@@ -2,20 +2,6 @@ const path = require("node:path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const PopupHtmlPlugin = new HtmlWebpackPlugin({
-  chunks: ["popup"],
-  template: path.resolve(__dirname, "src/popup/index.html"),
-  filename: "popup.html",
-  inject: "body",
-});
-
-const OptionsHtmlPlugin = new HtmlWebpackPlugin({
-  chunks: ["options"],
-  template: path.resolve(__dirname, "src/options/index.html"),
-  filename: "options.html",
-  inject: "body",
-});
-
 const config = {
   mode: "production",
   entry: {
@@ -73,8 +59,18 @@ const config = {
     ],
   },
   plugins: [
-    PopupHtmlPlugin,
-    OptionsHtmlPlugin,
+    new HtmlWebpackPlugin({
+      chunks: ["popup"],
+      template: path.resolve(__dirname, "src/popup/index.html"),
+      filename: "popup.html",
+      inject: "body",
+    }),
+    new HtmlWebpackPlugin({
+      chunks: ["options"],
+      template: path.resolve(__dirname, "src/options/index.html"),
+      filename: "options.html",
+      inject: "body",
+    }),
     new CopyWebpackPlugin({
       patterns: [
         {

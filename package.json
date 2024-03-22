@@ -5,7 +5,7 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "build": "webpack",
+    "build": "ts-node scripts/generate-manifest.ts && webpack",
     "clean": "rm -rf build/*",
     "lint": "eslint .",
     "lint:ci": "eslint . --quiet",
@@ -22,10 +22,14 @@
     "@anthony-j-castro/prettier-config": "github:anthony-j-castro/prettier-config#semver:1.0.0",
     "@types/react": "18.2.67",
     "@types/react-dom": "18.2.22",
+    "copy-webpack-plugin": "12.0.2",
     "eslint": "8.57.0",
+    "eslint-import-resolver-alias": "1.1.2",
     "html-webpack-plugin": "5.6.0",
     "prettier": "3.2.5",
     "ts-loader": "9.5.1",
+    "ts-node": "10.9.2",
+    "tsconfig-paths": "4.2.0",
     "typescript": "5.4.3",
     "webpack": "5.91.0",
     "webpack-cli": "5.1.4"

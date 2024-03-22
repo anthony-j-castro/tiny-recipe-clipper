@@ -5,6 +5,6 @@ const root = ReactDOM.createRoot(document.getElementById("root")!);
 
 root.render(
   <React.StrictMode>
-    <div>Hello World!</div>
+    <div>From popup: Hello World!</div>
   </React.StrictMode>,
 );

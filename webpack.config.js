@@ -1,17 +1,17 @@
 const path = require("node:path");
-const webpack = require("webpack");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const PopupHtmlPlugin = new HtmlWebpackPlugin({
   chunks: ["popup"],
-  template: path.resolve(__dirname + "/src/popup/index.html"),
+  template: path.resolve(__dirname, "src/popup/index.html"),
   filename: "popup.html",
   inject: "body",
 });
 
 const OptionsHtmlPlugin = new HtmlWebpackPlugin({
   chunks: ["options"],
-  template: path.resolve(__dirname + "/src/options/index.html"),
+  template: path.resolve(__dirname, "src/options/index.html"),
   filename: "options.html",
   inject: "body",
 });
@@ -19,13 +19,24 @@ const OptionsHtmlPlugin = new HtmlWebpackPlugin({
 const config = {
   mode: "production",
   entry: {
+    "service-worker": {
+      import: path.resolve(__dirname, "src/service-worker/index.ts"),
+      filename: "service-worker.js",
+    },
     options: {
-      import: path.resolve(__dirname, "/src/options/index.tsx"),
+      import: path.resolve(__dirname, "src/options/index.tsx"),
       filename: "options.js",
     },
     popup: {
-      import: path.resolve(__dirname, "/src/popup/index.tsx"),
+      import: path.resolve(__dirname, "src/popup/index.tsx"),
       filename: "popup.js",
+    },
+    "recipe-scraper": {
+      import: path.resolve(
+        __dirname,
+        "src/content-scripts/recipe-scraper/index.ts",
+      ),
+      filename: "recipe-scraper.js",
     },
   },
   output: {
@@ -61,7 +72,24 @@ const config = {
       },
     ],
   },
-  plugins: [PopupHtmlPlugin, OptionsHtmlPlugin],
+  plugins: [
+    PopupHtmlPlugin,
+    OptionsHtmlPlugin,
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "src/manifest.json"),
+          to: path.resolve(__dirname, "dist"),
+        },
+      ],
+    }),
+  ],
+  resolve: {
+    alias: {
+      "~": path.resolve(__dirname, "src"),
+    },
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
+  },
 };
 
 module.exports = config;

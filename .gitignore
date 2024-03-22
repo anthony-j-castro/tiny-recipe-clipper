@@ -1,3 +1,6 @@
+# Generated manifest
+/src/manifest.json
+
 # Dependencies
 /node_modules
 

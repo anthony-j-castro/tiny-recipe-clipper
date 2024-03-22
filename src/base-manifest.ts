@@ -33,10 +33,10 @@ const baseManifest = {
     page: "options.html",
     open_in_tab: true,
   },
-  // icons: {
-  //   "48": "icon48.png",
-  //   "128": "icon128.png",
-  // },
+  icons: {
+    "48": "images/icon48.png",
+    "128": "images/icon128.png",
+  },
   permissions: ["activeTab", "storage", "tabs"],
 };
 

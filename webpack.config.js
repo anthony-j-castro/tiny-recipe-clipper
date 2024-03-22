@@ -81,6 +81,10 @@ const config = {
           from: path.resolve(__dirname, "src/manifest.json"),
           to: path.resolve(__dirname, "dist"),
         },
+        {
+          from: path.resolve(__dirname, "src/images"),
+          to: path.resolve(__dirname, "dist/images"),
+        },
       ],
     }),
   ],

@@ -5,7 +5,7 @@ const recipeWebsitesMatchesArray = Object.entries(SUPPORTED_HOSTNAMES_DATA).map(
   ([hostname]) => `https://${hostname}/*`,
 );
 
-const baseManifest = {
+const baseManifest: chrome.runtime.ManifestV3 = {
   name: "Tiny Recipe Clipper",
   description: "Clip recipes from your favorite websites.",
   // The real version will be copied over automatically

@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "lint:ci": "eslint . --quiet",
     "prettier": "prettier . --write",
-    "prettier:ci": "prettier . --check"
+    "prettier:ci": "prettier . --check",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "react": "18.2.0",

@@ -1,5 +1,8 @@
 # Dependencies
 /node_modules
 
+# Compiled files
+/dist
+
 # Miscellaneous
 .DS_Store

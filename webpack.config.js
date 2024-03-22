@@ -1,9 +1,11 @@
 const path = require("node:path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
+
+require("dotenv").config({ path: path.resolve(__dirname, ".env") });
 
 const config = {
-  mode: "production",
   entry: {
     "service-worker": {
       import: path.resolve(__dirname, "src/service-worker/index.ts"),
@@ -59,6 +61,9 @@ const config = {
     ],
   },
   plugins: [
+    new webpack.EnvironmentPlugin({
+      BUILD_ENV: null,
+    }),
     new HtmlWebpackPlugin({
       chunks: ["popup"],
       template: path.resolve(__dirname, "src/popup/index.html"),

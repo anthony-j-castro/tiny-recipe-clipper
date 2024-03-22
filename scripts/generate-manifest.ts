@@ -1,4 +1,5 @@
 /* eslint-disable no-restricted-imports */
+import "dotenv/config";
 import fs from "node:fs";
 import path from "node:path";
 import * as prettier from "prettier";

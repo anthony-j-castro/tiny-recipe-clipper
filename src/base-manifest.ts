@@ -27,7 +27,7 @@ const baseManifest: chrome.runtime.ManifestV3 = {
     },
   ],
   externally_connectable: {
-    matches: [`http://${config.WEB_APP.HOSTNAME}/*`],
+    matches: [`${config.WEB_APP.ORIGIN}/*`],
   },
   options_ui: {
     page: "options.html",

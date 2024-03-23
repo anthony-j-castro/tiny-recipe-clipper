@@ -6,6 +6,6 @@ const root = ReactDOM.createRoot(document.getElementById("root")!);
 
 root.render(
   <React.StrictMode>
-    <div>From options: Hello World! {config.WEB_APP.HOSTNAME}</div>
+    <div>From options: Hello World! {config.WEB_APP.ORIGIN}</div>
   </React.StrictMode>,
 );

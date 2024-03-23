@@ -2,7 +2,7 @@ const path = require("node:path");
 
 module.exports = {
   env: { browser: true, node: true },
-  extends: ["@anthony-j-castro/eslint-config"],
+  extends: ["@anthony-j-castro/eslint-config", "plugin:react/jsx-runtime"],
   settings: {
     "import/resolver": {
       alias: {

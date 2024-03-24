@@ -11,15 +11,6 @@ export const TopRow = styled.div`
   margin-bottom: 16px;
 `;
 
-export const IconButtonsRow = styled.div`
-  display: flex;
-  margin-right: 32px;
-
-  & > :not(:first-child) {
-    margin-left: 4px;
-  }
-`;
-
 export const Card = styled.div`
   padding: 8px;
   border: 1px solid #dbdce0;

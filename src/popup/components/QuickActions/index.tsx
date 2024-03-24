@@ -11,6 +11,12 @@ const ICON_OPTIONS = { display: "block", fontSize: 16 };
 const QuickActions = () => (
   <Container>
     <IconButton
+      href={config.WEB_APP.ORIGIN}
+      title="Open website"
+    >
+      <WebIcon sx={ICON_OPTIONS} />
+    </IconButton>
+    <IconButton
       href={getExtensionUrl("options.html")}
       title="Open extension options"
     >
@@ -21,12 +27,6 @@ const QuickActions = () => (
       title="Report a problem"
     >
       <BugReportIcon sx={ICON_OPTIONS} />
-    </IconButton>
-    <IconButton
-      href={config.WEB_APP.ORIGIN}
-      title="Open website"
-    >
-      <WebIcon sx={ICON_OPTIONS} />
     </IconButton>
   </Container>
 );

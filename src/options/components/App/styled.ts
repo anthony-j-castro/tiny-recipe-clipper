@@ -1,5 +1,6 @@
 import { Separator as AriakitSeparator } from "@ariakit/react/separator";
 import styled, { css } from "styled-components";
+import LinkPrimaryButton from "~/ui-shared/components/LinkPrimaryButton";
 
 export const Container = styled.div`
   width: 100%;
@@ -72,4 +73,32 @@ export const VersionInformation = styled.div`
 
 export const VersionNumber = styled.span`
   font-family: monospace;
+`;
+
+export const InfoBanner = styled.div(
+  ({ theme }) => css`
+    font-size: 16px;
+    font-weight: 500;
+    background: ${theme.colors.lightGray};
+    padding: 8px;
+    border-radius: 4px;
+    margin: 0 -8px 32px -8px;
+  `,
+);
+
+export const InnerBannerContainer = styled.div`
+  display: flex;
+  align-items: flex-start;
+`;
+
+export const BannerCopy = styled.div`
+  flex-grow: 1;
+  margin-top: 2px;
+  margin-left: 16px;
+`;
+
+export const BannerButton = styled(LinkPrimaryButton)`
+  display: inline-block;
+  width: auto;
+  margin-top: 16px;
 `;

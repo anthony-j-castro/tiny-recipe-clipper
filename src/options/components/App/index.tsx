@@ -1,10 +1,15 @@
+import InfoIcon from "@mui/icons-material/Info";
 import config from "~/config";
 import useGetUserId from "~/hooks/useGetUserId";
 import logo from "~/options/images/logo.svg";
 import {
+  BannerButton,
+  BannerCopy,
   Container,
   DescriptionParagraph,
   Header,
+  InfoBanner,
+  InnerBannerContainer,
   Label,
   Logo,
   Main,
@@ -17,7 +22,7 @@ import {
 } from "./styled";
 
 export default function App() {
-  const { data: userId } = useGetUserId();
+  const { data: userId, isPending } = useGetUserId();
 
   const reportProblemFormUrl = new URL(config.REPORT_PROBLEM_FORM.URL);
   reportProblemFormUrl.searchParams.set(
@@ -35,9 +40,33 @@ export default function App() {
         <Title>Tiny Recipe Clipper Options</Title>
       </Header>
       <Main>
+        {!isPending && userId === undefined ? (
+          <InfoBanner>
+            <InnerBannerContainer>
+              <InfoIcon sx={{ display: "block", fontSize: 20 }} />
+              <BannerCopy>
+                <div>
+                  Finish setting up this extension by syncing with the web app.
+                </div>
+                <BannerButton
+                  href={`${config.WEB_APP.ORIGIN}${config.WEB_APP.BROWSER_EXTENSION_PATH}`}
+                >
+                  Launch Tiny Recipe Box in a new tab
+                </BannerButton>
+              </BannerCopy>
+            </InnerBannerContainer>
+          </InfoBanner>
+        ) : null}
         <section>
           <Label>
-            User ID: <UserId>{userId}</UserId>
+            User ID:{" "}
+            {isPending ? (
+              <UserId>Loading…</UserId>
+            ) : userId === undefined ? (
+              <span>Not yet synced</span>
+            ) : (
+              <UserId>{userId}</UserId>
+            )}
           </Label>
           <DescriptionParagraph>
             Your user ID is synced from the Tiny Recipe Box web app. Learn more

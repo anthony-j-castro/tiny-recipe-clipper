@@ -1,0 +1,11 @@
+body {
+  font-family: "Inter Tight Variable", system-ui, sans-serif;
+  color: #202124;
+  padding: 32px 16px;
+  user-select: none;
+}
+
+a,
+a:visited {
+  color: #1967d2;
+}

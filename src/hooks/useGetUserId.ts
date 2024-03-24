@@ -12,6 +12,7 @@ const useGetUserId = () =>
 
       return userId;
     },
+    refetchOnWindowFocus: true,
   });
 
 export default useGetUserId;

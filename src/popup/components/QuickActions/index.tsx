@@ -1,7 +1,6 @@
 import BugReportIcon from "@mui/icons-material/BugReport";
 import SettingsIcon from "@mui/icons-material/Settings";
 import WebIcon from "@mui/icons-material/Web";
-import packageJson from "~/../package.json";
 import { getExtensionUrl } from "~/chrome-helpers";
 import config from "~/config";
 import useGetCurrentTab from "~/hooks/useGetCurrentTab";
@@ -16,7 +15,7 @@ const QuickActions = () => {
   const reportProblemFormUrl = new URL(config.REPORT_PROBLEM_FORM.URL);
   reportProblemFormUrl.searchParams.set(
     config.REPORT_PROBLEM_FORM.VERSION_LINK_PARAM,
-    packageJson.version,
+    config.VERSION,
   );
   if (currentTab?.url) {
     reportProblemFormUrl.searchParams.set(

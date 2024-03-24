@@ -1,4 +1,5 @@
 import { Decoder, exact, oneOf, string } from "decoders";
+import packageJson from "~/../package.json";
 
 type Config = {
   ENVIRONMENT: "development" | "production";
@@ -7,6 +8,7 @@ type Config = {
     VERSION_LINK_PARAM: string;
     WEBSITE_LINK_PARAM: string;
   };
+  VERSION: string;
   WEB_APP: {
     BROWSER_EXTENSION_PATH: string;
     ORIGIN: string;
@@ -20,6 +22,7 @@ const configDecoder: Decoder<Config> = exact({
     VERSION_LINK_PARAM: string,
     WEBSITE_LINK_PARAM: string,
   }),
+  VERSION: string,
   WEB_APP: exact({
     BROWSER_EXTENSION_PATH: string,
     ORIGIN: string,
@@ -35,6 +38,7 @@ const config = {
     VERSION_LINK_PARAM: "entry.307864289",
     WEBSITE_LINK_PARAM: "entry.1161392725",
   },
+  VERSION: packageJson.version,
   WEB_APP: {
     BROWSER_EXTENSION_PATH: "/browser-extension",
     ORIGIN: IS_PRODUCTION

@@ -3,7 +3,7 @@ import { uuidv4 } from "decoders";
 import { getLocalStorage } from "~/chrome-helpers";
 import { USER_ID_STORAGE_KEY } from "~/storage";
 
-const useGetMe = () =>
+const useGetUserId = () =>
   useQuery({
     queryKey: ["userId"],
     queryFn: async () => {
@@ -15,4 +15,4 @@ const useGetMe = () =>
     },
   });
 
-export default useGetMe;
+export default useGetUserId;

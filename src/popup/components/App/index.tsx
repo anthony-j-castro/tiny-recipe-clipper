@@ -1,5 +1,5 @@
 import config from "~/config";
-import useGetMe from "~/hooks/useGetMe";
+import useGetMe from "~/hooks/useGetUserId";
 import LinkPrimaryButton from "~/popup/components/LinkPrimaryButton";
 import QuickActions from "~/popup/components/QuickActions";
 import { AppContainer, Card, IconButtonsRow, Text, TopRow } from "./styled";

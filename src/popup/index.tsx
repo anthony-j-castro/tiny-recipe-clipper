@@ -2,9 +2,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { ThemeProvider } from "styled-components";
+import App from "~/popup/components/App";
 import theme from "~/ui-shared/theme";
-import { UserProvider } from "./contexts/UserIdContext";
+import "@fontsource-variable/inter-tight";
 import "modern-normalize";
+import "~/popup/index.css";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false, retry: false } },
@@ -16,9 +18,7 @@ root.render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <UserProvider>
-          <div>From popup: Hello World!</div>
-        </UserProvider>
+        <App />
       </ThemeProvider>
     </QueryClientProvider>
   </StrictMode>,

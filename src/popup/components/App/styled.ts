@@ -14,7 +14,7 @@ export const TopRow = styled.div`
 export const Card = styled.div(
   ({ theme }) => css`
     padding: 8px;
-    border: 1px solid ${theme.colors.e1e5ea};
+    border: 1px solid ${theme.colors.gray};
     border-radius: 4px;
   `,
 );

@@ -3,9 +3,9 @@ import Button from "~/ui-shared/components/Button";
 
 const PrimaryButton = styled(Button)(
   ({ theme }) => css`
-    --button-background-color: #4100b3;
+    --button-background-color: ${theme.colors.purple};
     --button-text-color: ${theme.colors.white};
-    --button-hover-background-color: #33008c;
+    --button-hover-background-color: ${theme.colors.darkPurple};
   `,
 );
 

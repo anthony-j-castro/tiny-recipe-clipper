@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import config from "~/config";
 
-const root = ReactDOM.createRoot(document.getElementById("root")!);
+const root = createRoot(document.getElementById("root")!);
 
 root.render(
-  <React.StrictMode>
+  <StrictMode>
     <div>From options: Hello World! {config.WEB_APP.ORIGIN}</div>
-  </React.StrictMode>,
+  </StrictMode>,
 );

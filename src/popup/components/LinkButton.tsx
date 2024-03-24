@@ -1,7 +1,7 @@
-import React from "react";
+import { ComponentPropsWithoutRef, MouseEvent } from "react";
 import Button from "~/ui-shared/components/Button";
 
-interface Props extends React.ComponentPropsWithoutRef<"button"> {
+interface Props extends ComponentPropsWithoutRef<"button"> {
   href: string;
   onClick?: () => void | Promise<void>;
 }
@@ -9,7 +9,7 @@ interface Props extends React.ComponentPropsWithoutRef<"button"> {
 const LinkButton = (props: Props) => {
   const { href, onClick, ...rest } = props;
 
-  const handleClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     if (onClick) {

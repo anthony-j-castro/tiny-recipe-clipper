@@ -1,5 +1,11 @@
 {
   "version": "0.2",
   "language": "en",
-  "words": ["fontsource", "nytimes", "tanstack", "typecheck"]
+  "words": [
+    "fontsource",
+    "nytimes",
+    "tanstack",
+    "typecheck",
+    "uuidv"
+  ]
 }

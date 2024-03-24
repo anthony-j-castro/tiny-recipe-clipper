@@ -7,8 +7,6 @@ const WEB_APP_URL = new URL(config.WEB_APP.ORIGIN);
 chrome.runtime.onMessageExternal.addListener(
   (rawMessage, sender, sendResponse) => {
     try {
-      console.log("MESSAGE", rawMessage);
-
       if (sender.origin !== WEB_APP_URL.origin) {
         throw new Error("Unknown sender origin.");
       }
@@ -29,6 +27,7 @@ chrome.runtime.onMessageExternal.addListener(
         }
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error);
     }
   },

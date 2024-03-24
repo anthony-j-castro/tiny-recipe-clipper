@@ -12,6 +12,7 @@ type Config = {
   WEB_APP: {
     BROWSER_EXTENSION_PATH: string;
     ORIGIN: string;
+    SETTINGS_PATH: string;
   };
 };
 
@@ -26,6 +27,7 @@ const configDecoder: Decoder<Config> = exact({
   WEB_APP: exact({
     BROWSER_EXTENSION_PATH: string,
     ORIGIN: string,
+    SETTINGS_PATH: string,
   }),
 });
 
@@ -44,6 +46,7 @@ const config = {
     ORIGIN: IS_PRODUCTION
       ? "https://tinyrecipebox.com"
       : "http://localhost:3000",
+    SETTINGS_PATH: "/settings",
   },
 };
 

@@ -16,8 +16,6 @@ chrome.runtime.onMessageExternal.addListener(
       switch (message.type) {
         case "PING": {
           setUserId(message.payload.userId);
-          // TODO: Reset user ID query in popup by
-          // sending a message to popup?
 
           sendResponse({
             type: "PONG",

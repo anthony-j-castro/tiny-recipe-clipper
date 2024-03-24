@@ -5,6 +5,10 @@
   "eslint.validate": ["javascript", "typescript"],
   "typescript.reportStyleChecksAsWarnings": false,
   "typescript.validate.enable": true,
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }

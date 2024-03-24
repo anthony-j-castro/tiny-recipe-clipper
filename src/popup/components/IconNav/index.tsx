@@ -9,7 +9,7 @@ import { Container } from "./styled";
 
 const ICON_OPTIONS = { display: "block", fontSize: 16 };
 
-const QuickActions = () => {
+const IconNav = () => {
   const { data: currentTab } = useGetCurrentTab();
 
   const reportProblemFormUrl = new URL(config.REPORT_PROBLEM_FORM.URL);
@@ -48,4 +48,4 @@ const QuickActions = () => {
   );
 };
 
-export default QuickActions;
+export default IconNav;

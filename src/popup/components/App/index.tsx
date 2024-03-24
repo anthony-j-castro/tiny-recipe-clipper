@@ -1,7 +1,7 @@
 import config from "~/config";
 import useGetMe from "~/hooks/useGetUserId";
 import LinkPrimaryButton from "~/popup/components/LinkPrimaryButton";
-import QuickActions from "~/popup/components/QuickActions";
+import IconNav from "~/popup/components/IconNav";
 import { AppContainer, Card, Text, TopRow } from "./styled";
 
 const App = () => {
@@ -10,7 +10,7 @@ const App = () => {
   return (
     <AppContainer>
       <TopRow>
-        <QuickActions />
+        <IconNav />
       </TopRow>
       {isPending ? null : userId === undefined ? (
         <Card>

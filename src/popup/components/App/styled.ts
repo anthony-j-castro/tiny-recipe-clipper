@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const AppContainer = styled.div`
   padding: 8px;
@@ -11,11 +11,13 @@ export const TopRow = styled.div`
   margin-bottom: 16px;
 `;
 
-export const Card = styled.div`
-  padding: 8px;
-  border: 1px solid #dbdce0;
-  border-radius: 4px;
-`;
+export const Card = styled.div(
+  ({ theme }) => css`
+    padding: 8px;
+    border: 1px solid ${theme.colors.e1e5ea};
+    border-radius: 4px;
+  `,
+);
 
 export const Text = styled.div`
   line-height: 1.25em;

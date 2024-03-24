@@ -30,7 +30,6 @@ export const Label = styled.span`
   display: block;
   font-size: 16px;
   font-weight: 500;
-  margin-right: 16px;
   margin-bottom: 16px;
 `;
 

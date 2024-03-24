@@ -1,6 +1,5 @@
 import config from "~/config";
 import useGetUserId from "~/hooks/useGetUserId";
-import manifest from "~/manifest.json";
 import logo from "~/options/images/logo.svg";
 import {
   Container,
@@ -23,7 +22,7 @@ export default function App() {
   const reportProblemFormUrl = new URL(config.REPORT_PROBLEM_FORM.URL);
   reportProblemFormUrl.searchParams.set(
     config.REPORT_PROBLEM_FORM.VERSION_LINK_PARAM,
-    manifest.version,
+    config.VERSION,
   );
 
   return (
@@ -70,7 +69,7 @@ export default function App() {
         <section>
           <SectionHeading>About</SectionHeading>
           <VersionInformation>
-            Extension version: <VersionNumber>{manifest.version}</VersionNumber>
+            Extension version: <VersionNumber>{config.VERSION}</VersionNumber>
           </VersionInformation>
         </section>
       </Main>

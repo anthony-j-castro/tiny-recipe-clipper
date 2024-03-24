@@ -1,10 +1,25 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { ThemeProvider } from "styled-components";
+import App from "~/popup/components/App";
+import theme from "~/ui-shared/theme";
+import "@fontsource-variable/inter-tight";
+import "modern-normalize";
+import "~/popup/index.css";
 
-const root = ReactDOM.createRoot(document.getElementById("root")!);
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { refetchOnWindowFocus: false, retry: false } },
+});
+
+const root = createRoot(document.getElementById("root")!);
 
 root.render(
-  <React.StrictMode>
-    <div>From popup: Hello World!</div>
-  </React.StrictMode>,
+  <StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </QueryClientProvider>
+  </StrictMode>,
 );

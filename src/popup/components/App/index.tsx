@@ -1,7 +1,7 @@
 import config from "~/config";
 import useGetMe from "~/hooks/useGetUserId";
-import LinkPrimaryButton from "~/popup/components/LinkPrimaryButton";
 import IconNav from "~/popup/components/IconNav";
+import LinkPrimaryButton from "~/popup/components/LinkPrimaryButton";
 import { AppContainer, Card, Text, TopRow } from "./styled";
 
 const App = () => {

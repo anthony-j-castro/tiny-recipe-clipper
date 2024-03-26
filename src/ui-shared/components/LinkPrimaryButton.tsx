@@ -3,7 +3,7 @@ import PrimaryButton from "~/ui-shared/components/PrimaryButton";
 
 interface Props extends ComponentPropsWithoutRef<"button"> {
   href: string;
-  onClick?: () => void | Promise<void>;
+  onClick?: () => Promise<void> | void;
 }
 
 const LinkPrimaryButton = (props: Props) => {

@@ -3,7 +3,7 @@ import Button from "~/ui-shared/components/Button";
 
 interface Props extends ComponentPropsWithoutRef<"button"> {
   href: string;
-  onClick?: () => void | Promise<void>;
+  onClick?: () => Promise<void> | void;
 }
 
 const LinkButton = (props: Props) => {

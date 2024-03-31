@@ -8,22 +8,26 @@ import { AppContainer, Card, ClipRecipeButton, Text, TopRow } from "./styled";
 const App = () => {
   const { data: userId, isPending } = useGetMe();
 
+  const isRequiresSync = userId === undefined;
+
   return (
     <AppContainer>
       <TopRow>
         <IconNav />
-        <ClipRecipeButton
-          onClick={() => {
-            sendMessageToBackground({
-              sender: "popup",
-              type: "SEND_RECIPE_DATA",
-            });
-          }}
-        >
-          Clip recipe
-        </ClipRecipeButton>
+        {!isRequiresSync ? (
+          <ClipRecipeButton
+            onClick={() => {
+              sendMessageToBackground({
+                sender: "popup",
+                type: "SEND_RECIPE_DATA",
+              });
+            }}
+          >
+            Clip recipe
+          </ClipRecipeButton>
+        ) : null}
       </TopRow>
-      {isPending ? null : userId === undefined ? (
+      {isPending ? null : isRequiresSync ? (
         <Card>
           <Text>
             Finish setting up this extension by syncing with the web app.

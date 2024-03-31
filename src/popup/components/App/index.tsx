@@ -3,8 +3,7 @@ import config from "~/config";
 import useGetMe from "~/hooks/useGetUserId";
 import IconNav from "~/popup/components/IconNav";
 import LinkPrimaryButton from "~/ui-shared/components/LinkPrimaryButton";
-import PrimaryButton from "~/ui-shared/components/PrimaryButton";
-import { AppContainer, Card, Text, TopRow } from "./styled";
+import { AppContainer, Card, ClipRecipeButton, Text, TopRow } from "./styled";
 
 const App = () => {
   const { data: userId, isPending } = useGetMe();
@@ -13,7 +12,7 @@ const App = () => {
     <AppContainer>
       <TopRow>
         <IconNav />
-        <PrimaryButton
+        <ClipRecipeButton
           onClick={() => {
             sendMessageToBackground({
               sender: "popup",
@@ -21,8 +20,8 @@ const App = () => {
             });
           }}
         >
-          Test
-        </PrimaryButton>
+          Clip recipe
+        </ClipRecipeButton>
       </TopRow>
       {isPending ? null : userId === undefined ? (
         <Card>

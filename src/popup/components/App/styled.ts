@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import PrimaryButton from "~/ui-shared/components/PrimaryButton";
 
 export const AppContainer = styled.div`
   padding: 8px;
@@ -9,6 +10,10 @@ export const TopRow = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 16px;
+`;
+
+export const ClipRecipeButton = styled(PrimaryButton)`
+  margin-left: 32px;
 `;
 
 export const Card = styled.div(

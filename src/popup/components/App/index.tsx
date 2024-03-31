@@ -10,11 +10,11 @@ const App = () => {
 
   const isRequiresSync = userId === undefined;
 
+  // TODO: Add conditions to show/enable the clip recipe button once valid website/recipe detection is implemented.
   return (
     <AppContainer>
       <TopRow>
         <IconNav />
-        {/* TODO: Add conditions to show/enable this button once valid website/recipe detection is implemented. */}
         {!isRequiresSync ? (
           <ClipRecipeButton
             onClick={() => {

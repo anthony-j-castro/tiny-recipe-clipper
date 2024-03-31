@@ -29,7 +29,7 @@ const App = () => {
         ) : null}
       </TopRow>
       {isPending ? null : isRequiresSync ? (
-        <Card>
+        <Card data-testid="initialization-message">
           <Text>
             Finish setting up this extension by syncing with the web app.
           </Text>

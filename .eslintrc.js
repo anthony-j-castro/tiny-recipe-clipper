@@ -7,6 +7,9 @@ module.exports = {
     "plugin:react/jsx-runtime",
     "plugin:@tanstack/eslint-plugin-query/recommended",
   ],
+  rules: {
+    curly: ["error", "all"],
+  },
   settings: {
     "import/resolver": {
       alias: {

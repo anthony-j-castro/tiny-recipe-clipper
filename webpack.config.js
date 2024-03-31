@@ -1,6 +1,7 @@
 const path = require("node:path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
 
 require("dotenv").config({ path: path.resolve(__dirname, ".env") });
@@ -95,6 +96,25 @@ const config = {
       "~": path.resolve(__dirname, "src"),
     },
     extensions: [".ts", ".tsx", ".js", ".jsx"],
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          format: {
+            comments: false,
+          },
+        },
+        extractComments: false,
+      }),
+    ],
+    removeAvailableModules: false,
+    removeEmptyChunks: false,
+    splitChunks: false,
+  },
+  performance: {
+    hints: false,
   },
 };
 

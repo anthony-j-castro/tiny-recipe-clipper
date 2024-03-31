@@ -10,9 +10,11 @@ const main = async () => {
   const manifest = { ...baseManifest };
   manifest.version = packageJson.version;
 
-  if (process.env.GITHUB_SHA) {
+  if (process.env.GITHUB_SHA && process.env.PUBLISH !== "true") {
     const shortSha = process.env.GITHUB_SHA.substring(0, 7);
     manifest.version_name = `${manifest.version}-${shortSha}`;
+  } else {
+    delete manifest.version_name;
   }
 
   const prettierOptions = await prettier.resolveConfig(

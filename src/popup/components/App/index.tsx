@@ -1,7 +1,9 @@
+import { sendMessageToBackground } from "~/chrome-helpers";
 import config from "~/config";
 import useGetMe from "~/hooks/useGetUserId";
 import IconNav from "~/popup/components/IconNav";
 import LinkPrimaryButton from "~/ui-shared/components/LinkPrimaryButton";
+import PrimaryButton from "~/ui-shared/components/PrimaryButton";
 import { AppContainer, Card, Text, TopRow } from "./styled";
 
 const App = () => {
@@ -11,6 +13,16 @@ const App = () => {
     <AppContainer>
       <TopRow>
         <IconNav />
+        <PrimaryButton
+          onClick={() => {
+            sendMessageToBackground({
+              sender: "popup",
+              type: "SEND_RECIPE_DATA",
+            });
+          }}
+        >
+          Test
+        </PrimaryButton>
       </TopRow>
       {isPending ? null : userId === undefined ? (
         <Card>

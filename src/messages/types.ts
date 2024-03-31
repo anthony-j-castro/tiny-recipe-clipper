@@ -18,6 +18,28 @@ export type PingMessage = BaseMessage & {
   type: "PING";
 };
 
-export type Message = PingMessage;
+export type RecipeImporterReadyMessage = BaseMessage & {
+  sender: "web-app";
+  type: "RECIPE_IMPORTER_READY";
+};
 
-export type ReceivableServiceWorkerMessage = PingMessage;
+export type SendRecipeDataMessage = BaseMessage & {
+  sender: "popup";
+  type: "SEND_RECIPE_DATA";
+};
+
+export type RecipeDataMessage = BaseMessage & {
+  sender: "service-worker";
+  type: "RECIPE_DATA";
+};
+
+export type Message =
+  | PingMessage
+  | RecipeDataMessage
+  | RecipeImporterReadyMessage
+  | SendRecipeDataMessage;
+
+export type ReceivableServiceWorkerMessage =
+  | PingMessage
+  | RecipeImporterReadyMessage
+  | SendRecipeDataMessage;

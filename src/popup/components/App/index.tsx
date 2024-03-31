@@ -40,7 +40,7 @@ const App = () => {
           </LinkPrimaryButton>
         </Card>
       ) : (
-        <div>Display app</div>
+        <div data-testid="display-app-message">Display app</div>
       )}
     </AppContainer>
   );

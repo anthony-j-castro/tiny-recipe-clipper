@@ -14,7 +14,7 @@ const pingMessageDecoder: Decoder<PingMessage> = exact({
   }),
 });
 
-const recipeImporterReadyMessageDecoder: Decoder<RecipeImporterReadyMessage> =
+export const recipeImporterReadyMessageDecoder: Decoder<RecipeImporterReadyMessage> =
   exact({
     sender: constant("web-app"),
     type: constant("RECIPE_IMPORTER_READY"),

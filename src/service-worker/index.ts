@@ -1,6 +1,9 @@
 import { createEmptyTab, setTabUrl } from "~/chrome-helpers";
 import config from "~/config";
-import { receivableServiceWorkerMessageDecoder } from "~/messages/decoders";
+import {
+  receivableServiceWorkerMessageDecoder,
+  recipeImporterReadyMessageDecoder,
+} from "~/messages/decoders";
 import { Message } from "~/messages/types";
 import { setUserId } from "~/storage";
 
@@ -20,11 +23,10 @@ chrome.runtime.onMessage.addListener(async (rawMessage) => {
           sendResponse: (message: Message) => void,
         ) => {
           const message =
-            receivableServiceWorkerMessageDecoder.value(newTabRawMessage);
+            recipeImporterReadyMessageDecoder.value(newTabRawMessage);
 
           if (
             message !== undefined &&
-            message.type === "RECIPE_IMPORTER_READY" &&
             tab.id !== undefined &&
             newTabSender.tab?.id === tab.id
           ) {

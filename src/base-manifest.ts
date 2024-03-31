@@ -12,6 +12,9 @@ const baseManifest: chrome.runtime.ManifestV3 = {
   // from package.json. A placeholder is used here to maintain
   // the position of the version key in the file.
   version: "x.x.x",
+  // This is also a placeholder. This key will be deleted if
+  // if it's a production build.
+  version_name: "x.x.x-xxxxxx",
   manifest_version: 3,
   action: {
     default_icon: "images/inactive-icon.png",

@@ -11,9 +11,7 @@
 .env
 
 # Playwright
-/test-results/
-/playwright-report/
-/blob-report/
+/playwright/report/
 /playwright/.cache/
 
 # Miscellaneous

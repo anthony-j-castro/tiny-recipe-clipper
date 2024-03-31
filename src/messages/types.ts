@@ -15,6 +15,7 @@ export type PingMessage = BaseMessage & {
   payload: {
     userId: string;
   };
+  sender: "web-app";
   type: "PING";
 };
 

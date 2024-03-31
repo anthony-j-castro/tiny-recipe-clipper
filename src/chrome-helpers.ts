@@ -1,3 +1,5 @@
+import { Message } from "~/messages/types";
+
 export const getCurrentTab = async () => {
   const [currentTab] = await chrome.tabs.query({
     active: true,
@@ -6,6 +8,17 @@ export const getCurrentTab = async () => {
 
   return currentTab;
 };
+
+export const createEmptyTab = () => chrome.tabs.create({ active: false });
+
+export const setTabUrl = (tabId: number, url: string) =>
+  chrome.tabs.update(tabId, {
+    active: true,
+    url,
+  });
+
+export const sendMessageToBackground = (message: Message) =>
+  chrome.runtime.sendMessage(message);
 
 export const getLocalStorage = async (key: string) => {
   const data = await chrome.storage.local.get(key);

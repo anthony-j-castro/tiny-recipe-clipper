@@ -48,3 +48,4 @@ jobs:
         with:
           name: tiny-recipe-clipper
           path: dist
+          retention-days: 30

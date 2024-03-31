@@ -113,6 +113,9 @@ const config = {
     removeEmptyChunks: false,
     splitChunks: false,
   },
+  performance: {
+    hints: false,
+  },
 };
 
 module.exports = config;

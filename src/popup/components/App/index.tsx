@@ -14,6 +14,7 @@ const App = () => {
     <AppContainer>
       <TopRow>
         <IconNav />
+        {/* TODO: Add conditions to show/enable this button once valid website/recipe detection is implemented. */}
         {!isRequiresSync ? (
           <ClipRecipeButton
             onClick={() => {

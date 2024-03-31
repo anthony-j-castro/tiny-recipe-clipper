@@ -42,7 +42,7 @@ chrome.runtime.onMessage.addListener(async (rawMessage) => {
 
           setTabUrl(
             tab.id,
-            `${config.WEB_APP.ORIGIN}${config.WEB_APP.IMPORT_RECIPE_PATH}`,
+            `${config.WEB_APP.ORIGIN}${config.WEB_APP.IMPORT_RECIPE_PATH}?enabled=true`,
           );
         }
 

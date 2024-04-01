@@ -6,6 +6,7 @@ const Button = styled(AriakitButton)(
     --button-background-color: ${theme.colors.lightGray};
     --button-text-color: ${theme.colors.nearBlack};
     --button-hover-background-color: ${theme.colors.gray};
+    --button-disabled-background-color: ${theme.colors.lightGray};
     display: block;
     width: 100%;
     background: var(--button-background-color);
@@ -20,6 +21,11 @@ const Button = styled(AriakitButton)(
 
     &:hover {
       background: var(--button-hover-background-color);
+    }
+
+    &[aria-disabled="true"] {
+      background: var(--button-disabled-background-color);
+      cursor: not-allowed;
     }
 
     &:focus-visible {

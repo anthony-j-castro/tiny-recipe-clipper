@@ -34,19 +34,20 @@ const App = () => {
     );
   }
 
-  // TODO: Add conditions to show/enable the clip recipe button once valid website/recipe detection is implemented.
   return (
     <AppContainer>
       <TopRow>
         <IconNav />
-        {!isRequiresSync ? (
+        {!isRequiresSync && isSupported ? (
           <ClipRecipeButton
+            disabled={!isRecipeOnPage}
             onClick={() => {
               sendMessageToBackground({
                 sender: "popup",
                 type: "SEND_RECIPE_DATA",
               });
             }}
+            accessibleWhenDisabled
           >
             Clip recipe
           </ClipRecipeButton>

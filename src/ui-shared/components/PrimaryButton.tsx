@@ -6,6 +6,7 @@ const PrimaryButton = styled(Button)(
     --button-background-color: ${theme.colors.purple};
     --button-text-color: ${theme.colors.white};
     --button-hover-background-color: ${theme.colors.darkPurple};
+    --button-disabled-background-color: ${theme.colors.lightPurple};
   `,
 );
 

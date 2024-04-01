@@ -8,6 +8,10 @@ type Config = {
     VERSION_LINK_PARAM: string;
     WEBSITE_LINK_PARAM: string;
   };
+  REQUEST_FORM: {
+    URL: string;
+    WEBSITE_LINK_PARAM: string;
+  };
   VERSION: string;
   WEB_APP: {
     BROWSER_EXTENSION_PATH: string;
@@ -22,6 +26,10 @@ const configDecoder: Decoder<Config> = exact({
   REPORT_PROBLEM_FORM: exact({
     URL: string,
     VERSION_LINK_PARAM: string,
+    WEBSITE_LINK_PARAM: string,
+  }),
+  REQUEST_FORM: exact({
+    URL: string,
     WEBSITE_LINK_PARAM: string,
   }),
   VERSION: string,
@@ -41,6 +49,10 @@ const config = {
     URL: "https://docs.google.com/forms/d/e/1FAIpQLSeV1bF-mkxoBibHnxKk4AjeVLI8fUjLLRj08Z9nW7vch1qnPg/viewform",
     VERSION_LINK_PARAM: "entry.307864289",
     WEBSITE_LINK_PARAM: "entry.1161392725",
+  },
+  REQUEST_FORM: {
+    URL: "https://docs.google.com/forms/d/e/1FAIpQLSfxOzZQMDKmz8uCvlUskaiZdH6JO9nhc3eWNo59YSgtOqlTHw/viewform",
+    WEBSITE_LINK_PARAM: "entry.895703910",
   },
   VERSION: packageJson.version,
   WEB_APP: {

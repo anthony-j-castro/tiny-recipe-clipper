@@ -13,9 +13,7 @@ export default class BaseParser {
   _executeInPageScope: Executor;
 
   constructor({
-    executeInPageScope = async <T>(instructions: () => T) => {
-      return instructions();
-    },
+    executeInPageScope = async <T>(instructions: () => T) => instructions(),
   }: {
     executeInPageScope?: Executor;
   }) {

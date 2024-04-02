@@ -3,6 +3,7 @@ import config from "~/config";
 import useGetCurrentTab from "~/hooks/useGetCurrentTab";
 import useGetMe from "~/hooks/useGetUserId";
 import IconNav from "~/popup/components/IconNav";
+import useGetRecipeTitle from "~/popup/hooks/useGetRecipeTitle";
 import isRecipePage from "~/utils/isRecipePage";
 import isSupportedWebsite from "~/utils/isSupportedWebsite";
 import {
@@ -33,6 +34,8 @@ const App = () => {
       currentTab.url,
     );
   }
+
+  const { data: recipeTitle } = useGetRecipeTitle();
 
   return (
     <AppContainer>
@@ -66,7 +69,7 @@ const App = () => {
         </Card>
       ) : isRecipeOnPage ? (
         <Card>
-          <Text>Recipe found.</Text>
+          <Text>{recipeTitle}</Text>
         </Card>
       ) : isSupported ? (
         <Card>

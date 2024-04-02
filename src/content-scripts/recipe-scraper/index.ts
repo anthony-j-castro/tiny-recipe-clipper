@@ -1,8 +1,8 @@
+import { Scraper } from "~/content-scripts/recipe-scraper/scrapers";
+import TimesScraper from "~/content-scripts/recipe-scraper/scrapers/cooking.nytimes.com";
 import { receivableRecipeScraperMessageDecoder } from "~/messages/decoders";
 import isRecipePage from "~/utils/isRecipePage";
 import isSupportedWebsite from "~/utils/isSupportedWebsite";
-import { Parser } from "./recipe-parsers";
-import TimesParser from "./recipe-parsers/cooking.nytimes.com";
 
 chrome.runtime.onMessage.addListener((rawMessage, sender, sendResponse) => {
   // We only care about messages from the extension. If a tab exists, that
@@ -24,11 +24,11 @@ chrome.runtime.onMessage.addListener((rawMessage, sender, sendResponse) => {
         const getAndSendRecipe = async (
           sendResponse: (response: unknown) => void,
         ) => {
-          let parser: Parser;
+          let scraper: Scraper;
 
           switch (hostname) {
             case "cooking.nytimes.com": {
-              parser = new TimesParser();
+              scraper = new TimesScraper();
 
               break;
             }
@@ -37,7 +37,7 @@ chrome.runtime.onMessage.addListener((rawMessage, sender, sendResponse) => {
             }
           }
 
-          const recipe = await parser.load();
+          const recipe = await scraper.load();
 
           sendResponse({
             type: "RECIPE_DATA",

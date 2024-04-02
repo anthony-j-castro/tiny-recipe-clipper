@@ -2,14 +2,14 @@ type Recipe = {
   title: string | null;
 };
 
-export interface Parser {
+export interface Scraper {
   _getTitle: () => Promise<string | null>;
   load: () => Promise<Recipe>;
 }
 
 export type Executor = <T>(instructions: () => T) => Promise<T>;
 
-export default class BaseParser {
+export class BaseScraper {
   _executeInPageScope: Executor;
 
   constructor({

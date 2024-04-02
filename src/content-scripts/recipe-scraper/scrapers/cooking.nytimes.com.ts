@@ -1,10 +1,10 @@
-import BaseParser, { Executor, Parser } from ".";
+import { BaseScraper, Executor, Scraper } from ".";
 
 interface Props {
   customExecuteInPageScope?: Executor;
 }
 
-export default class TimesParser extends BaseParser implements Parser {
+export default class TimesScraper extends BaseScraper implements Scraper {
   constructor({ customExecuteInPageScope }: Props = {}) {
     super({ executeInPageScope: customExecuteInPageScope });
   }

@@ -35,7 +35,7 @@ const App = () => {
     );
   }
 
-  const { data: recipeTitle } = useGetRecipeTitle();
+  const { data: recipeTitle } = useGetRecipeTitle({ enabled: isRecipeOnPage });
 
   return (
     <AppContainer>

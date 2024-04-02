@@ -2,8 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { getCurrentTab, sendMessageToTab } from "~/chrome-helpers";
 import { recipeDataMessageDecoder } from "~/messages/decoders";
 
-const useGetRecipeTitle = () =>
+const useGetRecipeTitle = ({ enabled }: { enabled?: boolean } = {}) =>
   useQuery({
+    enabled,
     queryKey: ["getRecipeTitle"],
     queryFn: async () => {
       const currentTab = await getCurrentTab();

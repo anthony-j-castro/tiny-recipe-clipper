@@ -53,7 +53,9 @@ chrome.runtime.onMessage.addListener((rawMessage, sender, sendResponse) => {
         return true;
       }
 
-      break;
+      sendResponse(undefined);
+
+      return;
     }
   }
 });

@@ -38,6 +38,9 @@ chrome.runtime.onMessage.addListener((rawMessage, sender, sendResponse) => {
           });
         };
 
+        // Because we are performing an asynchronous action,
+        // we need to return true in order to use sendResponse asynchronously.
+        // See: https://developer.chrome.com/docs/extensions/develop/concepts/messaging#simple
         getAndSendRecipe(sendResponse);
 
         return true;

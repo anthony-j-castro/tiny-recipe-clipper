@@ -33,8 +33,14 @@ export const recipeImporterReadyMessageDecoder: Decoder<RecipeImporterReadyMessa
   });
 
 const sendRecipeDataMessageDecoder: Decoder<SendRecipeDataMessage> = exact({
-  sender: constant("popup"),
+  sender: constant("recipe-scraper"),
   type: constant("SEND_RECIPE_DATA"),
+  payload: exact({
+    recipe: exact({
+      title: nullable(nonEmptyString),
+      url: nonEmptyString,
+    }),
+  }),
 });
 
 const extractRecipeMessageDecoder: Decoder<ExtractRecipeMessage> = exact({

@@ -1,4 +1,4 @@
-import { sendMessageToBackground } from "~/chrome-helpers";
+import { sendMessageToTab } from "~/chrome-helpers";
 import config from "~/config";
 import useGetCurrentTab from "~/hooks/useGetCurrentTab";
 import useGetMe from "~/hooks/useGetUserId";
@@ -50,10 +50,15 @@ const App = () => {
           <ClipRecipeButton
             disabled={!isRecipeOnPage}
             onClick={() => {
-              sendMessageToBackground({
-                sender: "popup",
-                type: "SEND_RECIPE_DATA",
-              });
+              if (currentTab?.id) {
+                sendMessageToTab(currentTab.id, {
+                  type: "EXTRACT_RECIPE",
+                  sender: "popup",
+                  payload: {
+                    destination: "service-worker",
+                  },
+                });
+              }
             }}
             accessibleWhenDisabled
           >

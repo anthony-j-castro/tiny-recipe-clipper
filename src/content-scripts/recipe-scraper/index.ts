@@ -1,3 +1,4 @@
+import { sendMessageToBackground } from "~/chrome-helpers";
 import instantiateScraper from "~/content-scripts/recipe-scraper/utils/instantiateScraper";
 import { receivableRecipeScraperMessageDecoder } from "~/messages/decoders";
 import isRecipePage from "~/utils/isRecipePage";
@@ -27,13 +28,29 @@ chrome.runtime.onMessage.addListener((rawMessage, sender, sendResponse) => {
 
           const recipe = await scraper.load();
 
-          sendResponse({
-            type: "RECIPE_DATA",
-            sender: "recipe-scraper",
-            payload: {
-              recipe,
-            },
-          });
+          switch (message.payload.destination) {
+            case "popup": {
+              sendResponse({
+                type: "RECIPE_DATA",
+                sender: "recipe-scraper",
+                payload: {
+                  recipe,
+                },
+              });
+              break;
+            }
+            case "service-worker": {
+              sendMessageToBackground({
+                type: "SEND_RECIPE_DATA",
+                sender: "recipe-scraper",
+                payload: {
+                  recipe,
+                },
+              });
+
+              break;
+            }
+          }
         };
 
         // Because we are performing an asynchronous action,

@@ -25,7 +25,10 @@ export type RecipeImporterReadyMessage = BaseMessage & {
 };
 
 export type SendRecipeDataMessage = BaseMessage & {
-  sender: "popup";
+  payload: {
+    recipe: { title: string | null; url: string };
+  };
+  sender: "recipe-scraper";
   type: "SEND_RECIPE_DATA";
 };
 

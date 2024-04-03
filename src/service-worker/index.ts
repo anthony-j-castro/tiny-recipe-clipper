@@ -22,18 +22,20 @@ chrome.runtime.onMessage.addListener(async (rawMessage) => {
           newTabSender: chrome.runtime.MessageSender,
           sendResponse: (message: Message) => void,
         ) => {
-          const message =
+          const readyMessage =
             recipeImporterReadyMessageDecoder.value(newTabRawMessage);
 
           if (
-            message !== undefined &&
+            readyMessage !== undefined &&
             tab.id !== undefined &&
             newTabSender.tab?.id === tab.id
           ) {
+            const { recipe } = message.payload;
+
             sendResponse({
               type: "RECIPE_DATA",
               sender: "service-worker",
-              payload: { recipe: { title: null, url: "" } },
+              payload: { recipe },
             });
 
             chrome.runtime.onMessageExternal.removeListener(newTabListener);

@@ -21,7 +21,8 @@ export const ClipRecipeButton = styled(PrimaryButton)`
 export const Card = styled.div<{ $emphasize?: boolean }>(
   ({ $emphasize, theme }) => css`
     padding: 8px;
-    border: 1px solid ${$emphasize ? theme.colors.purple : theme.colors.gray};
+    border: ${$emphasize ? "2px" : "1px"} solid
+      ${$emphasize ? theme.colors.purple : theme.colors.gray};
     border-radius: 4px;
   `,
 );

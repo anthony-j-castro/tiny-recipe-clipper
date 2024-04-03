@@ -131,3 +131,17 @@ chrome.windows.onFocusChanged.addListener(async (windowId) => {
     updateExtensionIcon(tab);
   }
 });
+
+const setIconsOnStartup = async () => {
+  const tabs = await chrome.tabs.query({
+    active: true,
+  });
+
+  tabs.forEach((tab) => {
+    updateExtensionIcon(tab);
+  });
+};
+
+chrome.runtime.onInstalled.addListener(setIconsOnStartup);
+
+chrome.runtime.onStartup.addListener(setIconsOnStartup);

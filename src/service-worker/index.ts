@@ -115,7 +115,6 @@ chrome.tabs.onCreated.addListener((tab) => {
 
 chrome.tabs.onActivated.addListener(async (activeInfo) => {
   const tab = await getTab(activeInfo.tabId);
-
   updateExtensionIcon(tab);
 });
 

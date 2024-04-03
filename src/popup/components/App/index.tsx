@@ -3,6 +3,7 @@ import config from "~/config";
 import useGetCurrentTab from "~/hooks/useGetCurrentTab";
 import useGetMe from "~/hooks/useGetUserId";
 import IconNav from "~/popup/components/IconNav";
+import useFlavorText from "~/popup/hooks/useFlavorText";
 import useGetRecipeTitle from "~/popup/hooks/useGetRecipeTitle";
 import isRecipePage from "~/utils/isRecipePage";
 import isSupportedWebsite from "~/utils/isSupportedWebsite";
@@ -39,6 +40,8 @@ const App = () => {
 
   const { data: recipeTitle } = useGetRecipeTitle({ enabled: isRecipeOnPage });
 
+  const flavorText = useFlavorText();
+
   return (
     <AppContainer>
       <TopRow>
@@ -72,7 +75,7 @@ const App = () => {
       ) : isRecipeOnPage ? (
         <Card $emphasize>
           <RecipeTitle>{recipeTitle}</RecipeTitle>
-          <FlavorText>“Mmm, that looks good!”</FlavorText>
+          <FlavorText>{flavorText}</FlavorText>
         </Card>
       ) : isSupported ? (
         <Card>

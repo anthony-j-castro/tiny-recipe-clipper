@@ -64,7 +64,7 @@ const App = () => {
     <AppContainer>
       <TopRow>
         <IconNav />
-        {!isRequiresSync && isSupported && !isPendingRecipeTitle ? (
+        {!isRequiresSync && isSupported ? (
           <ClipRecipeButton
             disabled={!isRecipeOnPage || isErrorRecipeTitle}
             onClick={() => {

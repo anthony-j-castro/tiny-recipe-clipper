@@ -6,8 +6,8 @@ import isRecipePage from "~/utils/isRecipePage";
 import isSupportedWebsite from "~/utils/isSupportedWebsite";
 
 chrome.runtime.onMessage.addListener((rawMessage, sender, sendResponse) => {
-  // We only care about messages from the extension. If a tab exists, that
-  // means this message is from a content script.
+  // We currently only care about messages from the popup UI. If a tab exists,
+  // that means this message is from a content script.
   if (sender.tab) {
     return;
   }

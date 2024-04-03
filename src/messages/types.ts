@@ -39,7 +39,7 @@ export type ExtractRecipeMessage = BaseMessage & {
 
 export type RecipeDataMessage = BaseMessage & {
   payload: {
-    recipe: { title: string | null };
+    recipe: { title: string | null; url: string };
   };
   sender: "recipe-scraper" | "service-worker";
   type: "RECIPE_DATA";

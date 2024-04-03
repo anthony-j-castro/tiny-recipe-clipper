@@ -1,9 +1,11 @@
 type Recipe = {
   title: string | null;
+  url: string;
 };
 
 export interface Scraper {
   _getTitle: () => Promise<string | null>;
+  _getUrl: () => Promise<string>;
   load: () => Promise<Recipe>;
 }
 

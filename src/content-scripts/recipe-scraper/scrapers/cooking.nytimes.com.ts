@@ -10,9 +10,9 @@ export default class TimesScraper extends BaseScraper implements Scraper {
   }
 
   async load() {
-    const [title] = await Promise.all([this._getTitle()]);
+    const [title, url] = await Promise.all([this._getTitle(), this._getUrl()]);
 
-    return { title };
+    return { title, url };
   }
 
   async _getTitle() {
@@ -23,5 +23,12 @@ export default class TimesScraper extends BaseScraper implements Scraper {
 
       return titleElement?.innerText.trim() ?? null;
     });
+  }
+
+  async _getUrl() {
+    const href = await this._executeInPageScope(() => window.location.href);
+    const url = new URL(href);
+
+    return url.origin + url.pathname;
   }
 }

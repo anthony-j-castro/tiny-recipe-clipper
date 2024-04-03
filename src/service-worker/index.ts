@@ -33,7 +33,7 @@ chrome.runtime.onMessage.addListener(async (rawMessage) => {
             sendResponse({
               type: "RECIPE_DATA",
               sender: "service-worker",
-              payload: { recipe: { title: null } },
+              payload: { recipe: { title: null, url: "" } },
             });
 
             chrome.runtime.onMessageExternal.removeListener(newTabListener);

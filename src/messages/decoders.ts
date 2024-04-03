@@ -3,9 +3,9 @@ import {
   constant,
   either,
   exact,
+  nonEmptyString,
   nullable,
   oneOf,
-  string,
   uuidv4,
 } from "decoders";
 import {
@@ -50,7 +50,8 @@ export const recipeDataMessageDecoder: Decoder<RecipeDataMessage> = exact({
   type: constant("RECIPE_DATA"),
   payload: exact({
     recipe: exact({
-      title: nullable(string),
+      title: nullable(nonEmptyString),
+      url: nonEmptyString,
     }),
   }),
 });

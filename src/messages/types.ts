@@ -25,22 +25,50 @@ export type RecipeImporterReadyMessage = BaseMessage & {
 };
 
 export type SendRecipeDataMessage = BaseMessage & {
-  sender: "popup";
+  payload: {
+    recipe: { title: string; url: string };
+  };
+  sender: "recipe-scraper";
   type: "SEND_RECIPE_DATA";
 };
 
+export type ExtractRecipeMessage = BaseMessage & {
+  payload: {
+    destination: "popup" | "service-worker";
+  };
+  sender: "popup";
+  type: "EXTRACT_RECIPE";
+};
+
 export type RecipeDataMessage = BaseMessage & {
-  sender: "service-worker";
+  payload: {
+    recipe: { title: string; url: string };
+  };
+  sender: "recipe-scraper" | "service-worker";
   type: "RECIPE_DATA";
 };
 
+export type ErrorMessage = BaseMessage & {
+  payload: {
+    error: string;
+  };
+  type: "ERROR";
+};
+
 export type Message =
+  | ErrorMessage
+  | ExtractRecipeMessage
   | PingMessage
   | RecipeDataMessage
   | RecipeImporterReadyMessage
   | SendRecipeDataMessage;
 
+export type ReceivablePopupMessage = RecipeDataMessage;
+
+export type ReceivableRecipeScraperMessage = ExtractRecipeMessage;
+
 export type ReceivableServiceWorkerMessage =
   | PingMessage
+  | RecipeDataMessage
   | RecipeImporterReadyMessage
   | SendRecipeDataMessage;

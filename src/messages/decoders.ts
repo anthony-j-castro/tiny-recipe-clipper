@@ -1,7 +1,19 @@
-import { Decoder, constant, either, exact, uuidv4 } from "decoders";
 import {
+  Decoder,
+  constant,
+  either,
+  exact,
+  nonEmptyString,
+  oneOf,
+  uuidv4,
+} from "decoders";
+import {
+  ErrorMessage,
+  ExtractRecipeMessage,
   PingMessage,
+  ReceivableRecipeScraperMessage,
   ReceivableServiceWorkerMessage,
+  RecipeDataMessage,
   RecipeImporterReadyMessage,
   SendRecipeDataMessage,
 } from "~/messages/types";
@@ -21,9 +33,45 @@ export const recipeImporterReadyMessageDecoder: Decoder<RecipeImporterReadyMessa
   });
 
 const sendRecipeDataMessageDecoder: Decoder<SendRecipeDataMessage> = exact({
-  sender: constant("popup"),
+  sender: constant("recipe-scraper"),
   type: constant("SEND_RECIPE_DATA"),
+  payload: exact({
+    recipe: exact({
+      title: nonEmptyString,
+      url: nonEmptyString,
+    }),
+  }),
 });
+
+const extractRecipeMessageDecoder: Decoder<ExtractRecipeMessage> = exact({
+  sender: constant("popup"),
+  type: constant("EXTRACT_RECIPE"),
+  payload: exact({
+    destination: oneOf(["popup", "service-worker"]),
+  }),
+});
+
+export const recipeDataMessageDecoder: Decoder<RecipeDataMessage> = exact({
+  sender: constant("recipe-scraper"),
+  type: constant("RECIPE_DATA"),
+  payload: exact({
+    recipe: exact({
+      title: nonEmptyString,
+      url: nonEmptyString,
+    }),
+  }),
+});
+
+export const errorMessageDecoder: Decoder<ErrorMessage> = exact({
+  sender: constant("recipe-scraper"),
+  type: constant("ERROR"),
+  payload: exact({
+    error: nonEmptyString,
+  }),
+});
+
+export const receivableRecipeScraperMessageDecoder: Decoder<ReceivableRecipeScraperMessage> =
+  either(extractRecipeMessageDecoder);
 
 export const receivableServiceWorkerMessageDecoder: Decoder<ReceivableServiceWorkerMessage> =
   either(

@@ -18,11 +18,29 @@ export const ClipRecipeButton = styled(PrimaryButton)`
   margin-left: 32px;
 `;
 
-export const Card = styled.div(
-  ({ theme }) => css`
+export const Card = styled.div<{ $emphasize?: boolean }>(
+  ({ $emphasize, theme }) => css`
+    min-width: 200px;
     padding: 8px;
-    border: 1px solid ${theme.colors.gray};
+    border: ${$emphasize ? "2px" : "1px"} solid
+      ${$emphasize ? theme.colors.purple : theme.colors.gray};
     border-radius: 4px;
+  `,
+);
+
+export const RecipeTitle = styled.div`
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+`;
+
+export const FlavorText = styled.div(
+  ({ theme }) => css`
+    font-size: 10px;
+    color: ${theme.colors.darkGray};
+    font-style: italic;
+    text-align: center;
+    margin-top: 16px;
   `,
 );
 

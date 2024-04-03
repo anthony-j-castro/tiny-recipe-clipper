@@ -17,8 +17,11 @@ export const setTabUrl = (tabId: number, url: string) =>
     url,
   });
 
-export const sendMessageToBackground = (message: Message) =>
+export const sendMessageToServiceWorker = (message: Message) =>
   chrome.runtime.sendMessage(message);
+
+export const sendMessageToTab = (tabId: number, message: Message) =>
+  chrome.tabs.sendMessage(tabId, message);
 
 export const getLocalStorage = async (key: string) => {
   const data = await chrome.storage.local.get(key);

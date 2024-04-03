@@ -1,8 +1,10 @@
-import { sendMessageToBackground } from "~/chrome-helpers";
+import { sendMessageToTab } from "~/chrome-helpers";
 import config from "~/config";
 import useGetCurrentTab from "~/hooks/useGetCurrentTab";
 import useGetMe from "~/hooks/useGetUserId";
 import IconNav from "~/popup/components/IconNav";
+import useFlavorText from "~/popup/hooks/useFlavorText";
+import useGetRecipeTitle from "~/popup/hooks/useGetRecipeTitle";
 import isRecipePage from "~/utils/isRecipePage";
 import isSupportedWebsite from "~/utils/isSupportedWebsite";
 import {
@@ -10,13 +12,15 @@ import {
   AppContainer,
   Card,
   ClipRecipeButton,
+  FlavorText,
   PrimaryActionButton,
+  RecipeTitle,
   Text,
   TopRow,
 } from "./styled";
 
 const App = () => {
-  const { data: userId, isPending } = useGetMe();
+  const { data: userId, isPending: isPendingMe } = useGetMe();
   const { data: currentTab } = useGetCurrentTab();
 
   const isRequiresSync = userId === undefined;
@@ -26,6 +30,18 @@ const App = () => {
     : false;
   const isRecipeOnPage = currentTab?.url ? isRecipePage(currentTab.url) : false;
 
+  const reportProblemFormUrl = new URL(config.REPORT_PROBLEM_FORM.URL);
+  reportProblemFormUrl.searchParams.set(
+    config.REPORT_PROBLEM_FORM.VERSION_LINK_PARAM,
+    config.VERSION,
+  );
+  if (currentTab?.url) {
+    reportProblemFormUrl.searchParams.set(
+      config.REPORT_PROBLEM_FORM.WEBSITE_LINK_PARAM,
+      currentTab.url,
+    );
+  }
+
   const requestFormUrl = new URL(config.REQUEST_FORM.URL);
   if (currentTab?.url) {
     requestFormUrl.searchParams.set(
@@ -34,18 +50,33 @@ const App = () => {
     );
   }
 
+  const {
+    data: recipeTitle,
+    isError: isErrorRecipeTitle,
+    isPending: isPendingRecipeTitle,
+  } = useGetRecipeTitle({
+    enabled: isRecipeOnPage,
+  });
+
+  const flavorText = useFlavorText();
+
   return (
     <AppContainer>
       <TopRow>
         <IconNav />
         {!isRequiresSync && isSupported ? (
           <ClipRecipeButton
-            disabled={!isRecipeOnPage}
+            disabled={!isRecipeOnPage || isErrorRecipeTitle}
             onClick={() => {
-              sendMessageToBackground({
-                sender: "popup",
-                type: "SEND_RECIPE_DATA",
-              });
+              if (currentTab?.id) {
+                sendMessageToTab(currentTab.id, {
+                  type: "EXTRACT_RECIPE",
+                  sender: "popup",
+                  payload: {
+                    destination: "service-worker",
+                  },
+                });
+              }
             }}
             accessibleWhenDisabled
           >
@@ -53,7 +84,7 @@ const App = () => {
           </ClipRecipeButton>
         ) : null}
       </TopRow>
-      {isPending ? null : isRequiresSync ? (
+      {isPendingMe ? null : isRequiresSync ? (
         <Card>
           <Text>
             Finish setting up this extension by syncing with the web app.
@@ -65,9 +96,22 @@ const App = () => {
           </PrimaryActionButton>
         </Card>
       ) : isRecipeOnPage ? (
-        <Card>
-          <Text>Recipe found.</Text>
-        </Card>
+        isPendingRecipeTitle ? null : isErrorRecipeTitle ? (
+          <Card>
+            <Text>
+              Sorry! You’re on a valid recipe page but the recipe couldn’t be
+              read properly.
+            </Text>
+            <ActionButton href={reportProblemFormUrl.toString()}>
+              Report a problem
+            </ActionButton>
+          </Card>
+        ) : (
+          <Card $emphasize>
+            <RecipeTitle>{recipeTitle}</RecipeTitle>
+            <FlavorText>{flavorText}</FlavorText>
+          </Card>
+        )
       ) : isSupported ? (
         <Card>
           <Text>To clip a recipe, make sure you’re on a recipe page.</Text>

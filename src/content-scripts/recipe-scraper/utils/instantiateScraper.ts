@@ -9,6 +9,7 @@ const instantiateScraper = (url: string): Scraper | undefined => {
       case "cooking.nytimes.com": {
         return new TimesScraper();
       }
+
       default: {
         return undefined;
       }

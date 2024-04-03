@@ -43,8 +43,10 @@ chrome.runtime.onMessage.addListener(
                       recipe,
                     },
                   });
+
                   break;
                 }
+
                 case "service-worker": {
                   sendMessageToServiceWorker({
                     type: "SEND_RECIPE_DATA",

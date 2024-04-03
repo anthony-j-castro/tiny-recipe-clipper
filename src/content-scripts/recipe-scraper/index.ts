@@ -18,9 +18,7 @@ chrome.runtime.onMessage.addListener((rawMessage, sender, sendResponse) => {
         isSupportedWebsite(window.location.href) &&
         isRecipePage(window.location.href)
       ) {
-        const getAndSendRecipe = async (
-          sendResponse: (response: unknown) => void,
-        ) => {
+        const getAndSendRecipe = async () => {
           const scraper = instantiateScraper(window.location.href);
 
           if (scraper === undefined) {
@@ -41,7 +39,7 @@ chrome.runtime.onMessage.addListener((rawMessage, sender, sendResponse) => {
         // Because we are performing an asynchronous action,
         // we need to return true in order to use sendResponse asynchronously.
         // See: https://developer.chrome.com/docs/extensions/develop/concepts/messaging#simple
-        getAndSendRecipe(sendResponse);
+        getAndSendRecipe();
 
         return true;
       }

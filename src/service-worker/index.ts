@@ -1,4 +1,10 @@
-import { createEmptyTab, setTabUrl } from "~/chrome-helpers";
+import {
+  createEmptyTab,
+  getCurrentTab,
+  getTab,
+  setExtensionIcon,
+  setTabUrl,
+} from "~/chrome-helpers";
 import config from "~/config";
 import {
   receivableServiceWorkerMessageDecoder,
@@ -6,6 +12,7 @@ import {
 } from "~/messages/decoders";
 import { Message } from "~/messages/types";
 import { setUserId } from "~/storage";
+import isRecipePage from "~/utils/isRecipePage";
 
 const WEB_APP_URL = new URL(config.WEB_APP.ORIGIN);
 
@@ -87,3 +94,40 @@ chrome.runtime.onMessageExternal.addListener(
     }
   },
 );
+
+const updateExtensionIcon = (tab: chrome.tabs.Tab) => {
+  if (!tab.id) {
+    return;
+  }
+
+  if (tab.url && isRecipePage(tab.url)) {
+    setExtensionIcon(tab.id, "active-icon");
+
+    return;
+  }
+
+  setExtensionIcon(tab.id, "inactive-icon");
+};
+
+chrome.tabs.onCreated.addListener((tab) => {
+  updateExtensionIcon(tab);
+});
+
+chrome.tabs.onActivated.addListener(async (activeInfo) => {
+  const tab = await getTab(activeInfo.tabId);
+
+  updateExtensionIcon(tab);
+});
+
+chrome.tabs.onUpdated.addListener((_tabId, _changeInfo, tab) => {
+  if (tab.active) {
+    updateExtensionIcon(tab);
+  }
+});
+
+chrome.windows.onFocusChanged.addListener(async (windowId) => {
+  if (windowId !== chrome.windows.WINDOW_ID_NONE) {
+    const tab = await getCurrentTab({ focused: true });
+    updateExtensionIcon(tab);
+  }
+});

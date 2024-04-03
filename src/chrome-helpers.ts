@@ -1,9 +1,14 @@
 import { Message } from "~/messages/types";
 
-export const getCurrentTab = async () => {
+export const getTab = async (tabId: number) => chrome.tabs.get(tabId);
+
+export const getCurrentTab = async ({
+  focused,
+}: { focused?: boolean } = {}) => {
   const [currentTab] = await chrome.tabs.query({
     active: true,
     currentWindow: true,
+    lastFocusedWindow: focused,
   });
 
   return currentTab;
@@ -22,6 +27,16 @@ export const sendMessageToServiceWorker = (message: Message) =>
 
 export const sendMessageToTab = (tabId: number, message: Message) =>
   chrome.tabs.sendMessage(tabId, message);
+
+export const setExtensionIcon = (
+  tabId: number,
+  icon: "active-icon" | "inactive-icon",
+) => {
+  chrome.action.setIcon({
+    path: `/images/${icon}.png`,
+    tabId,
+  });
+};
 
 export const getLocalStorage = async (key: string) => {
   const data = await chrome.storage.local.get(key);

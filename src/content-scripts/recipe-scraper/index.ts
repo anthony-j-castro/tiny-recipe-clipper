@@ -1,5 +1,6 @@
 import { sendMessageToServiceWorker } from "~/chrome-helpers";
 import instantiateScraper from "~/content-scripts/recipe-scraper/utils/instantiateScraper";
+import { ImpossibleStateError } from "~/errors";
 import { receivableRecipeScraperMessageDecoder } from "~/messages/decoders";
 import isRecipePage from "~/utils/isRecipePage";
 import isSupportedWebsite from "~/utils/isSupportedWebsite";
@@ -23,7 +24,9 @@ chrome.runtime.onMessage.addListener((rawMessage, sender, sendResponse) => {
           const scraper = instantiateScraper(window.location.href);
 
           if (scraper === undefined) {
-            throw new Error("Impossible!");
+            throw new ImpossibleStateError(
+              "A scraper could not be instantiated for a valid recipe page.",
+            );
           }
 
           const recipe = await scraper.load();

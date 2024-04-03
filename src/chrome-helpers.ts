@@ -17,7 +17,7 @@ export const setTabUrl = (tabId: number, url: string) =>
     url,
   });
 
-export const sendMessageToBackground = (message: Message) =>
+export const sendMessageToServiceWorker = (message: Message) =>
   chrome.runtime.sendMessage(message);
 
 export const sendMessageToTab = (tabId: number, message: Message) =>

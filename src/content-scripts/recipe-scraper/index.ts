@@ -1,4 +1,4 @@
-import { sendMessageToBackground } from "~/chrome-helpers";
+import { sendMessageToServiceWorker } from "~/chrome-helpers";
 import instantiateScraper from "~/content-scripts/recipe-scraper/utils/instantiateScraper";
 import { receivableRecipeScraperMessageDecoder } from "~/messages/decoders";
 import isRecipePage from "~/utils/isRecipePage";
@@ -40,7 +40,7 @@ chrome.runtime.onMessage.addListener((rawMessage, sender, sendResponse) => {
               break;
             }
             case "service-worker": {
-              sendMessageToBackground({
+              sendMessageToServiceWorker({
                 type: "SEND_RECIPE_DATA",
                 sender: "recipe-scraper",
                 payload: {

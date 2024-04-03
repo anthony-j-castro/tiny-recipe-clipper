@@ -11,7 +11,9 @@ import {
   AppContainer,
   Card,
   ClipRecipeButton,
+  FlavorText,
   PrimaryActionButton,
+  RecipeTitle,
   Text,
   TopRow,
 } from "./styled";
@@ -68,8 +70,9 @@ const App = () => {
           </PrimaryActionButton>
         </Card>
       ) : isRecipeOnPage ? (
-        <Card>
-          <Text>{recipeTitle}</Text>
+        <Card $emphasize>
+          <RecipeTitle>{recipeTitle}</RecipeTitle>
+          <FlavorText>“Mmm, that looks good!”</FlavorText>
         </Card>
       ) : isSupported ? (
         <Card>

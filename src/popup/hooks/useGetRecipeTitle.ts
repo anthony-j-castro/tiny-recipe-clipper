@@ -1,26 +1,43 @@
 import { useQuery } from "@tanstack/react-query";
+import { either } from "decoders";
 import { getCurrentTab, sendMessageToTab } from "~/chrome-helpers";
-import { recipeDataMessageDecoder } from "~/messages/decoders";
+import {
+  errorMessageDecoder,
+  recipeDataMessageDecoder,
+} from "~/messages/decoders";
 
 const useGetRecipeTitle = ({ enabled }: { enabled?: boolean } = {}) =>
   useQuery({
     enabled,
     queryKey: ["getRecipeTitle"],
     queryFn: async () => {
-      const currentTab = await getCurrentTab();
+      try {
+        const currentTab = await getCurrentTab();
 
-      if (currentTab.id) {
-        const response = await sendMessageToTab(currentTab.id, {
-          type: "EXTRACT_RECIPE",
-          sender: "popup",
-          payload: {
-            destination: "popup",
-          },
-        });
+        if (currentTab.id) {
+          const response = await sendMessageToTab(currentTab.id, {
+            type: "EXTRACT_RECIPE",
+            sender: "popup",
+            payload: {
+              destination: "popup",
+            },
+          });
 
-        const decodedResponse = recipeDataMessageDecoder.verify(response);
+          const decodedResponse = either(
+            recipeDataMessageDecoder,
+            errorMessageDecoder,
+          ).verify(response);
 
-        return decodedResponse.payload.recipe.title;
+          if (decodedResponse.type === "ERROR") {
+            throw new Error(decodedResponse.payload.error);
+          }
+
+          return decodedResponse.payload.recipe.title;
+        }
+      } catch (error) {
+        throw new Error(
+          "An unexpected error occurred while extracting the recipe title.",
+        );
       }
     },
   });

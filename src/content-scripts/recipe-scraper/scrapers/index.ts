@@ -1,10 +1,10 @@
 type Recipe = {
-  title: string | null;
+  title: string;
   url: string;
 };
 
 export interface Scraper {
-  _getTitle: () => Promise<string | null>;
+  _getTitle: () => Promise<string>;
   _getUrl: () => Promise<string>;
   load: () => Promise<Recipe>;
 }

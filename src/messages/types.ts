@@ -26,7 +26,7 @@ export type RecipeImporterReadyMessage = BaseMessage & {
 
 export type SendRecipeDataMessage = BaseMessage & {
   payload: {
-    recipe: { title: string | null; url: string };
+    recipe: { title: string; url: string };
   };
   sender: "recipe-scraper";
   type: "SEND_RECIPE_DATA";
@@ -42,13 +42,21 @@ export type ExtractRecipeMessage = BaseMessage & {
 
 export type RecipeDataMessage = BaseMessage & {
   payload: {
-    recipe: { title: string | null; url: string };
+    recipe: { title: string; url: string };
   };
   sender: "recipe-scraper" | "service-worker";
   type: "RECIPE_DATA";
 };
 
+export type ErrorMessage = BaseMessage & {
+  payload: {
+    error: string;
+  };
+  type: "ERROR";
+};
+
 export type Message =
+  | ErrorMessage
   | ExtractRecipeMessage
   | PingMessage
   | RecipeDataMessage

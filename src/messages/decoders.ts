@@ -4,11 +4,11 @@ import {
   either,
   exact,
   nonEmptyString,
-  nullable,
   oneOf,
   uuidv4,
 } from "decoders";
 import {
+  ErrorMessage,
   ExtractRecipeMessage,
   PingMessage,
   ReceivableRecipeScraperMessage,
@@ -37,7 +37,7 @@ const sendRecipeDataMessageDecoder: Decoder<SendRecipeDataMessage> = exact({
   type: constant("SEND_RECIPE_DATA"),
   payload: exact({
     recipe: exact({
-      title: nullable(nonEmptyString),
+      title: nonEmptyString,
       url: nonEmptyString,
     }),
   }),
@@ -56,9 +56,17 @@ export const recipeDataMessageDecoder: Decoder<RecipeDataMessage> = exact({
   type: constant("RECIPE_DATA"),
   payload: exact({
     recipe: exact({
-      title: nullable(nonEmptyString),
+      title: nonEmptyString,
       url: nonEmptyString,
     }),
+  }),
+});
+
+export const errorMessageDecoder: Decoder<ErrorMessage> = exact({
+  sender: constant("recipe-scraper"),
+  type: constant("ERROR"),
+  payload: exact({
+    error: nonEmptyString,
   }),
 });
 

@@ -21,9 +21,7 @@ export const sendMessageToServiceWorker = (message: Message) =>
   chrome.runtime.sendMessage(message);
 
 export const sendMessageToTab = (tabId: number, message: Message) =>
-  new Promise((resolve) => {
-    chrome.tabs.sendMessage(tabId, message, resolve);
-  });
+  chrome.tabs.sendMessage(tabId, message);
 
 export const getLocalStorage = async (key: string) => {
   const data = await chrome.storage.local.get(key);

@@ -21,7 +21,11 @@ export default class TimesScraper extends BaseScraper implements Scraper {
         'h1[class*="pantry--title-display"]',
       );
 
-      return titleElement?.innerText.trim() ?? null;
+      if (!titleElement) {
+        throw new Error("Recipe title could not be found on the page.");
+      }
+
+      return titleElement.innerText.trim();
     });
   }
 

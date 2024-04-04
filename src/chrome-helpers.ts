@@ -1,6 +1,6 @@
 import { Message } from "~/messages/types";
 
-const NO_TAB_ERROR_REGEX = /No tab with id:/;
+const NO_TAB_ERROR_REGEX = /^No tab with id:/;
 
 export const getTab = async (tabId: number) => chrome.tabs.get(tabId);
 

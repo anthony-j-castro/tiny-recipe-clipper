@@ -4,6 +4,7 @@ import salmonBurgers from "~/playwright/fixtures/cooking.nytimes.com/salmon-burg
 
 export const test = base.extend<{
   context: BrowserContext;
+  customExecuteInPageScope: <T>(instructions: () => T) => Promise<T>;
   extensionId: string;
   recipeFixtures: {
     salmonBurgers: typeof salmonBurgers;
@@ -31,6 +32,10 @@ export const test = base.extend<{
 
     const extensionId = background.url().split("/")[2];
     await use(extensionId);
+  },
+  customExecuteInPageScope: async ({ page }, use) => {
+    const fn = <T>(instructions: () => T) => page.evaluate(instructions);
+    await use(fn);
   },
   recipeFixtures: {
     salmonBurgers,

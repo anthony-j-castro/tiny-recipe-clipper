@@ -15,6 +15,24 @@ test.describe("cooking.nytimes.com", () => {
 
     const recipe = await scraper.load();
 
-    expect(recipe).toMatchObject(recipeFixtures.salmonBurgers);
+    expect(recipe).toEqual(recipeFixtures.salmonBurgers);
+  });
+
+  test("parses a recipe with 2 attributions", async ({
+    customExecuteInPageScope,
+    page,
+    recipeFixtures,
+  }) => {
+    await page.goto(
+      "https://cooking.nytimes.com/recipes/1023785-magnolia-bakerys-banana-pudding",
+    );
+
+    const scraper = new TimesScraper({
+      customExecuteInPageScope,
+    });
+
+    const recipe = await scraper.load();
+
+    expect(recipe).toEqual(recipeFixtures.bananaPudding);
   });
 });

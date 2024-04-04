@@ -1,5 +1,6 @@
 import path from "path";
 import { type BrowserContext, test as base, chromium } from "@playwright/test";
+import bananaPudding from "~/playwright/fixtures/cooking.nytimes.com/banana-pudding.json";
 import salmonBurgers from "~/playwright/fixtures/cooking.nytimes.com/salmon-burgers.json";
 
 export const test = base.extend<{
@@ -7,6 +8,7 @@ export const test = base.extend<{
   customExecuteInPageScope: <T>(instructions: () => T) => Promise<T>;
   extensionId: string;
   recipeFixtures: {
+    bananaPudding: typeof bananaPudding;
     salmonBurgers: typeof salmonBurgers;
   };
 }>({
@@ -38,6 +40,7 @@ export const test = base.extend<{
     await use(fn);
   },
   recipeFixtures: {
+    bananaPudding,
     salmonBurgers,
   },
 });

@@ -1,9 +1,13 @@
 import path from "path";
 import { type BrowserContext, test as base, chromium } from "@playwright/test";
+import salmonBurgers from "./cooking.nytimes.com/salmon-burgers.json";
 
 export const test = base.extend<{
   context: BrowserContext;
   extensionId: string;
+  recipeFixtures: {
+    salmonBurgers: typeof salmonBurgers;
+  };
 }>({
   // eslint-disable-next-line no-empty-pattern
   context: async ({}, use) => {
@@ -27,6 +31,9 @@ export const test = base.extend<{
 
     const extensionId = background.url().split("/")[2];
     await use(extensionId);
+  },
+  recipeFixtures: {
+    salmonBurgers,
   },
 });
 

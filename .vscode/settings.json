@@ -2,7 +2,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "eslint.validate": ["javascript", "typescript"],
+  "eslint.validate": ["javascript", "typescript", "json"],
   "typescript.reportStyleChecksAsWarnings": false,
   "typescript.validate.enable": true,
   "[css]": {

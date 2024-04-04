@@ -7,6 +7,16 @@ module.exports = {
     "plugin:react/jsx-runtime",
     "plugin:@tanstack/eslint-plugin-query/recommended",
   ],
+  overrides: [
+    {
+      files: ["playwright/**/*.json"],
+      parser: "jsonc-eslint-parser",
+      rules: {
+        "jsonc/sort-keys": "error",
+      },
+    },
+  ],
+  plugins: ["jsonc"],
   settings: {
     "import/resolver": {
       alias: {

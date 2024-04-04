@@ -29,8 +29,10 @@
   "devDependencies": {
     "@anthony-j-castro/eslint-config": "github:anthony-j-castro/eslint-config#semver:1.6.0",
     "@anthony-j-castro/prettier-config": "github:anthony-j-castro/prettier-config#semver:1.0.0",
+    "@playwright/test": "1.42.1",
     "@tanstack/eslint-plugin-query": "5.28.11",
     "@types/chrome": "0.0.263",
+    "@types/node": "20.12.4",
     "@types/react": "18.2.74",
     "@types/react-dom": "18.2.24",
     "copy-webpack-plugin": "12.0.2",

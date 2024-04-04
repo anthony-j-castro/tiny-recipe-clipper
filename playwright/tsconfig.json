@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": "../src",
+    "esModuleInterop": true,
+    "lib": ["es5", "dom"],
+    "paths": {
+      "~/*": ["*"]
+    },
+    "resolveJsonModule": true,
+    "target": "es5",
+    "types": ["node"]
+  },
+  "include": ["**/*.ts"]
+}

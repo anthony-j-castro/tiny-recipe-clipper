@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": "../src",
+    "esModuleInterop": true,
+    "lib": ["es5", "dom"],
+    "paths": {
+      "~/playwright/*": ["../playwright/*"],
+      "~/src/*": ["*"]
+    },
+    "resolveJsonModule": true,
+    "target": "es5",
+    "types": ["node"]
+  },
+  "include": ["**/*.ts"]
+}

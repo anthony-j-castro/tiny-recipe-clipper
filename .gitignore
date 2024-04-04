@@ -10,5 +10,9 @@
 # Sensitive Files
 .env
 
+# Playwright
+/playwright/report/
+/playwright/.cache/
+
 # Miscellaneous
 .DS_Store

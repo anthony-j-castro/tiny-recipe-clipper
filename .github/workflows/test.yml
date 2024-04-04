@@ -28,6 +28,7 @@ jobs:
         run: npm run lint:ci
 
   test-with-playwright:
+    needs: compile-and-lint
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:

@@ -1,5 +1,7 @@
 import { Message } from "~/messages/types";
 
+const NO_TAB_ERROR_REGEX = /No tab with id:/;
+
 export const getTab = async (tabId: number) => chrome.tabs.get(tabId);
 
 export const getCurrentTab = async ({
@@ -31,12 +33,30 @@ export const sendMessageToTab = (tabId: number, message: Message) =>
 export const setExtensionIcon = (
   tabId: number,
   icon: "active-icon" | "inactive-icon",
-) => {
-  chrome.action.setIcon({
-    path: `/images/${icon}.png`,
-    tabId,
-  });
-};
+) =>
+  chrome.action.setIcon(
+    {
+      path: `/images/${icon}.png`,
+      tabId,
+    },
+    () => {
+      const error = chrome.runtime.lastError;
+
+      if (error !== undefined) {
+        // It's possible that a tab no longer exists when we try
+        // to set the icon, so we expect that error to exist here.
+        if (error.message !== undefined) {
+          if (!NO_TAB_ERROR_REGEX.test(error.message)) {
+            // eslint-disable-next-line no-console
+            console.error(error.message);
+          }
+        } else {
+          // eslint-disable-next-line no-console
+          console.error("Unknown chrome.runtime.lastError occurred.");
+        }
+      }
+    },
+  );
 
 export const getLocalStorage = async (key: string) => {
   const data = await chrome.storage.local.get(key);

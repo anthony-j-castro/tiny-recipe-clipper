@@ -1,6 +1,6 @@
 import path from "path";
 import { type BrowserContext, test as base, chromium } from "@playwright/test";
-import salmonBurgers from "./cooking.nytimes.com/salmon-burgers.json";
+import salmonBurgers from "~/playwright/fixtures/cooking.nytimes.com/salmon-burgers.json";
 
 export const test = base.extend<{
   context: BrowserContext;

@@ -1,6 +1,5 @@
-/* eslint-disable no-restricted-imports */
-import TimesScraper from "~/content-scripts/recipe-scraper/scrapers/cooking.nytimes.com";
-import { expect, test } from "../../fixtures";
+import { expect, test } from "~/playwright/fixtures";
+import TimesScraper from "~/src/content-scripts/recipe-scraper/scrapers/cooking.nytimes.com";
 
 test.describe("cooking.nytimes.com", () => {
   test("parses a standard recipe", async ({ page, recipeFixtures }) => {

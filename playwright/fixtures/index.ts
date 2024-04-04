@@ -1,16 +1,10 @@
 import path from "path";
 import { type BrowserContext, test as base, chromium } from "@playwright/test";
-import bananaPudding from "~/playwright/fixtures/cooking.nytimes.com/banana-pudding.json";
-import salmonBurgers from "~/playwright/fixtures/cooking.nytimes.com/salmon-burgers.json";
 
 export const test = base.extend<{
   context: BrowserContext;
   customExecuteInPageScope: <T>(instructions: () => T) => Promise<T>;
   extensionId: string;
-  recipeFixtures: {
-    bananaPudding: typeof bananaPudding;
-    salmonBurgers: typeof salmonBurgers;
-  };
 }>({
   // eslint-disable-next-line no-empty-pattern
   context: async ({}, use) => {
@@ -38,10 +32,6 @@ export const test = base.extend<{
   customExecuteInPageScope: async ({ page }, use) => {
     const fn = <T>(instructions: () => T) => page.evaluate(instructions);
     await use(fn);
-  },
-  recipeFixtures: {
-    bananaPudding,
-    salmonBurgers,
   },
 });
 

@@ -11,7 +11,9 @@ import {
   recipeImporterReadyMessageDecoder,
 } from "~/messages/decoders";
 import { Message } from "~/messages/types";
+import exceptionLogger from "~/service-worker/exception-logger";
 import { setUserId } from "~/storage";
+import assertIsError from "~/utils/assertIsError";
 import isRecipePage from "~/utils/isRecipePage";
 
 const WEB_APP_URL = new URL(config.WEB_APP.ORIGIN);
@@ -62,8 +64,8 @@ chrome.runtime.onMessage.addListener(async (rawMessage) => {
       }
     }
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
+    assertIsError(error);
+    exceptionLogger.error(error.message);
   }
 });
 
@@ -89,8 +91,8 @@ chrome.runtime.onMessageExternal.addListener(
         }
       }
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error);
+      assertIsError(error);
+      exceptionLogger.error(error.message);
     }
   },
 );

@@ -64,6 +64,7 @@ const config = {
   plugins: [
     new webpack.EnvironmentPlugin({
       BUILD_ENV: null,
+      ROLLBAR_ACCESS_TOKEN: null,
     }),
     new HtmlWebpackPlugin({
       chunks: ["popup"],

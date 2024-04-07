@@ -44,3 +44,34 @@ export const DisclosureContentSeparator = styled(AriakitSeparator)(
     margin: 4px 0;
   `,
 );
+
+export const Table = styled.table`
+  display: block;
+  font-family: monospace;
+  border-collapse: collapse;
+  overflow: auto;
+  margin-top: 12px;
+  user-select: text;
+`;
+
+export const HeaderCell = styled.th(
+  ({ theme }) => css`
+    text-align: left;
+    font-weight: 700;
+    white-space: nowrap;
+    padding: 4px 16px 4px 4px;
+    border-left: 1px solid ${theme.colors.nearBlack};
+  `,
+);
+
+export const Cell = styled.td(
+  ({ theme }) => css`
+    white-space: nowrap;
+    padding: 4px 16px 4px 4px;
+    border-left: 1px solid ${theme.colors.nearBlack};
+  `,
+);
+
+export const Disclaimer = styled.div`
+  margin-top: 16px;
+`;

@@ -11,6 +11,8 @@ import {
 } from "decoders";
 import { getErrorLog as getStoredErrorLog, setErrorLog } from "~/storage";
 
+export const ERROR_LOG_MAX_LENGTH = 50;
+
 type ErrorLogEntry = {
   level: string;
   message: string;
@@ -38,7 +40,7 @@ export const getErrorLog = async () => {
 export const appendErrorLogEntry = async (entry: ErrorLogEntry) => {
   const oldErrorLog = await getErrorLog();
 
-  const newErrorLog = [entry, ...oldErrorLog].slice(0, 50);
+  const newErrorLog = [entry, ...oldErrorLog].slice(0, ERROR_LOG_MAX_LENGTH);
 
   return setErrorLog(newErrorLog);
 };

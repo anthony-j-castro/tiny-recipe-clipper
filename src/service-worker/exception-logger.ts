@@ -53,7 +53,13 @@ async function sendItem({
     }),
   });
 
-  await appendErrorLogEntry({ level, message, timestamp, uuid, properties });
+  await appendErrorLogEntry({
+    level,
+    message,
+    timestamp: timestamp * 1000,
+    uuid,
+    properties,
+  });
 
   return response.json();
 }

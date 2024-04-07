@@ -1,21 +1,13 @@
-import { useDisclosureStore } from "@ariakit/react/disclosure";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import InfoIcon from "@mui/icons-material/Info";
-import { useState } from "react";
 import config from "~/config";
 import useGetUserId from "~/hooks/useGetUserId";
-import useGetErrorLog from "~/options/hooks/useGetErrorLog";
+import ErrorHistory from "~/options/components/ErrorHistory";
 import logo from "~/options/images/logo.svg";
 import {
   BannerButton,
   BannerCopy,
   Container,
   DescriptionParagraph,
-  Disclosure,
-  DisclosureContent,
-  DisclosureContentSeparator,
-  DisclosureWrapper,
   Header,
   InfoBanner,
   InnerBannerContainer,
@@ -30,8 +22,6 @@ import {
   VersionNumber,
 } from "./styled";
 
-const ICON_OPTIONS = { fontSize: 16, marginRight: "4px", flexGrow: 0 };
-
 export default function App() {
   const { data: userId, isPending } = useGetUserId();
 
@@ -40,10 +30,6 @@ export default function App() {
     config.REPORT_PROBLEM_FORM.VERSION_LINK_PARAM,
     config.VERSION,
   );
-
-  const { data: errorLog } = useGetErrorLog();
-  const [open, setOpen] = useState(false);
-  const disclosure = useDisclosureStore({ open, setOpen });
 
   return (
     <Container>
@@ -108,20 +94,7 @@ export default function App() {
               Report a problem…
             </a>
           </div>
-          <DisclosureWrapper>
-            <Disclosure store={disclosure}>
-              {open ? (
-                <ExpandLessIcon sx={ICON_OPTIONS} />
-              ) : (
-                <ExpandMoreIcon sx={ICON_OPTIONS} />
-              )}
-              <span>Error History</span>
-            </Disclosure>
-            <DisclosureContent store={disclosure}>
-              <DisclosureContentSeparator />
-              <pre>{JSON.stringify(errorLog)}</pre>
-            </DisclosureContent>
-          </DisclosureWrapper>
+          <ErrorHistory />
         </section>
         <Separator />
         <section>

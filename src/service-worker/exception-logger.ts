@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import config from "~/config";
 import getUserId from "~/utils/getUserId";
+import { appendErrorLogEntry } from "./utils/error-log";
 
 export type SeverityLevel = "critical" | "debug" | "error" | "info" | "warning";
 type Properties = Record<string, unknown>;
@@ -20,6 +21,9 @@ async function sendItem({
 
   const userId = await getUserId();
 
+  const timestamp = Math.floor(Date.now() / 1000);
+  const uuid = uuidv4();
+
   const response = await fetch("https://api.rollbar.com/api/1/item/", {
     method: "POST",
     headers: {
@@ -31,6 +35,7 @@ async function sendItem({
       data: {
         body: {
           message: {
+            ...properties,
             body: message,
           },
         },
@@ -38,16 +43,17 @@ async function sendItem({
           id: userId,
         },
         code_version: config.VERSION,
-        custom: properties,
         environment: config.ENVIRONMENT,
         language: "javascript",
         level,
         platform: "client",
-        timestamp: Math.floor(Date.now() / 1000),
-        uuid: uuidv4(),
+        timestamp,
+        uuid,
       },
     }),
   });
+
+  await appendErrorLogEntry({ level, message, timestamp, uuid, properties });
 
   return response.json();
 }

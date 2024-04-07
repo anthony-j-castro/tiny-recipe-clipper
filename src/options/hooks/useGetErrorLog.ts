@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getErrorLog } from "~/service-worker/utils/error-log";
+import { getErrorLog } from "~/utils/error-log";
 
 const useGetErrorLog = () =>
   useQuery({

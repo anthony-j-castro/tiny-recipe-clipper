@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import config from "~/config";
+import { appendErrorLogEntry } from "~/utils/error-log";
 import getUserId from "~/utils/getUserId";
-import { appendErrorLogEntry } from "./utils/error-log";
 
 export type SeverityLevel = "critical" | "debug" | "error" | "info" | "warning";
 type Properties = Record<string, unknown>;

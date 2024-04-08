@@ -46,7 +46,7 @@ async function sendItem({
         environment: config.ENVIRONMENT,
         language: "javascript",
         level,
-        platform: "client",
+        platform: "browser",
         timestamp,
         uuid,
       },

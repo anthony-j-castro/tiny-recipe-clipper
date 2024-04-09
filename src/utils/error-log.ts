@@ -1,9 +1,9 @@
 import {
   Decoder,
   array,
-  exact,
   nonEmptyString,
   number,
+  object,
   optional,
   record,
   string,
@@ -22,7 +22,7 @@ type ErrorLogEntry = {
 };
 
 const errorLogDecoder: Decoder<Array<ErrorLogEntry>> = array(
-  exact({
+  object({
     level: nonEmptyString,
     message: string,
     timestamp: number,

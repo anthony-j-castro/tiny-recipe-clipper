@@ -8,7 +8,7 @@ import styled, { css } from "styled-components";
 export const DisclosureWrapper = styled.div(
   ({ theme }) => css`
     background: ${theme.colors.lightGray};
-    padding: 8px;
+    padding: 4px 8px;
     border-radius: 4px;
     margin-top: 32px;
   `,
@@ -72,6 +72,8 @@ export const Cell = styled.td(
   `,
 );
 
-export const Disclaimer = styled.div`
-  margin-top: 16px;
+export const IconWithMessageWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 16px 0 8px;
 `;

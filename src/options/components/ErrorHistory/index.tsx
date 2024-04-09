@@ -1,17 +1,20 @@
 import { useDisclosureStore } from "@ariakit/react/disclosure";
+import ErrorIcon from "@mui/icons-material/Error";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import InfoIcon from "@mui/icons-material/Info";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { ERROR_LOG_MAX_LENGTH, getErrorLog } from "~/utils/error-log";
+import getReportProblemFormUrl from "~/utils/getReportProblemFormUrl";
 import {
   Cell,
-  Disclaimer,
   Disclosure,
   DisclosureContent,
   DisclosureContentSeparator,
   DisclosureWrapper,
   HeaderCell,
+  IconWithMessageWrapper,
   Table,
 } from "./styled";
 
@@ -31,6 +34,8 @@ const ErrorHistory = () => {
     refetchOnWindowFocus: true,
   });
 
+  const reportProblemFormUrl = getReportProblemFormUrl();
+
   return (
     <DisclosureWrapper>
       <Disclosure store={disclosure}>
@@ -44,11 +49,27 @@ const ErrorHistory = () => {
       <DisclosureContent store={disclosure}>
         <DisclosureContentSeparator />
         {isPending ? (
-          <div>Loading…</div>
+          <IconWithMessageWrapper>Loading…</IconWithMessageWrapper>
         ) : isError ? (
-          <div>There was an error.</div>
+          <IconWithMessageWrapper>
+            <ErrorIcon sx={ICON_OPTIONS} />
+            <span>
+              Something went wrong while loading your error history. Please{" "}
+              <a
+                href={reportProblemFormUrl}
+                rel="noreferrer"
+                target="_blank"
+              >
+                report this problem
+              </a>
+              .
+            </span>
+          </IconWithMessageWrapper>
         ) : errorLog.length === 0 ? (
-          <div>There are no errors to display.</div>
+          <IconWithMessageWrapper>
+            <InfoIcon sx={ICON_OPTIONS} />
+            <span>There are no recent errors to display.</span>
+          </IconWithMessageWrapper>
         ) : (
           <>
             <Table>
@@ -77,9 +98,13 @@ const ErrorHistory = () => {
                 })}
               </tbody>
             </Table>
-            <Disclaimer>
-              Error history is limited to the last {ERROR_LOG_MAX_LENGTH} items.
-            </Disclaimer>
+            <IconWithMessageWrapper>
+              <InfoIcon sx={ICON_OPTIONS} />
+              <span>
+                Error history is limited to the last {ERROR_LOG_MAX_LENGTH}{" "}
+                items.
+              </span>
+            </IconWithMessageWrapper>
           </>
         )}
       </DisclosureContent>

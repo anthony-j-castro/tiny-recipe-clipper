@@ -1,7 +1,9 @@
 import InfoIcon from "@mui/icons-material/Info";
 import config from "~/config";
 import useGetUserId from "~/hooks/useGetUserId";
+import ErrorHistory from "~/options/components/ErrorHistory";
 import logo from "~/options/images/logo.svg";
+import getReportProblemFormUrl from "~/utils/getReportProblemFormUrl";
 import {
   BannerButton,
   BannerCopy,
@@ -24,11 +26,7 @@ import {
 export default function App() {
   const { data: userId, isPending } = useGetUserId();
 
-  const reportProblemFormUrl = new URL(config.REPORT_PROBLEM_FORM.URL);
-  reportProblemFormUrl.searchParams.set(
-    config.REPORT_PROBLEM_FORM.VERSION_LINK_PARAM,
-    config.VERSION,
-  );
+  const reportProblemFormUrl = getReportProblemFormUrl();
 
   return (
     <Container>
@@ -86,13 +84,14 @@ export default function App() {
           <SectionHeading>Help</SectionHeading>
           <div>
             <a
-              href={reportProblemFormUrl.toString()}
+              href={reportProblemFormUrl}
               rel="noreferrer"
               target="_blank"
             >
               Report a problem…
             </a>
           </div>
+          <ErrorHistory />
         </section>
         <Separator />
         <section>

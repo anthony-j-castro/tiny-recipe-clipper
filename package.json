@@ -24,7 +24,8 @@
     "modern-normalize": "2.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "styled-components": "6.1.8"
+    "styled-components": "6.1.8",
+    "uuid": "9.0.1"
   },
   "devDependencies": {
     "@anthony-j-castro/eslint-config": "github:anthony-j-castro/eslint-config#semver:1.6.0",
@@ -35,6 +36,7 @@
     "@types/node": "20.12.4",
     "@types/react": "18.2.74",
     "@types/react-dom": "18.2.24",
+    "@types/uuid": "9.0.8",
     "copy-webpack-plugin": "12.0.2",
     "css-loader": "7.0.0",
     "dotenv": "16.4.5",

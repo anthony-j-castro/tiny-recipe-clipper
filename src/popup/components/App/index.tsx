@@ -5,6 +5,7 @@ import useGetMe from "~/hooks/useGetUserId";
 import IconNav from "~/popup/components/IconNav";
 import useFlavorText from "~/popup/hooks/useFlavorText";
 import useGetRecipeTitle from "~/popup/hooks/useGetRecipeTitle";
+import getReportProblemFormUrl from "~/utils/getReportProblemFormUrl";
 import isRecipePage from "~/utils/isRecipePage";
 import isSupportedWebsite from "~/utils/isSupportedWebsite";
 import {
@@ -30,17 +31,7 @@ const App = () => {
     : false;
   const isRecipeOnPage = currentTab?.url ? isRecipePage(currentTab.url) : false;
 
-  const reportProblemFormUrl = new URL(config.REPORT_PROBLEM_FORM.URL);
-  reportProblemFormUrl.searchParams.set(
-    config.REPORT_PROBLEM_FORM.VERSION_LINK_PARAM,
-    config.VERSION,
-  );
-  if (currentTab?.url) {
-    reportProblemFormUrl.searchParams.set(
-      config.REPORT_PROBLEM_FORM.WEBSITE_LINK_PARAM,
-      currentTab.url,
-    );
-  }
+  const reportProblemFormUrl = getReportProblemFormUrl(currentTab?.url);
 
   const requestFormUrl = new URL(config.REQUEST_FORM.URL);
   if (currentTab?.url) {
@@ -102,7 +93,7 @@ const App = () => {
               Sorry! You’re on a valid recipe page but the recipe couldn’t be
               read properly.
             </Text>
-            <ActionButton href={reportProblemFormUrl.toString()}>
+            <ActionButton href={reportProblemFormUrl}>
               Report a problem
             </ActionButton>
           </Card>

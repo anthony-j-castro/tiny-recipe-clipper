@@ -6,6 +6,10 @@ updates:
       interval: "daily"
       time: "18:00"
       timezone: "America/New_York"
+    groups:
+      material-ui:
+        patterns:
+          - "@mui/*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:

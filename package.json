@@ -31,7 +31,7 @@
     "@anthony-j-castro/eslint-config": "github:anthony-j-castro/eslint-config#semver:1.6.0",
     "@anthony-j-castro/prettier-config": "github:anthony-j-castro/prettier-config#semver:1.0.0",
     "@playwright/test": "1.45.3",
-    "@tanstack/eslint-plugin-query": "5.51.13",
+    "@tanstack/eslint-plugin-query": "5.51.15",
     "@types/chrome": "0.0.269",
     "@types/node": "20.14.12",
     "@types/react": "18.3.3",

@@ -1,7 +1,7 @@
-import { Button as AriakitButton } from "@ariakit/react/button";
+import { Button as BaseButton } from "react-aria-components";
 import styled, { css } from "styled-components";
 
-const Button = styled(AriakitButton)(
+const Button = styled(BaseButton)(
   ({ theme }) => css`
     --button-background-color: ${theme.colors.lightGray};
     --button-text-color: ${theme.colors.nearBlack};
@@ -23,7 +23,7 @@ const Button = styled(AriakitButton)(
       background: var(--button-hover-background-color);
     }
 
-    &[aria-disabled="true"] {
+    &[data-disabled] {
       background: var(--button-disabled-background-color);
       cursor: not-allowed;
     }

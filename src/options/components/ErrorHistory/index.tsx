@@ -1,4 +1,3 @@
-import { useDisclosureStore } from "@ariakit/react/disclosure";
 import ErrorIcon from "@mui/icons-material/Error";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -10,7 +9,6 @@ import getReportProblemFormUrl from "~/utils/getReportProblemFormUrl";
 import {
   Cell,
   Disclosure,
-  DisclosureContent,
   DisclosureContentSeparator,
   DisclosureWrapper,
   HeaderCell,
@@ -22,7 +20,6 @@ const ICON_OPTIONS = { fontSize: 16, marginRight: "4px", flexGrow: 0 };
 
 const ErrorHistory = () => {
   const [open, setOpen] = useState(false);
-  const disclosure = useDisclosureStore({ open, setOpen });
   const {
     data: errorLog,
     isError,
@@ -37,8 +34,13 @@ const ErrorHistory = () => {
   const reportProblemFormUrl = getReportProblemFormUrl();
 
   return (
-    <DisclosureWrapper>
-      <Disclosure store={disclosure}>
+    <DisclosureWrapper {...(open ? { open: true } : {})}>
+      <Disclosure
+        onClick={(event) => {
+          event.preventDefault();
+          setOpen((open) => !open);
+        }}
+      >
         {open ? (
           <ExpandLessIcon sx={ICON_OPTIONS} />
         ) : (
@@ -46,7 +48,7 @@ const ErrorHistory = () => {
         )}
         <span>Error History</span>
       </Disclosure>
-      <DisclosureContent store={disclosure}>
+      <div>
         <DisclosureContentSeparator />
         {isPending ? (
           <IconWithMessageWrapper>Loading…</IconWithMessageWrapper>
@@ -107,7 +109,7 @@ const ErrorHistory = () => {
             </IconWithMessageWrapper>
           </>
         )}
-      </DisclosureContent>
+      </div>
     </DisclosureWrapper>
   );
 };

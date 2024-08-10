@@ -1,19 +1,17 @@
-import { ComponentPropsWithoutRef, MouseEvent } from "react";
+import { ComponentPropsWithoutRef } from "react";
 import PrimaryButton from "~/ui-shared/components/PrimaryButton";
 
-interface Props extends ComponentPropsWithoutRef<"button"> {
+interface Props extends ComponentPropsWithoutRef<typeof PrimaryButton> {
   href: string;
-  onClick?: () => Promise<void> | void;
+  onPress?: () => Promise<void> | void;
 }
 
 const LinkPrimaryButton = (props: Props) => {
-  const { href, onClick, ...rest } = props;
+  const { href, onPress, ...rest } = props;
 
-  const handleClick = async (event: MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-
-    if (onClick) {
-      await onClick();
+  const handlePress = async () => {
+    if (onPress) {
+      await onPress();
     }
 
     window.open(href, "_blank");
@@ -22,7 +20,7 @@ const LinkPrimaryButton = (props: Props) => {
   return (
     <PrimaryButton
       {...rest}
-      onClick={handleClick}
+      onPress={handlePress}
     />
   );
 };

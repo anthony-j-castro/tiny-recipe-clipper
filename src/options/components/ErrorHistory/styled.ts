@@ -2,8 +2,8 @@ import {
   Disclosure as AriakitDisclosure,
   DisclosureContent as AriakitDisclosureContent,
 } from "@ariakit/react/disclosure";
-import { Separator as AriakitSeparator } from "@ariakit/react/separator";
 import styled, { css } from "styled-components";
+import HorizontalSeparator from "~/options/components/HorizontalSeparator";
 
 export const DisclosureWrapper = styled.div(
   ({ theme }) => css`
@@ -35,15 +35,9 @@ export const Disclosure = styled(AriakitDisclosure)(
 
 export const DisclosureContent = styled(AriakitDisclosureContent)``;
 
-export const DisclosureContentSeparator = styled(AriakitSeparator)(
-  ({ theme }) => css`
-    width: 100%;
-    height: 1px;
-    border: 0;
-    background: ${theme.colors.gray};
-    margin: 4px 0;
-  `,
-);
+export const DisclosureContentSeparator = styled(HorizontalSeparator)`
+  margin: 4px 0;
+`;
 
 export const Table = styled.table`
   display: block;

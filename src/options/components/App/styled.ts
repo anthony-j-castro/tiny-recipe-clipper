@@ -1,5 +1,5 @@
-import { Separator as AriakitSeparator } from "@ariakit/react/separator";
 import styled, { css } from "styled-components";
+import HorizontalSeparator from "~/options/components/HorizontalSeparator";
 import LinkPrimaryButton from "~/ui-shared/components/LinkPrimaryButton";
 
 export const Container = styled.div`
@@ -48,18 +48,9 @@ export const UserId = styled.span`
   user-select: text;
 `;
 
-export const Separator = styled(AriakitSeparator)(
-  ({ theme }) => css`
-    width: 100%;
-    height: 1px;
-    border: 0;
-    background: ${theme.colors.gray};
-
-    &&& {
-      margin: 32px 0;
-    }
-  `,
-);
+export const Separator = styled(HorizontalSeparator)`
+  margin: 32px 0;
+`;
 
 export const SectionHeading = styled.h2`
   font-size: 20px;

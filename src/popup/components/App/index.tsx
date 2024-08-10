@@ -57,8 +57,8 @@ const App = () => {
         <IconNav />
         {!isRequiresSync && isSupported ? (
           <ClipRecipeButton
-            disabled={!isRecipeOnPage || isErrorRecipeTitle}
-            onClick={() => {
+            isDisabled={!isRecipeOnPage || isErrorRecipeTitle}
+            onPress={() => {
               if (currentTab?.id) {
                 sendMessageToTab(currentTab.id, {
                   type: "EXTRACT_RECIPE",
@@ -69,7 +69,6 @@ const App = () => {
                 });
               }
             }}
-            accessibleWhenDisabled
           >
             Clip recipe
           </ClipRecipeButton>

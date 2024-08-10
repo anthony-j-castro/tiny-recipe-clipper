@@ -14,7 +14,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ariakit/react": "0.4.7",
     "@fontsource-variable/inter-tight": "5.0.21",
     "@mui/icons-material": "5.16.6",
     "@mui/material": "5.16.6",

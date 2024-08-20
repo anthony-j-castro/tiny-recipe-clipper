@@ -14,7 +14,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@fontsource-variable/inter-tight": "5.0.21",
+    "@fontsource-variable/inter-tight": "5.0.22",
     "@mui/icons-material": "5.16.7",
     "@mui/material": "5.16.7",
     "@mui/styled-engine-sc": "6.0.0-alpha.18",

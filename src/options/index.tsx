@@ -5,7 +5,6 @@ import { ThemeProvider } from "styled-components";
 import App from "~/options/components/App";
 import theme from "~/ui-shared/theme";
 import "@fontsource-variable/inter-tight";
-import "modern-normalize";
 import "~/options/index.css";
 
 const queryClient = new QueryClient({

@@ -2,9 +2,13 @@
 import "dotenv/config";
 import fs from "node:fs";
 import path from "node:path";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 import * as prettier from "prettier";
 import packageJson from "../package.json";
 import baseManifest from "../src/base-manifest";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const main = async () => {
   const manifest = { ...baseManifest };

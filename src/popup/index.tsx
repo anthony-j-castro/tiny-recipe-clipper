@@ -5,7 +5,6 @@ import { ThemeProvider } from "styled-components";
 import App from "~/popup/components/App";
 import theme from "~/ui-shared/theme";
 import "@fontsource-variable/inter-tight";
-import "modern-normalize";
 import "~/popup/index.css";
 
 const queryClient = new QueryClient({

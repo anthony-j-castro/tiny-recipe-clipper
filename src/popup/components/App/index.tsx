@@ -20,9 +20,23 @@ import {
   TopRow,
 } from "./styled";
 
+const ACTIVE_TAB_QUERY_PARAM_KEY = "active-tab-id";
+
 const App = () => {
+  let activeTabId;
+  const queryParams = new URLSearchParams(window.location.search);
+  if (
+    config.ENVIRONMENT === "test" &&
+    queryParams.has(ACTIVE_TAB_QUERY_PARAM_KEY)
+  ) {
+    const tabId = queryParams.get(ACTIVE_TAB_QUERY_PARAM_KEY);
+    if (tabId !== null) {
+      activeTabId = parseInt(tabId, 10);
+    }
+  }
+
   const { data: userId, isPending: isPendingMe } = useGetMe();
-  const { data: currentTab } = useGetCurrentTab();
+  const { data: currentTab } = useGetCurrentTab(activeTabId);
 
   const isRequiresSync = userId === undefined;
 

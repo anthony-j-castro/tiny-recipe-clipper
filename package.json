@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsx ./scripts/generate-manifest.ts && webpack --mode production",
+    "build:e2e": "BUILD_ENV=test tsx ./scripts/generate-manifest.ts && webpack --mode production",
     "clean": "rm -rf dist/*",
     "lint": "eslint .",
     "lint:ci": "eslint . --quiet",

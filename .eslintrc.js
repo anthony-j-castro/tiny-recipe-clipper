@@ -31,6 +31,9 @@ module.exports = {
     },
   ],
   plugins: ["jsonc"],
+  rules: {
+    radix: ["error", "always"],
+  },
   settings: {
     "import/resolver": {
       alias: {

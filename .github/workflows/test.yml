@@ -59,7 +59,8 @@ jobs:
           retention-days: 7
 
   upload-artifact:
-    needs: compile-and-lint
+    if: github.ref == 'refs/heads/main'
+    needs: test-with-playwright
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -74,7 +75,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          BUILD_ENV: test
+          BUILD_ENV: production
           ROLLBAR_ACCESS_TOKEN: ${{ vars.ROLLBAR_ACCESS_TOKEN }}
       - name: Upload artifact
         uses: actions/upload-artifact@v4

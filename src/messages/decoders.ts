@@ -5,18 +5,39 @@ import {
   exact,
   nonEmptyString,
   oneOf,
+  string,
   uuidv4,
 } from "decoders";
 import {
   ErrorMessage,
   ExtractRecipeMessage,
+  OpenUrlForE2ETestMessage,
   PingMessage,
   ReceivableRecipeScraperMessage,
   ReceivableServiceWorkerMessage,
   RecipeDataMessage,
   RecipeImporterReadyMessage,
   SendRecipeDataMessage,
+  SetUserIdForE2ETestMessage,
 } from "~/messages/types";
+
+export const setUserIdForE2ETestDecoder: Decoder<SetUserIdForE2ETestMessage> =
+  exact({
+    sender: constant("web-app"),
+    type: constant("SET_USER_ID_FOR_E2E_TEST"),
+    payload: exact({
+      userId: uuidv4,
+    }),
+  });
+
+export const openUrlForE2ETestDecoder: Decoder<OpenUrlForE2ETestMessage> =
+  exact({
+    sender: constant("web-app"),
+    type: constant("OPEN_URL_FOR_E2E_TEST"),
+    payload: exact({
+      url: string,
+    }),
+  });
 
 const pingMessageDecoder: Decoder<PingMessage> = exact({
   sender: constant("web-app"),
@@ -75,7 +96,9 @@ export const receivableRecipeScraperMessageDecoder: Decoder<ReceivableRecipeScra
 
 export const receivableServiceWorkerMessageDecoder: Decoder<ReceivableServiceWorkerMessage> =
   either(
+    openUrlForE2ETestDecoder,
     pingMessageDecoder,
     recipeImporterReadyMessageDecoder,
     sendRecipeDataMessageDecoder,
+    setUserIdForE2ETestDecoder,
   );

@@ -1,4 +1,7 @@
+import config from "~/config";
 import { Message } from "~/messages/types";
+
+const ACTIVE_TAB_QUERY_PARAM_KEY = "active-tab-id";
 
 const NO_TAB_ERROR_REGEX = /^No tab with id:/;
 
@@ -7,6 +10,22 @@ export const getTab = async (tabId: number) => chrome.tabs.get(tabId);
 export const getCurrentTab = async ({
   focused,
 }: { focused?: boolean } = {}) => {
+  if (config.ENVIRONMENT === "test") {
+    const queryParams = new URLSearchParams(window.location.search);
+
+    if (queryParams.has(ACTIVE_TAB_QUERY_PARAM_KEY)) {
+      const tabId = queryParams.get(ACTIVE_TAB_QUERY_PARAM_KEY);
+
+      if (tabId !== null) {
+        const activeTabId = parseInt(tabId, 10);
+
+        if (activeTabId !== undefined) {
+          return getTab(activeTabId);
+        }
+      }
+    }
+  }
+
   const [currentTab] = await chrome.tabs.query({
     active: true,
     currentWindow: true,

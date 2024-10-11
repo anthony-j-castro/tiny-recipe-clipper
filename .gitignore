@@ -12,6 +12,7 @@
 
 # Playwright
 /playwright/report/
+/playwright/test-results/
 /playwright/.cache/
 
 # Miscellaneous

@@ -1,4 +1,5 @@
 export type MessageSender =
+  | "e2e-test"
   | "options"
   | "popup"
   | "recipe-scraper"
@@ -9,6 +10,22 @@ export type BaseMessage = {
   sender: MessageSender;
   type: string;
   payload?: unknown;
+};
+
+export type SetUserIdForE2ETestMessage = BaseMessage & {
+  payload: {
+    userId: string;
+  };
+  sender: "web-app";
+  type: "SET_USER_ID_FOR_E2E_TEST";
+};
+
+export type OpenUrlForE2ETestMessage = BaseMessage & {
+  payload: {
+    url: string;
+  };
+  sender: "web-app";
+  type: "OPEN_URL_FOR_E2E_TEST";
 };
 
 export type PingMessage = BaseMessage & {
@@ -58,17 +75,21 @@ export type ErrorMessage = BaseMessage & {
 export type Message =
   | ErrorMessage
   | ExtractRecipeMessage
+  | OpenUrlForE2ETestMessage
   | PingMessage
   | RecipeDataMessage
   | RecipeImporterReadyMessage
-  | SendRecipeDataMessage;
+  | SendRecipeDataMessage
+  | SetUserIdForE2ETestMessage;
 
 export type ReceivablePopupMessage = RecipeDataMessage;
 
 export type ReceivableRecipeScraperMessage = ExtractRecipeMessage;
 
 export type ReceivableServiceWorkerMessage =
+  | OpenUrlForE2ETestMessage
   | PingMessage
   | RecipeDataMessage
   | RecipeImporterReadyMessage
-  | SendRecipeDataMessage;
+  | SendRecipeDataMessage
+  | SetUserIdForE2ETestMessage;

@@ -1,11 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCurrentTab, getTab } from "~/chrome-helpers";
+import { getCurrentTab } from "~/chrome-helpers";
 
-const useGetCurrentTab = (forcedTabId?: number) =>
+const useGetCurrentTab = () =>
   useQuery({
-    queryKey: ["currentTab", forcedTabId],
-    queryFn: () =>
-      forcedTabId !== undefined ? getTab(forcedTabId) : getCurrentTab(),
+    queryKey: ["currentTab"],
+    queryFn: () => getCurrentTab(),
   });
 
 export default useGetCurrentTab;

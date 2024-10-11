@@ -45,7 +45,7 @@ jobs:
         run: npm run build
         env:
           BUILD_ENV: test
-          ROLLBAR_ACCESS_TOKEN: ${{ secrets.ROLLBAR_ACCESS_TOKEN }}
+          ROLLBAR_ACCESS_TOKEN: ${{ vars.ROLLBAR_ACCESS_TOKEN }}
       - name: Install playwright browsers
         run: npx playwright install --with-deps
       - name: Run playwright tests

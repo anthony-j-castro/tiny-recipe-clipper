@@ -59,8 +59,7 @@ jobs:
           retention-days: 7
 
   upload-artifact:
-    if: github.ref == 'refs/heads/main'
-    needs: test-with-playwright
+    needs: compile-and-lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

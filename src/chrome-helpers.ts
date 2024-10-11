@@ -10,7 +10,7 @@ export const getTab = async (tabId: number) => chrome.tabs.get(tabId);
 export const getCurrentTab = async ({
   focused,
 }: { focused?: boolean } = {}) => {
-  if (config.ENVIRONMENT === "test" && window !== undefined) {
+  if (config.ENVIRONMENT === "test" && typeof window !== "undefined") {
     const queryParams = new URLSearchParams(window.location.search);
 
     if (queryParams.has(ACTIVE_TAB_QUERY_PARAM_KEY)) {

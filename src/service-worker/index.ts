@@ -10,7 +10,7 @@ import {
   receivableServiceWorkerMessageDecoder,
   recipeImporterReadyMessageDecoder,
 } from "~/messages/decoders";
-import { Message } from "~/messages/types";
+import { SendResponseFn } from "~/messages/types";
 import exceptionLogger from "~/service-worker/exception-logger";
 import { setUserId } from "~/storage";
 import assertIsError from "~/utils/assertIsError";
@@ -29,7 +29,7 @@ chrome.runtime.onMessage.addListener(async (rawMessage) => {
         const newTabListener = (
           newTabRawMessage: unknown,
           newTabSender: chrome.runtime.MessageSender,
-          sendResponse: (message: Message) => void,
+          sendResponse: SendResponseFn,
         ) => {
           const readyMessage =
             recipeImporterReadyMessageDecoder.value(newTabRawMessage);
@@ -70,7 +70,7 @@ chrome.runtime.onMessage.addListener(async (rawMessage) => {
 });
 
 chrome.runtime.onMessageExternal.addListener(
-  (rawMessage, sender, sendResponse) => {
+  (rawMessage, sender, sendResponse: SendResponseFn) => {
     try {
       if (sender.origin !== WEB_APP_URL.origin) {
         throw new Error("Unknown sender origin.");
@@ -84,7 +84,8 @@ chrome.runtime.onMessageExternal.addListener(
 
           sendResponse({
             type: "PONG",
-            extensionVersion: config.VERSION, // update to payload
+            sender: "service-worker",
+            payload: { extensionVersion: config.VERSION },
           });
 
           break;
@@ -99,7 +100,7 @@ chrome.runtime.onMessageExternal.addListener(
 
 // Messages used in E2E tests
 chrome.runtime.onMessageExternal.addListener(
-  async (rawMessage, sender, sendResponse) => {
+  async (rawMessage, sender, sendResponse: SendResponseFn) => {
     try {
       exceptionLogger.info("in e2e");
 

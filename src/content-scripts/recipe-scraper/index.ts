@@ -2,12 +2,12 @@ import { sendMessageToServiceWorker } from "~/chrome-helpers";
 import instantiateScraper from "~/content-scripts/recipe-scraper/utils/instantiateScraper";
 import { ImpossibleStateError } from "~/errors";
 import { receivableRecipeScraperMessageDecoder } from "~/messages/decoders";
-import { Message } from "~/messages/types";
+import { SendResponseFn } from "~/messages/types";
 import isRecipePage from "~/utils/isRecipePage";
 import isSupportedWebsite from "~/utils/isSupportedWebsite";
 
 chrome.runtime.onMessage.addListener(
-  (rawMessage, sender, sendResponse: (response: Message) => void) => {
+  (rawMessage, sender, sendResponse: SendResponseFn) => {
     // We currently only care about messages from the popup UI. If a tab exists,
     // that means this message is from a content script.
     if (sender.tab) {

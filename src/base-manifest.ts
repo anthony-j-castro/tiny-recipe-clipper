@@ -30,7 +30,11 @@ const baseManifest: chrome.runtime.ManifestV3 = {
     },
   ],
   externally_connectable: {
-    matches: [`${config.WEB_APP.ORIGIN}/*`],
+    matches: [
+      `${config.WEB_APP.ORIGIN}/*`,
+      "http://localhost:3000/*",
+      ...(config.ENVIRONMENT === "test" ? recipeWebsitesMatchesArray : []),
+    ],
   },
   options_ui: {
     page: "options.html",

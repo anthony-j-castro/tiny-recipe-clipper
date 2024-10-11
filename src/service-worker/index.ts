@@ -102,16 +102,9 @@ chrome.runtime.onMessageExternal.addListener(
 chrome.runtime.onMessageExternal.addListener(
   async (rawMessage, sender, sendResponse: SendResponseFn) => {
     try {
-      exceptionLogger.info("in e2e");
-
       if (config.ENVIRONMENT !== "test") {
         return;
       }
-
-      exceptionLogger.info("origin", {
-        origin: sender.origin,
-        wau: WEB_APP_URL.origin,
-      });
 
       if (sender.origin !== WEB_APP_URL.origin) {
         throw new Error("Unknown sender origin.");
@@ -122,8 +115,6 @@ chrome.runtime.onMessageExternal.addListener(
       switch (message.type) {
         case "SET_USER_ID_FOR_E2E_TEST": {
           setUserId(message.payload.userId);
-
-          exceptionLogger.info("success");
 
           sendResponse({
             type: "SET_USER_ID_FOR_E2E_TEST_SUCCESS",

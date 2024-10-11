@@ -23,6 +23,7 @@ type Config = {
   VERSION: string;
   WEB_APP: {
     BROWSER_EXTENSION_PATH: string;
+    EXTENSION_TEST_INITIALIZER_PATH: string;
     IMPORT_RECIPE_PATH: string;
     ORIGIN: string;
     SETTINGS_PATH: string;
@@ -44,6 +45,7 @@ const configDecoder: Decoder<Config> = exact({
   VERSION: string,
   WEB_APP: exact({
     BROWSER_EXTENSION_PATH: string,
+    EXTENSION_TEST_INITIALIZER_PATH: string,
     IMPORT_RECIPE_PATH: string,
     ORIGIN: string,
     SETTINGS_PATH: string,
@@ -68,6 +70,7 @@ const config = {
   VERSION: packageJson.version,
   WEB_APP: {
     BROWSER_EXTENSION_PATH: "/browser-extension",
+    EXTENSION_TEST_INITIALIZER_PATH: "/public/extension-test-initializer.html",
     IMPORT_RECIPE_PATH: "/import-recipe",
     ORIGIN: USE_PRODUCTION_VALUES
       ? "https://tinyrecipebox.com"

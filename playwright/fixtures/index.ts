@@ -1,6 +1,7 @@
 import path from "path";
 import { type BrowserContext, test as base, chromium } from "@playwright/test";
 import { integer } from "decoders";
+import config from "~/src/config";
 
 export const test = base.extend<{
   context: BrowserContext;
@@ -26,7 +27,7 @@ export const test = base.extend<{
   gotoWithTabIdHelper: async ({ context }, use) => {
     const page = await context.newPage();
     await page.goto(
-      "https://tinyrecipebox.com/public/extension-test-initializer.html",
+      `${config.WEB_APP.ORIGIN}${config.WEB_APP.EXTENSION_TEST_INITIALIZER_PATH}`,
     );
 
     const success = page.locator('[data-testid="initialize-e2e-success"]');

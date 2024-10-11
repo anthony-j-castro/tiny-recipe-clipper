@@ -25,7 +25,7 @@ export const test = base.extend<{
   },
   gotoWithTabIdHelper: async ({ context }, use) => {
     const page = await context.newPage();
-    page.goto(
+    await page.goto(
       "https://tinyrecipebox.com/public/extension-test-initializer.html",
     );
 

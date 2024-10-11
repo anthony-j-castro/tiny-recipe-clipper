@@ -10,6 +10,8 @@ export const getTab = async (tabId: number) => chrome.tabs.get(tabId);
 export const getCurrentTab = async ({
   focused,
 }: { focused?: boolean } = {}) => {
+  // Return a specific tab if a tab ID is passed to the page.
+  // See: https://developer.chrome.com/docs/extensions/how-to/test/end-to-end-testing#extension-popup
   if (config.ENVIRONMENT === "test" && typeof window !== "undefined") {
     const queryParams = new URLSearchParams(window.location.search);
 

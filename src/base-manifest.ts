@@ -8,6 +8,7 @@ const recipeWebsitesMatchesArray = Object.entries(SUPPORTED_HOSTNAMES_DATA).map(
 const baseManifest: chrome.runtime.ManifestV3 = {
   name: "Tiny Recipe Clipper",
   description: "Clip recipes from your favorite websites.",
+  key: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAg7YR6fSyLKY2/5U9OyK0djEKQpViaNRV7+Gcc2kgoSAgUHqi50lVe4PdB87UMVKS4s3r78UjfySP0UPl8vZjKrCfnWdrTOt8Bhvi3EXcYfmjUYhzBDI8kMjWv506g31ZPvbTneH4VUfl2sg6DwpJHtih0OYcQcm+ehbBApBPT2pthwqqvWNTscnokWn315XDGakQd050+MRbipELibJwNY3B2sMEwZtmM44ZWwroPK8kfgfAEMa7AbMIfzqeFucKPZAtpKxj/ATgkb6j+vecw7WbzMxv4YvMkO5zFITPRve3827+LGxpR/j8dUmGlcJaPz1VFYmMp53M3L+BJdfWhQIDAQAB",
   // The real version will be copied over automatically
   // from package.json. A placeholder is used here to maintain
   // the position of the version key in the file.

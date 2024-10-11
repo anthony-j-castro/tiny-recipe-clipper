@@ -45,7 +45,7 @@ test("detects a recipe", async ({
     `chrome-extension://${extensionId}/popup.html?active-tab-id=${tabId}`,
   );
 
-  await expect(
-    extensionPopupPage.locator('[data-testid="recipe-title"]'),
-  ).toHaveText("Salmon Burgers");
+  await expect(extensionPopupPage.getByTestId("recipe-title")).toHaveText(
+    "Salmon Burgers",
+  );
 });

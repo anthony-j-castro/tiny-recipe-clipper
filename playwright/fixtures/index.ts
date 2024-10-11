@@ -30,7 +30,7 @@ export const test = base.extend<{
       `${config.WEB_APP.ORIGIN}${config.WEB_APP.EXTENSION_TEST_INITIALIZER_PATH}`,
     );
 
-    const success = page.locator('[data-testid="initialize-e2e-success"]');
+    const success = page.getByTestId("initialize-e2e-success");
     await success.waitFor();
 
     const fn = async (url: string) => {

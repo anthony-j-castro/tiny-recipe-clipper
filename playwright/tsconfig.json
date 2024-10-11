@@ -9,7 +9,7 @@
     },
     "resolveJsonModule": true,
     "target": "es5",
-    "types": ["node"]
+    "types": ["chrome", "node"]
   },
   "include": ["**/*.ts"]
 }

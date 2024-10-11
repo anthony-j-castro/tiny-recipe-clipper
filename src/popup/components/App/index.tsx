@@ -98,17 +98,19 @@ const App = () => {
           </Card>
         ) : (
           <Card $emphasize>
-            <RecipeTitle>{recipeTitle}</RecipeTitle>
+            <RecipeTitle data-testid="recipe-title">{recipeTitle}</RecipeTitle>
             <FlavorText>{flavorText}</FlavorText>
           </Card>
         )
       ) : isSupported ? (
         <Card>
-          <Text>To clip a recipe, make sure you’re on a recipe page.</Text>
+          <Text data-testid="non-recipe-page-message">
+            To clip a recipe, make sure you’re on a recipe page.
+          </Text>
         </Card>
       ) : (
         <Card>
-          <Text>
+          <Text data-testid="unsupported-site-message">
             Sorry! It looks like we don’t support clipping recipes from this
             site.
           </Text>

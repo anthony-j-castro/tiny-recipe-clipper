@@ -9,7 +9,7 @@ import {
 import packageJson from "~/../package.json";
 
 type Config = {
-  ENVIRONMENT: "development" | "production";
+  ENVIRONMENT: "development" | "production" | "test";
   REPORT_PROBLEM_FORM: {
     URL: string;
     VERSION_LINK_PARAM: string;
@@ -23,6 +23,7 @@ type Config = {
   VERSION: string;
   WEB_APP: {
     BROWSER_EXTENSION_PATH: string;
+    EXTENSION_TEST_INITIALIZER_PATH: string;
     IMPORT_RECIPE_PATH: string;
     ORIGIN: string;
     SETTINGS_PATH: string;
@@ -30,7 +31,7 @@ type Config = {
 };
 
 const configDecoder: Decoder<Config> = exact({
-  ENVIRONMENT: oneOf(["development", "production"]),
+  ENVIRONMENT: oneOf(["development", "production", "test"]),
   REPORT_PROBLEM_FORM: exact({
     URL: string,
     VERSION_LINK_PARAM: string,
@@ -44,16 +45,18 @@ const configDecoder: Decoder<Config> = exact({
   VERSION: string,
   WEB_APP: exact({
     BROWSER_EXTENSION_PATH: string,
+    EXTENSION_TEST_INITIALIZER_PATH: string,
     IMPORT_RECIPE_PATH: string,
     ORIGIN: string,
     SETTINGS_PATH: string,
   }),
 });
 
-const IS_PRODUCTION = process.env.BUILD_ENV === "production";
+const USE_PRODUCTION_VALUES =
+  process.env.BUILD_ENV === "production" || process.env.BUILD_ENV === "test";
 
-const config: Config = {
-  ENVIRONMENT: IS_PRODUCTION ? "production" : "development",
+const config = {
+  ENVIRONMENT: process.env.BUILD_ENV || "development",
   REPORT_PROBLEM_FORM: {
     URL: "https://docs.google.com/forms/d/e/1FAIpQLSeV1bF-mkxoBibHnxKk4AjeVLI8fUjLLRj08Z9nW7vch1qnPg/viewform",
     VERSION_LINK_PARAM: "entry.307864289",
@@ -67,8 +70,9 @@ const config: Config = {
   VERSION: packageJson.version,
   WEB_APP: {
     BROWSER_EXTENSION_PATH: "/browser-extension",
+    EXTENSION_TEST_INITIALIZER_PATH: "/public/extension-test-initializer.html",
     IMPORT_RECIPE_PATH: "/import-recipe",
-    ORIGIN: IS_PRODUCTION
+    ORIGIN: USE_PRODUCTION_VALUES
       ? "https://tinyrecipebox.com"
       : "http://localhost:3000",
     SETTINGS_PATH: "/settings",

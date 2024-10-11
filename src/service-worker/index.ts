@@ -10,7 +10,7 @@ import {
   receivableServiceWorkerMessageDecoder,
   recipeImporterReadyMessageDecoder,
 } from "~/messages/decoders";
-import { Message } from "~/messages/types";
+import { SendResponseFn } from "~/messages/types";
 import exceptionLogger from "~/service-worker/exception-logger";
 import { setUserId } from "~/storage";
 import assertIsError from "~/utils/assertIsError";
@@ -29,7 +29,7 @@ chrome.runtime.onMessage.addListener(async (rawMessage) => {
         const newTabListener = (
           newTabRawMessage: unknown,
           newTabSender: chrome.runtime.MessageSender,
-          sendResponse: (message: Message) => void,
+          sendResponse: SendResponseFn,
         ) => {
           const readyMessage =
             recipeImporterReadyMessageDecoder.value(newTabRawMessage);
@@ -70,7 +70,7 @@ chrome.runtime.onMessage.addListener(async (rawMessage) => {
 });
 
 chrome.runtime.onMessageExternal.addListener(
-  (rawMessage, sender, sendResponse) => {
+  (rawMessage, sender, sendResponse: SendResponseFn) => {
     try {
       if (sender.origin !== WEB_APP_URL.origin) {
         throw new Error("Unknown sender origin.");
@@ -84,8 +84,65 @@ chrome.runtime.onMessageExternal.addListener(
 
           sendResponse({
             type: "PONG",
-            extensionVersion: config.VERSION,
+            sender: "service-worker",
+            payload: { extensionVersion: config.VERSION },
           });
+
+          break;
+        }
+      }
+    } catch (error) {
+      assertIsError(error);
+      exceptionLogger.error(error.message);
+    }
+  },
+);
+
+// Messages used in E2E tests
+chrome.runtime.onMessageExternal.addListener(
+  async (rawMessage, sender, sendResponse: SendResponseFn) => {
+    try {
+      if (config.ENVIRONMENT !== "test") {
+        return;
+      }
+
+      if (sender.origin !== WEB_APP_URL.origin) {
+        throw new Error("Unknown sender origin.");
+      }
+
+      const message = receivableServiceWorkerMessageDecoder.verify(rawMessage);
+
+      switch (message.type) {
+        case "SET_USER_ID_FOR_E2E_TEST": {
+          setUserId(message.payload.userId);
+
+          sendResponse({
+            type: "SET_USER_ID_FOR_E2E_TEST_SUCCESS",
+            sender: "service-worker",
+          });
+
+          break;
+        }
+
+        case "OPEN_URL_FOR_E2E_TEST": {
+          const tab = await createEmptyTab();
+
+          if (tab.id) {
+            setTabUrl(tab.id, message.payload.url);
+
+            sendResponse({
+              type: "OPEN_URL_FOR_E2E_TEST_SUCCESS",
+              payload: {
+                tabId: tab.id,
+              },
+              sender: "service-worker",
+            });
+          } else {
+            sendResponse({
+              type: "OPEN_URL_FOR_E2E_TEST_FAILURE",
+              sender: "service-worker",
+            });
+          }
 
           break;
         }

@@ -1,10 +1,10 @@
 /* eslint-disable no-restricted-imports */
-import "dotenv/config";
 import fs from "node:fs";
 import path from "node:path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
-import * as prettier from "prettier";
+import "dotenv/config";
+import { format, resolveConfig } from "prettier";
 import packageJson from "../package.json";
 import baseManifest from "../src/base-manifest";
 
@@ -21,14 +21,14 @@ const main = async () => {
     delete manifest.version_name;
   }
 
-  const prettierOptions = await prettier.resolveConfig(
+  const prettierOptions = await resolveConfig(
     path.resolve(__dirname, "placeholder.json"),
     {
       config: path.resolve(__dirname, "../.prettierrc.json"),
     },
   );
 
-  const formattedManifestContent = await prettier.format(
+  const formattedManifestContent = await format(
     JSON.stringify(manifest, null, 2),
     { ...(prettierOptions ?? undefined), parser: "json" },
   );

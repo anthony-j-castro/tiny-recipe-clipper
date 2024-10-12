@@ -9,12 +9,6 @@ export default class TimesScraper extends BaseScraper implements Scraper {
     super({ executeInPageScope: customExecuteInPageScope });
   }
 
-  async load() {
-    const [title, url] = await Promise.all([this._getTitle(), this._getUrl()]);
-
-    return { title, url };
-  }
-
   async _getTitle() {
     return this._executeInPageScope(() => {
       const titleElement = window.document.querySelector<HTMLElement>(
@@ -34,5 +28,11 @@ export default class TimesScraper extends BaseScraper implements Scraper {
     const url = new URL(href);
 
     return url.origin + url.pathname;
+  }
+
+  async load() {
+    const [title, url] = await Promise.all([this._getTitle(), this._getUrl()]);
+
+    return { title, url };
   }
 }

@@ -1,5 +1,4 @@
 import {
-  Decoder,
   array,
   nonEmptyString,
   number,
@@ -8,6 +7,7 @@ import {
   record,
   string,
   unknown,
+  type Decoder,
 } from "decoders";
 import { getErrorLog as getStoredErrorLog, setErrorLog } from "~/storage";
 

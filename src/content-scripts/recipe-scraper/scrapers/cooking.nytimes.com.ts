@@ -1,4 +1,4 @@
-import { BaseScraper, Executor, Scraper } from ".";
+import { BaseScraper, type Executor, type Scraper } from ".";
 
 interface Props {
   customExecuteInPageScope?: Executor;

@@ -1,5 +1,5 @@
 import config from "~/config";
-import { Message } from "~/messages/types";
+import type { Message } from "~/messages/types";
 
 const ACTIVE_TAB_QUERY_PARAM_KEY = "active-tab-id";
 

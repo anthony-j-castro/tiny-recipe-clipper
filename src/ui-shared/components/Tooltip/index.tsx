@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { OverlayArrow } from "react-aria-components";
 import { StyledTooltip } from "./styled";
 

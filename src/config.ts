@@ -1,11 +1,11 @@
 /* eslint-disable no-restricted-imports */
 import {
-  Decoder,
   exact,
   nonEmptyString,
   nullable,
   oneOf,
   string,
+  type Decoder,
 } from "decoders";
 import packageJson from "../package.json";
 

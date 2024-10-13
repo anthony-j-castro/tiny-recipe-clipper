@@ -2,7 +2,7 @@ import { sendMessageToServiceWorker } from "~/chrome-helpers";
 import instantiateScraper from "~/content-scripts/recipe-scraper/utils/instantiateScraper";
 import { ImpossibleStateError } from "~/errors";
 import { receivableRecipeScraperMessageDecoder } from "~/messages/decoders";
-import { SendResponseFn } from "~/messages/types";
+import type { SendResponseFn } from "~/messages/types";
 import isRecipePage from "~/utils/isRecipePage";
 import isSupportedWebsite from "~/utils/isSupportedWebsite";
 

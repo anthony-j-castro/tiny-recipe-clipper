@@ -1,5 +1,5 @@
 import "styled-components";
-import theme from "~/ui-shared/theme";
+import type theme from "~/ui-shared/theme";
 
 type CustomTheme = typeof theme;
 

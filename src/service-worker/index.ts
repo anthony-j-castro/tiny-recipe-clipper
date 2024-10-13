@@ -10,7 +10,7 @@ import {
   receivableServiceWorkerMessageDecoder,
   recipeImporterReadyMessageDecoder,
 } from "~/messages/decoders";
-import { SendResponseFn } from "~/messages/types";
+import type { SendResponseFn } from "~/messages/types";
 import exceptionLogger from "~/service-worker/exception-logger";
 import { setUserId } from "~/storage";
 import assertIsError from "~/utils/assertIsError";

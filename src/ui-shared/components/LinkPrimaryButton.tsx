@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 import PrimaryButton from "~/ui-shared/components/PrimaryButton";
 
 interface Props extends ComponentPropsWithoutRef<typeof PrimaryButton> {

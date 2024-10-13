@@ -1,5 +1,4 @@
 import {
-  Decoder,
   constant,
   either,
   exact,
@@ -7,8 +6,9 @@ import {
   oneOf,
   string,
   uuidv4,
+  type Decoder,
 } from "decoders";
-import {
+import type {
   ErrorMessage,
   ExtractRecipeMessage,
   OpenUrlForE2ETestMessage,

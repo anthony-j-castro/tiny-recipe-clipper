@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import path from "path";
-import { type BrowserContext, test as base, chromium } from "@playwright/test";
+import { test as base, chromium, type BrowserContext } from "@playwright/test";
 import { integer } from "decoders";
 import config from "~/src/config";
 

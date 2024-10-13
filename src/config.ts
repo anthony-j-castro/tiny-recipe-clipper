@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-imports */
 import {
   Decoder,
   exact,
@@ -6,7 +7,7 @@ import {
   oneOf,
   string,
 } from "decoders";
-import packageJson from "~/../package.json";
+import packageJson from "../package.json";
 
 type Config = {
   ENVIRONMENT: "development" | "production" | "test";

@@ -9,7 +9,7 @@ import {
 } from "decoders";
 import packageJson from "../package.json";
 
-type Config = {
+interface Config {
   ENVIRONMENT: "development" | "production" | "test";
   REPORT_PROBLEM_FORM: {
     URL: string;
@@ -29,7 +29,7 @@ type Config = {
     ORIGIN: string;
     SETTINGS_PATH: string;
   };
-};
+}
 
 const configDecoder: Decoder<Config> = exact({
   ENVIRONMENT: oneOf(["development", "production", "test"]),

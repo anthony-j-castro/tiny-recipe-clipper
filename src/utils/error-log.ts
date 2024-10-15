@@ -13,15 +13,15 @@ import { getErrorLog as getStoredErrorLog, setErrorLog } from "~/storage";
 
 export const ERROR_LOG_MAX_LENGTH = 50;
 
-type ErrorLogEntry = {
+interface ErrorLogEntry {
   level: string;
   message: string;
   timestamp: number;
   uuid: string;
   properties?: Record<string, unknown>;
-};
+}
 
-const errorLogDecoder: Decoder<Array<ErrorLogEntry>> = array(
+const errorLogDecoder: Decoder<ErrorLogEntry[]> = array(
   object({
     level: nonEmptyString,
     message: string,

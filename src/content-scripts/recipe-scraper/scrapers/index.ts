@@ -1,7 +1,7 @@
-type Recipe = {
+interface Recipe {
   title: string;
   url: string;
-};
+}
 
 export interface Scraper {
   _getTitle: () => Promise<string>;

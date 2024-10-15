@@ -6,11 +6,11 @@ export type MessageSender =
   | "service-worker"
   | "web-app";
 
-export type BaseMessage = {
+export interface BaseMessage {
   sender: MessageSender;
   type: string;
   payload?: unknown;
-};
+}
 
 export type SetUserIdForE2ETestMessage = BaseMessage & {
   payload: {

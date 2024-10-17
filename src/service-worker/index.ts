@@ -113,17 +113,6 @@ chrome.runtime.onMessageExternal.addListener(
       const message = receivableServiceWorkerMessageDecoder.verify(rawMessage);
 
       switch (message.type) {
-        case "SET_USER_ID_FOR_E2E_TEST": {
-          setUserId(message.payload.userId);
-
-          sendResponse({
-            type: "SET_USER_ID_FOR_E2E_TEST_SUCCESS",
-            sender: "service-worker",
-          });
-
-          break;
-        }
-
         case "OPEN_URL_FOR_E2E_TEST": {
           const tab = await createEmptyTab();
 
@@ -143,6 +132,17 @@ chrome.runtime.onMessageExternal.addListener(
               sender: "service-worker",
             });
           }
+
+          break;
+        }
+
+        case "SET_USER_ID_FOR_E2E_TEST": {
+          setUserId(message.payload.userId);
+
+          sendResponse({
+            type: "SET_USER_ID_FOR_E2E_TEST_SUCCESS",
+            sender: "service-worker",
+          });
 
           break;
         }

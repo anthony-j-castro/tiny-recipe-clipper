@@ -1,6 +1,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { CopyPlugin } from "copy-webpack-plugin";
+// eslint-disable-next-line import/default
+import CopyPlugin from "copy-webpack-plugin";
 import dotenv from "dotenv";
 import HtmlPlugin from "html-webpack-plugin";
 import TerserPlugin from "terser-webpack-plugin";

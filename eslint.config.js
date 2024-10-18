@@ -2,7 +2,6 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import config from "@anthony-j-castro/eslint-config";
 import jsonc from "eslint-plugin-jsonc";
-import globals from "globals";
 import jsoncParser from "jsonc-eslint-parser";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -21,14 +20,6 @@ export default [
           extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
         },
         typescript: { project: "tsconfig.json" },
-      },
-    },
-  },
-  {
-    files: ["webpack.config.js"],
-    languageOptions: {
-      globals: {
-        ...globals.node,
       },
     },
   },

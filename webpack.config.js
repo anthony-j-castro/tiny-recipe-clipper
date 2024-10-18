@@ -1,12 +1,17 @@
-const path = require("node:path");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
-const webpack = require("webpack");
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { CopyPlugin } from "copy-webpack-plugin";
+import dotenv from "dotenv";
+import HtmlPlugin from "html-webpack-plugin";
+import TerserPlugin from "terser-webpack-plugin";
+import webpack from "webpack";
 
-require("dotenv").config({ path: path.resolve(__dirname, ".env") });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const config = {
+dotenv.config({ path: path.resolve(__dirname, ".env") });
+
+export default {
   entry: {
     "service-worker": {
       import: path.resolve(__dirname, "src/service-worker/index.ts"),
@@ -66,19 +71,19 @@ const config = {
       BUILD_ENV: null,
       ROLLBAR_ACCESS_TOKEN: null,
     }),
-    new HtmlWebpackPlugin({
+    new HtmlPlugin({
       chunks: ["popup"],
       template: path.resolve(__dirname, "src/popup/index.html"),
       filename: "popup.html",
       inject: "body",
     }),
-    new HtmlWebpackPlugin({
+    new HtmlPlugin({
       chunks: ["options"],
       template: path.resolve(__dirname, "src/options/index.html"),
       filename: "options.html",
       inject: "body",
     }),
-    new CopyWebpackPlugin({
+    new CopyPlugin({
       patterns: [
         {
           from: path.resolve(__dirname, "src/manifest.json"),
@@ -118,5 +123,3 @@ const config = {
     hints: false,
   },
 };
-
-module.exports = config;

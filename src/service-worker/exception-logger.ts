@@ -6,7 +6,7 @@ import getUserId from "~/utils/getUserId";
 export type SeverityLevel = "critical" | "debug" | "error" | "info" | "warning";
 type Properties = Record<string, unknown>;
 
-async function sendItem({
+const sendItem = async ({
   level,
   message,
   properties,
@@ -14,7 +14,7 @@ async function sendItem({
   level: SeverityLevel;
   message: string;
   properties?: Properties;
-}) {
+}) => {
   if (!config.ROLLBAR_ACCESS_TOKEN) {
     return;
   }
@@ -62,15 +62,13 @@ async function sendItem({
   });
 
   return response.json();
-}
+};
 
-function sendError(message: string, properties?: Properties) {
-  return sendItem({ level: "error", message, properties });
-}
+const sendError = (message: string, properties?: Properties) =>
+  sendItem({ level: "error", message, properties });
 
-function sendInfo(message: string, properties?: Properties) {
-  return sendItem({ level: "info", message, properties });
-}
+const sendInfo = (message: string, properties?: Properties) =>
+  sendItem({ level: "info", message, properties });
 
 export default {
   error: sendError,

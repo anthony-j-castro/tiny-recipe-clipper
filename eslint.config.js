@@ -1,11 +1,13 @@
 const path = require("node:path");
 const config = require("@anthony-j-castro/eslint-config");
+const queryPlugin = require("@tanstack/eslint-plugin-query");
 const jsonc = require("eslint-plugin-jsonc");
 const globals = require("globals");
 const jsoncParser = require("jsonc-eslint-parser");
 
 module.exports = [
   ...config,
+  ...queryPlugin.configs["flat/recommended"],
   {
     ignores: ["dist/*", "playwright/report/**", "playwright/test-results/**"],
   },

@@ -24,7 +24,10 @@ chrome.runtime.onMessage.addListener(async (rawMessage) => {
 
     switch (message.type) {
       case "INFO": {
-        exceptionLogger.info(message.payload.message);
+        exceptionLogger.info(
+          message.payload.message,
+          message.payload.properties,
+        );
 
         break;
       }

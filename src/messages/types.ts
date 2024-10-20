@@ -96,6 +96,7 @@ export type RecipeDataMessage = BaseMessage & {
 export type InfoMessage = BaseMessage & {
   payload: {
     message: string;
+    properties?: Record<string, unknown>;
   };
   type: "INFO";
 };

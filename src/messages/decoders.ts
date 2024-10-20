@@ -5,7 +5,10 @@ import {
   nonEmptyString,
   nullable,
   oneOf,
+  optional,
+  record,
   string,
+  unknown,
   uuidv4,
   type Decoder,
 } from "decoders";
@@ -92,6 +95,7 @@ export const infoMessageDecoder: Decoder<InfoMessage> = exact({
   type: constant("INFO"),
   payload: exact({
     message: nonEmptyString,
+    properties: optional(record(unknown)),
   }),
 });
 

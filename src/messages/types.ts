@@ -1,3 +1,5 @@
+import { Recipe } from "~/types";
+
 export type MessageSender =
   | "e2e-test"
   | "options"
@@ -69,7 +71,7 @@ export type RecipeImporterReadyMessage = BaseMessage & {
 
 export type SendRecipeDataMessage = BaseMessage & {
   payload: {
-    recipe: { title: string; url: string };
+    recipe: Recipe;
   };
   sender: "recipe-scraper";
   type: "SEND_RECIPE_DATA";
@@ -85,7 +87,7 @@ export type ExtractRecipeMessage = BaseMessage & {
 
 export type RecipeDataMessage = BaseMessage & {
   payload: {
-    recipe: { title: string; url: string };
+    recipe: Recipe;
   };
   sender: "recipe-scraper" | "service-worker";
   type: "RECIPE_DATA";

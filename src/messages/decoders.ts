@@ -3,6 +3,7 @@ import {
   either,
   exact,
   nonEmptyString,
+  nullable,
   oneOf,
   string,
   uuidv4,
@@ -20,6 +21,14 @@ import type {
   SendRecipeDataMessage,
   SetUserIdForE2ETestMessage,
 } from "~/messages/types";
+import { Recipe } from "~/types";
+
+const recipeDecoder: Decoder<Recipe> = exact({
+  attribution: nullable(string),
+  time: nullable(string),
+  title: string,
+  url: string,
+});
 
 export const setUserIdForE2ETestDecoder: Decoder<SetUserIdForE2ETestMessage> =
   exact({
@@ -57,10 +66,7 @@ const sendRecipeDataMessageDecoder: Decoder<SendRecipeDataMessage> = exact({
   sender: constant("recipe-scraper"),
   type: constant("SEND_RECIPE_DATA"),
   payload: exact({
-    recipe: exact({
-      title: nonEmptyString,
-      url: nonEmptyString,
-    }),
+    recipe: recipeDecoder,
   }),
 });
 
@@ -76,10 +82,7 @@ export const recipeDataMessageDecoder: Decoder<RecipeDataMessage> = exact({
   sender: constant("recipe-scraper"),
   type: constant("RECIPE_DATA"),
   payload: exact({
-    recipe: exact({
-      title: nonEmptyString,
-      url: nonEmptyString,
-    }),
+    recipe: recipeDecoder,
   }),
 });
 

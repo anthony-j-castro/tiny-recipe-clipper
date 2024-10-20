@@ -1,9 +1,4 @@
-interface Recipe {
-  attribution: string | null;
-  time: string | null;
-  title: string;
-  url: string;
-}
+import { Recipe } from "~/types";
 
 export interface LoadReturn {
   alerts: string[];

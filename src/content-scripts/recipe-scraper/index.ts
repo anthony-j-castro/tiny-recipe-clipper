@@ -32,9 +32,17 @@ chrome.runtime.onMessage.addListener(
             }
 
             try {
-              const { recipe } = await scraper.load();
+              const { alerts, recipe } = await scraper.load();
 
-              // Check alerts and send info message to rollbar
+              if (alerts.length > 0) {
+                sendMessageToServiceWorker({
+                  type: "INFO",
+                  sender: "recipe-scraper",
+                  payload: {
+                    message: alerts[0],
+                  },
+                });
+              }
 
               switch (message.payload.destination) {
                 case "popup": {

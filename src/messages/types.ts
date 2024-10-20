@@ -93,6 +93,13 @@ export type RecipeDataMessage = BaseMessage & {
   type: "RECIPE_DATA";
 };
 
+export type InfoMessage = BaseMessage & {
+  payload: {
+    message: string;
+  };
+  type: "INFO";
+};
+
 export type ErrorMessage = BaseMessage & {
   payload: {
     error: string;
@@ -103,6 +110,7 @@ export type ErrorMessage = BaseMessage & {
 export type Message =
   | ErrorMessage
   | ExtractRecipeMessage
+  | InfoMessage
   | OpenUrlForE2ETestFailureMessage
   | OpenUrlForE2ETestMessage
   | OpenUrlForE2ETestSuccessMessage
@@ -119,6 +127,7 @@ export type ReceivablePopupMessage = RecipeDataMessage;
 export type ReceivableRecipeScraperMessage = ExtractRecipeMessage;
 
 export type ReceivableServiceWorkerMessage =
+  | InfoMessage
   | OpenUrlForE2ETestMessage
   | PingMessage
   | RecipeDataMessage

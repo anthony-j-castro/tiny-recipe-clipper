@@ -23,6 +23,12 @@ chrome.runtime.onMessage.addListener(async (rawMessage) => {
     const message = receivableServiceWorkerMessageDecoder.verify(rawMessage);
 
     switch (message.type) {
+      case "INFO": {
+        exceptionLogger.info(message.payload.message);
+
+        break;
+      }
+
       case "SEND_RECIPE_DATA": {
         const tab = await createEmptyTab();
 

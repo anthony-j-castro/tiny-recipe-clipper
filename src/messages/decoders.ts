@@ -12,6 +12,7 @@ import {
 import type {
   ErrorMessage,
   ExtractRecipeMessage,
+  InfoMessage,
   OpenUrlForE2ETestMessage,
   PingMessage,
   ReceivableRecipeScraperMessage,
@@ -86,6 +87,14 @@ export const recipeDataMessageDecoder: Decoder<RecipeDataMessage> = exact({
   }),
 });
 
+export const infoMessageDecoder: Decoder<InfoMessage> = exact({
+  sender: constant("recipe-scraper"),
+  type: constant("INFO"),
+  payload: exact({
+    message: nonEmptyString,
+  }),
+});
+
 export const errorMessageDecoder: Decoder<ErrorMessage> = exact({
   sender: constant("recipe-scraper"),
   type: constant("ERROR"),
@@ -100,6 +109,7 @@ export const receivableRecipeScraperMessageDecoder: Decoder<ReceivableRecipeScra
 export const receivableServiceWorkerMessageDecoder: Decoder<ReceivableServiceWorkerMessage> =
   either(
     openUrlForE2ETestDecoder,
+    infoMessageDecoder,
     pingMessageDecoder,
     recipeImporterReadyMessageDecoder,
     sendRecipeDataMessageDecoder,

@@ -9,6 +9,26 @@ export default class TimesScraper extends BaseScraper implements Scraper {
     super({ executeInPageScope: customExecuteInPageScope });
   }
 
+  async _getTime() {
+    return this._executeInPageScope(() => {
+      const statsElements = window.document.querySelectorAll<HTMLElement>(
+        'div[class*="stats_cookingTimeTable"] > *',
+      );
+
+      if (statsElements.length !== 2) {
+        return null;
+      }
+
+      const [label, time] = statsElements;
+
+      if (label.innerText !== "Total Time") {
+        return null;
+      }
+
+      return time.innerText.trim();
+    });
+  }
+
   async _getTitle() {
     return this._executeInPageScope(() => {
       const titleElement = window.document.querySelector<HTMLElement>(
@@ -31,8 +51,12 @@ export default class TimesScraper extends BaseScraper implements Scraper {
   }
 
   async load() {
-    const [title, url] = await Promise.all([this._getTitle(), this._getUrl()]);
+    const [time, title, url] = await Promise.all([
+      this._getTime(),
+      this._getTitle(),
+      this._getUrl(),
+    ]);
 
-    return { title, url };
+    return { time, title, url };
   }
 }

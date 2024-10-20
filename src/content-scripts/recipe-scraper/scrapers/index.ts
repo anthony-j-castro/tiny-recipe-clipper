@@ -4,6 +4,7 @@ interface Recipe {
 }
 
 export interface Scraper {
+  _getAttribution: () => Promise<string | null>;
   _getTime: () => Promise<string | null>;
   _getTitle: () => Promise<string>;
   _getUrl: () => Promise<string>;

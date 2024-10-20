@@ -1,69 +1,86 @@
-import { BaseScraper, type Executor, type Scraper } from ".";
+import { RecipeParseError } from "~/errors";
+import { BaseScraper, type Executor, type LoadReturn, type Scraper } from ".";
 
 interface Props {
   customExecuteInPageScope?: Executor;
 }
 
 export default class TimesScraper extends BaseScraper implements Scraper {
+  alerts: string[];
+
   constructor({ customExecuteInPageScope }: Props = {}) {
     super({ executeInPageScope: customExecuteInPageScope });
+
+    this.alerts = [];
   }
 
   async _getAttribution() {
-    return this._executeInPageScope(() => {
-      const attributionElements = window.document.querySelectorAll<HTMLElement>(
-        'h2[class*="byline"]',
-      );
+    try {
+      const attribution = await this._executeInPageScope(() => {
+        const attributionElements =
+          window.document.querySelectorAll<HTMLElement>('h2[class*="byline"]');
 
-      if (attributionElements.length === 0) {
+        if (attributionElements.length === 0) {
+          return null;
+        }
+
+        if (attributionElements.length > 2) {
+          throw new RecipeParseError(
+            "More than two lines of attribution detected.",
+          );
+        }
+
+        if (attributionElements.length === 1) {
+          const attributionText = attributionElements[0].innerText;
+
+          if (attributionText === "") {
+            return null;
+          }
+
+          const matches = attributionText.match(/^By\s*(.*)$/);
+
+          if (matches === null) {
+            return null;
+          }
+
+          const [attribution] = matches;
+
+          if (!attribution || matches.length !== 2) {
+            return null;
+          }
+
+          return attribution;
+        }
+
+        if (attributionElements.length === 2) {
+          const recipeFromText = attributionElements[0].innerText.trim();
+          const adaptedByText = attributionElements[1].innerText.trim();
+
+          if (recipeFromText === "" || adaptedByText === "") {
+            return null;
+          }
+
+          if (
+            /^Recipe from\s*(.*)$/.test(recipeFromText) &&
+            /^Adapted by\s*(.*)$/.test(adaptedByText)
+          ) {
+            return `${recipeFromText}, ${adaptedByText}`;
+          }
+        }
+
         return null;
+      });
+
+      return attribution;
+    } catch (error) {
+      if (error instanceof RecipeParseError) {
+        this.alerts.push(error.message);
+      } else {
+        throw error;
       }
+    }
 
-      if (attributionElements.length > 2) {
-        // Alert, we might need to update this
-        return null;
-      }
-
-      if (attributionElements.length === 1) {
-        const attributionText = attributionElements[0].innerText;
-
-        if (attributionText === "") {
-          return null;
-        }
-
-        const matches = attributionText.match(/^By\s*(.*)$/);
-
-        if (matches === null) {
-          return null;
-        }
-
-        const [attribution] = matches;
-
-        if (!attribution || matches.length !== 2) {
-          return null;
-        }
-
-        return attribution;
-      }
-
-      if (attributionElements.length === 2) {
-        const recipeFromText = attributionElements[0].innerText.trim();
-        const adaptedByText = attributionElements[1].innerText.trim();
-
-        if (recipeFromText === "" || adaptedByText === "") {
-          return null;
-        }
-
-        if (
-          /^Recipe from\s*(.*)$/.test(recipeFromText) &&
-          /^Adapted by\s*(.*)$/.test(adaptedByText)
-        ) {
-          return `${recipeFromText}, ${adaptedByText}`;
-        }
-      }
-
-      return null;
-    });
+    return null;
   }
 
   async _getTime() {
@@ -107,7 +124,7 @@ export default class TimesScraper extends BaseScraper implements Scraper {
     return url.origin + url.pathname;
   }
 
-  async load() {
+  async load(): Promise<LoadReturn> {
     const [attribution, time, title, url] = await Promise.all([
       this._getAttribution(),
       this._getTime(),
@@ -115,6 +132,6 @@ export default class TimesScraper extends BaseScraper implements Scraper {
       this._getUrl(),
     ]);
 
-    return { attribution, time, title, url };
+    return { alerts: this.alerts, recipe: { attribution, time, title, url } };
   }
 }

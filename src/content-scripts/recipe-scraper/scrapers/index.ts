@@ -1,6 +1,13 @@
 interface Recipe {
+  attribution: string | null;
+  time: string | null;
   title: string;
   url: string;
+}
+
+export interface LoadReturn {
+  alerts: string[];
+  recipe: Recipe;
 }
 
 export interface Scraper {
@@ -8,7 +15,7 @@ export interface Scraper {
   _getTime: () => Promise<string | null>;
   _getTitle: () => Promise<string>;
   _getUrl: () => Promise<string>;
-  load: () => Promise<Recipe>;
+  load: () => Promise<LoadReturn>;
 }
 
 export type Executor = <T>(instructions: () => T) => Promise<T>;

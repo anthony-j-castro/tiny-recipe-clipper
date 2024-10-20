@@ -34,7 +34,7 @@ testValues.forEach((testValue) => {
       customExecuteInPageScope,
     });
 
-    const recipe = await scraper.load();
+    const { recipe } = await scraper.load();
 
     expect(recipe).toEqual(testValue.fixture);
   });

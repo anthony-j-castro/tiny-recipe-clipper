@@ -6,6 +6,10 @@ import { chromium } from "playwright-extra";
 import stealth from "puppeteer-extra-plugin-stealth";
 import config from "~/src/config";
 
+// This should be retrieved dynamically, but it seems the stealth
+// plugin interferes with the example extension ID logic.
+// For now, we know what this value should be so it's defined here.
+// This needs to be updated if the key file in the manifest ever changes.
 const EXTENSION_ID = "llnmekdhiiidlehocjhlnajijopclbmo";
 
 export const test = base.extend<{

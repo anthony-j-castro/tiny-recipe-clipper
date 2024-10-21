@@ -130,17 +130,9 @@ export default class TimesScraper extends BaseScraper implements Scraper {
   }
 
   async _getTitle() {
-    return this._executeInPageScope(() => {
-      const titleElement = window.document.querySelector<HTMLElement>(
-        'h1[class*="pantry--title-display"]',
-      );
+    const title = string.verify(this.recipeJson.name);
 
-      if (!titleElement) {
-        throw new Error("Recipe title could not be found on the page.");
-      }
-
-      return titleElement.innerText.trim();
-    });
+    return title;
   }
 
   async _getUrl() {

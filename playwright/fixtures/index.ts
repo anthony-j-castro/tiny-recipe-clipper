@@ -6,6 +6,8 @@ import { chromium } from "playwright-extra";
 import stealth from "puppeteer-extra-plugin-stealth";
 import config from "~/src/config";
 
+const EXTENSION_ID = "llnmekdhiiidlehocjhlnajijopclbmo";
+
 export const test = base.extend<{
   context: BrowserContext;
   customExecuteInPageScope: <T>(instructions: () => T) => Promise<T>;
@@ -80,14 +82,9 @@ export const test = base.extend<{
     };
     await use(fn);
   },
-  extensionId: async ({ context }, use) => {
-    let [background] = context.serviceWorkers();
-    if (!background) {
-      background = await context.waitForEvent("serviceworker");
-    }
-
-    const extensionId = background.url().split("/")[2];
-    await use(extensionId);
+  // eslint-disable-next-line no-empty-pattern
+  extensionId: async ({}, use) => {
+    await use(EXTENSION_ID);
   },
   customExecuteInPageScope: async ({ page }, use) => {
     const fn = <T>(instructions: () => T) => page.evaluate(instructions);

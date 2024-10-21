@@ -1,4 +1,6 @@
+import { formatDuration } from "date-fns";
 import { array, string } from "decoders";
+import { parse } from "iso8601-duration";
 import { RecipeParseError } from "~/errors";
 import { BaseScraper, type Executor, type LoadReturn, type Scraper } from ".";
 
@@ -95,57 +97,6 @@ export default class TimesScraper extends BaseScraper implements Scraper {
     const ingredients = array(string).verify(this.recipeJson.recipeIngredient);
 
     return [{ ingredients: ingredients }];
-    const ingredientGroups = await this._executeInPageScope(() => {
-      const ingredientListItemElements = Array.from(
-        window.document.querySelectorAll<HTMLElement>(
-          'div[class*="recipebody_ingredients"] ul li[class*="ingredient_ingredient"], div[class*="recipebody_ingredients"] ul h3[class*="ingredientgroup_name"]',
-        ),
-      );
-
-      return ingredientListItemElements.reduce<IngredientsGroup[]>(
-        (ingredients, listItemElement) => {
-          let listItemText =
-            listItemElement.textContent ?? "".trim().replace(/\s+/g, " ");
-
-          if (listItemElement.childNodes.length > 1) {
-            listItemText = Array.from(listItemElement.childNodes)
-              .reduce<string[]>((strings, element) => {
-                if (element instanceof HTMLElement) {
-                  return [...strings, element.innerText];
-                } else if (element instanceof Text) {
-                  return [...strings, element.wholeText];
-                }
-
-                return strings;
-              }, [])
-              .join(" ");
-          }
-
-          if (listItemElement.tagName.toLowerCase() === "h3") {
-            return [...ingredients, { name: listItemText, ingredients: [] }];
-          }
-
-          const previousIngredientsGroups = ingredients.slice(0, -1);
-
-          const currentIngredientsGroup =
-            ingredients.length === 0
-              ? { ingredients: [] }
-              : ingredients[ingredients.length - 1];
-
-          console.log(previousIngredientsGroups, currentIngredientsGroup);
-
-          currentIngredientsGroup.ingredients = [
-            ...currentIngredientsGroup.ingredients,
-            listItemText,
-          ];
-
-          return [...previousIngredientsGroups, currentIngredientsGroup];
-        },
-        [],
-      );
-    });
-
-    return ingredientGroups;
   }
 
   async _getRecipeJson() {
@@ -171,23 +122,11 @@ export default class TimesScraper extends BaseScraper implements Scraper {
   }
 
   async _getTime() {
-    return this._executeInPageScope(() => {
-      const statsElements = window.document.querySelectorAll<HTMLElement>(
-        'div[class*="stats_cookingTimeTable"] > *',
-      );
+    const durationString = string.verify(this.recipeJson.totalTime);
 
-      if (statsElements.length !== 2) {
-        return null;
-      }
+    const duration = parse(durationString);
 
-      const [label, time] = statsElements;
-
-      if (label?.innerText !== "Total Time") {
-        return null;
-      }
-
-      return time?.innerText.trim() ?? null;
-    });
+    return formatDuration(duration);
   }
 
   async _getTitle() {

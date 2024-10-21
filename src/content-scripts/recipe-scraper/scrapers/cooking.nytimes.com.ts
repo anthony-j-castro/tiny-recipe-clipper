@@ -78,10 +78,9 @@ export default class TimesScraper extends BaseScraper implements Scraper {
   }
 
   async _getUrl() {
-    const href = await this._executeInPageScope(() => window.location.href);
-    const url = new URL(href);
+    const url = string.verify(this.recipeJson.url);
 
-    return url.origin + url.pathname;
+    return url;
   }
 
   async _getYield() {

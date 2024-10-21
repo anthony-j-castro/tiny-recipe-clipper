@@ -39,6 +39,7 @@ const recipeDecoder: Decoder<Recipe> = exact({
   time: nullable(string),
   title: string,
   url: string,
+  yield: nullable(string),
 });
 
 export const setUserIdForE2ETestDecoder: Decoder<SetUserIdForE2ETestMessage> =

@@ -84,22 +84,35 @@ export default class TimesScraper extends BaseScraper implements Scraper {
     return url.origin + url.pathname;
   }
 
+  async _getYield() {
+    const recipeYield = string.verify(this.recipeJson.recipeYield);
+
+    return recipeYield;
+  }
+
   async load(): Promise<LoadReturn> {
     await this._getRecipeJson();
 
-    const [attribution, ingredientGroups, time, title, url] = await Promise.all(
-      [
+    const [attribution, ingredientGroups, time, title, url, recipeYield] =
+      await Promise.all([
         this._getAttribution(),
         this._getIngredientGroups(),
         this._getTime(),
         this._getTitle(),
         this._getUrl(),
-      ],
-    );
+        this._getYield(),
+      ]);
 
     return {
       alerts: this.alerts,
-      recipe: { attribution, ingredientGroups, time, title, url },
+      recipe: {
+        attribution,
+        ingredientGroups,
+        time,
+        title,
+        url,
+        yield: recipeYield,
+      },
     };
   }
 }

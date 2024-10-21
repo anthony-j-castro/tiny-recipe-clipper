@@ -7,4 +7,5 @@ export interface Recipe {
   time: string | null;
   title: string;
   url: string;
+  yield: string | null;
 }

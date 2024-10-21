@@ -13,6 +13,7 @@ export interface Scraper {
   _getTime: () => Promise<string | null>;
   _getTitle: () => Promise<string>;
   _getUrl: () => Promise<string>;
+  _getYield: () => Promise<string | null>;
   load: () => Promise<LoadReturn>;
 }
 

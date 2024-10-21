@@ -7,6 +7,9 @@ export interface LoadReturn {
 
 export interface Scraper {
   _getAttribution: () => Promise<string | null>;
+  _getIngredientGroups: () => Promise<
+    Array<{ ingredients: string[]; name?: string }>
+  >;
   _getTime: () => Promise<string | null>;
   _getTitle: () => Promise<string>;
   _getUrl: () => Promise<string>;

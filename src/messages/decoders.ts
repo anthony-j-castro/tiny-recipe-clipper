@@ -1,4 +1,5 @@
 import {
+  array,
   constant,
   either,
   exact,
@@ -29,6 +30,12 @@ import { Recipe } from "~/types";
 
 const recipeDecoder: Decoder<Recipe> = exact({
   attribution: nullable(string),
+  ingredientGroups: array(
+    exact({
+      name: optional(string),
+      ingredients: array(string),
+    }),
+  ),
   time: nullable(string),
   title: string,
   url: string,

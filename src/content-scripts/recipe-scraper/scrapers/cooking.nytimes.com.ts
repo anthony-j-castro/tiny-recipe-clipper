@@ -1,5 +1,11 @@
+import { array, string } from "decoders";
 import { RecipeParseError } from "~/errors";
 import { BaseScraper, type Executor, type LoadReturn, type Scraper } from ".";
+
+interface IngredientsGroup {
+  ingredients: string[];
+  name?: string;
+}
 
 interface Props {
   customExecuteInPageScope?: Executor;
@@ -7,11 +13,13 @@ interface Props {
 
 export default class TimesScraper extends BaseScraper implements Scraper {
   alerts: string[];
+  recipeJson: Record<string, unknown>;
 
   constructor({ customExecuteInPageScope }: Props = {}) {
     super({ executeInPageScope: customExecuteInPageScope });
 
     this.alerts = [];
+    this.recipeJson = {};
   }
 
   async _getAttribution() {
@@ -31,9 +39,9 @@ export default class TimesScraper extends BaseScraper implements Scraper {
         }
 
         if (attributionElements.length === 1) {
-          const attributionText = attributionElements[0].innerText;
+          const attributionText = attributionElements[0]?.innerText.trim();
 
-          if (attributionText === "") {
+          if (!attributionText) {
             return null;
           }
 
@@ -53,10 +61,10 @@ export default class TimesScraper extends BaseScraper implements Scraper {
         }
 
         if (attributionElements.length === 2) {
-          const recipeFromText = attributionElements[0].innerText.trim();
-          const adaptedByText = attributionElements[1].innerText.trim();
+          const recipeFromText = attributionElements[0]?.innerText.trim();
+          const adaptedByText = attributionElements[1]?.innerText.trim();
 
-          if (recipeFromText === "" || adaptedByText === "") {
+          if (!recipeFromText || !adaptedByText) {
             return null;
           }
 
@@ -83,6 +91,85 @@ export default class TimesScraper extends BaseScraper implements Scraper {
     return null;
   }
 
+  async _getIngredientGroups(): Promise<IngredientsGroup[]> {
+    const ingredients = array(string).verify(this.recipeJson.recipeIngredient);
+
+    return [{ ingredients: ingredients }];
+    const ingredientGroups = await this._executeInPageScope(() => {
+      const ingredientListItemElements = Array.from(
+        window.document.querySelectorAll<HTMLElement>(
+          'div[class*="recipebody_ingredients"] ul li[class*="ingredient_ingredient"], div[class*="recipebody_ingredients"] ul h3[class*="ingredientgroup_name"]',
+        ),
+      );
+
+      return ingredientListItemElements.reduce<IngredientsGroup[]>(
+        (ingredients, listItemElement) => {
+          let listItemText =
+            listItemElement.textContent ?? "".trim().replace(/\s+/g, " ");
+
+          if (listItemElement.childNodes.length > 1) {
+            listItemText = Array.from(listItemElement.childNodes)
+              .reduce<string[]>((strings, element) => {
+                if (element instanceof HTMLElement) {
+                  return [...strings, element.innerText];
+                } else if (element instanceof Text) {
+                  return [...strings, element.wholeText];
+                }
+
+                return strings;
+              }, [])
+              .join(" ");
+          }
+
+          if (listItemElement.tagName.toLowerCase() === "h3") {
+            return [...ingredients, { name: listItemText, ingredients: [] }];
+          }
+
+          const previousIngredientsGroups = ingredients.slice(0, -1);
+
+          const currentIngredientsGroup =
+            ingredients.length === 0
+              ? { ingredients: [] }
+              : ingredients[ingredients.length - 1];
+
+          console.log(previousIngredientsGroups, currentIngredientsGroup);
+
+          currentIngredientsGroup.ingredients = [
+            ...currentIngredientsGroup.ingredients,
+            listItemText,
+          ];
+
+          return [...previousIngredientsGroups, currentIngredientsGroup];
+        },
+        [],
+      );
+    });
+
+    return ingredientGroups;
+  }
+
+  async _getRecipeJson() {
+    const recipeJson = await this._executeInPageScope(() => {
+      const scriptBlocks = document.querySelectorAll<HTMLElement>(
+        "script[type='application/ld+json']",
+      );
+
+      if (scriptBlocks.length !== 1) {
+        throw new Error("Could not load recipe JSON.");
+      }
+
+      const rawScriptContent = scriptBlocks[0].textContent;
+
+      if (!rawScriptContent) {
+        throw new Error("Could not load recipe JSON.");
+      }
+
+      return JSON.parse(rawScriptContent);
+    });
+
+    this.recipeJson = recipeJson;
+  }
+
   async _getTime() {
     return this._executeInPageScope(() => {
       const statsElements = window.document.querySelectorAll<HTMLElement>(
@@ -95,11 +182,11 @@ export default class TimesScraper extends BaseScraper implements Scraper {
 
       const [label, time] = statsElements;
 
-      if (label.innerText !== "Total Time") {
+      if (label?.innerText !== "Total Time") {
         return null;
       }
 
-      return time.innerText.trim();
+      return time?.innerText.trim() ?? null;
     });
   }
 
@@ -125,13 +212,21 @@ export default class TimesScraper extends BaseScraper implements Scraper {
   }
 
   async load(): Promise<LoadReturn> {
-    const [attribution, time, title, url] = await Promise.all([
-      this._getAttribution(),
-      this._getTime(),
-      this._getTitle(),
-      this._getUrl(),
-    ]);
+    await this._getRecipeJson();
 
-    return { alerts: this.alerts, recipe: { attribution, time, title, url } };
+    const [attribution, ingredientGroups, time, title, url] = await Promise.all(
+      [
+        this._getAttribution(),
+        this._getIngredientGroups(),
+        this._getTime(),
+        this._getTitle(),
+        this._getUrl(),
+      ],
+    );
+
+    return {
+      alerts: this.alerts,
+      recipe: { attribution, ingredientGroups, time, title, url },
+    };
   }
 }

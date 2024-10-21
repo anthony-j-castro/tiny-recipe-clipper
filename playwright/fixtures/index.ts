@@ -1,7 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import path from "path";
-import { test as base, chromium, type BrowserContext } from "@playwright/test";
+import { test as base, type BrowserContext } from "@playwright/test";
 import { integer } from "decoders";
+import { chromium } from "playwright-extra";
+import stealth from "puppeteer-extra-plugin-stealth";
 import config from "~/src/config";
 
 export const test = base.extend<{
@@ -12,6 +14,8 @@ export const test = base.extend<{
 }>({
   // eslint-disable-next-line no-empty-pattern
   context: async ({}, use) => {
+    chromium.use(stealth());
+
     const pathToExtension = path.join(__dirname, "../../dist");
     const context = await chromium.launchPersistentContext("", {
       headless: false,

@@ -37,7 +37,7 @@ chrome.runtime.onMessage.addListener(
               if (alerts.length > 0) {
                 alerts.forEach((alert) => {
                   sendMessageToServiceWorker({
-                    type: "INFO",
+                    type: "LOG_INFO",
                     sender: "recipe-scraper",
                     payload: {
                       message: alert,

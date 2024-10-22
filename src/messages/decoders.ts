@@ -16,7 +16,8 @@ import {
 import type {
   ErrorMessage,
   ExtractRecipeMessage,
-  InfoMessage,
+  LogInfoMessage,
+  MessageSender,
   OpenUrlForE2ETestMessage,
   PingMessage,
   ReceivableRecipeScraperMessage,
@@ -27,6 +28,15 @@ import type {
   SetUserIdForE2ETestMessage,
 } from "~/messages/types";
 import { Recipe } from "~/types";
+
+const senderDecoder: Decoder<MessageSender> = oneOf([
+  "e2e-test",
+  "options",
+  "popup",
+  "recipe-scraper",
+  "service-worker",
+  "web-app",
+]);
 
 const recipeDecoder: Decoder<Recipe> = exact({
   attribution: nullable(string),
@@ -98,9 +108,9 @@ export const recipeDataMessageDecoder: Decoder<RecipeDataMessage> = exact({
   }),
 });
 
-export const infoMessageDecoder: Decoder<InfoMessage> = exact({
-  sender: constant("recipe-scraper"),
-  type: constant("INFO"),
+export const logInfoMessageDecoder: Decoder<LogInfoMessage> = exact({
+  sender: senderDecoder,
+  type: constant("LOG_INFO"),
   payload: exact({
     message: nonEmptyString,
     properties: optional(record(unknown)),
@@ -108,7 +118,7 @@ export const infoMessageDecoder: Decoder<InfoMessage> = exact({
 });
 
 export const errorMessageDecoder: Decoder<ErrorMessage> = exact({
-  sender: constant("recipe-scraper"),
+  sender: senderDecoder,
   type: constant("ERROR"),
   payload: exact({
     error: nonEmptyString,
@@ -121,7 +131,7 @@ export const receivableRecipeScraperMessageDecoder: Decoder<ReceivableRecipeScra
 export const receivableServiceWorkerMessageDecoder: Decoder<ReceivableServiceWorkerMessage> =
   either(
     openUrlForE2ETestDecoder,
-    infoMessageDecoder,
+    logInfoMessageDecoder,
     pingMessageDecoder,
     recipeImporterReadyMessageDecoder,
     sendRecipeDataMessageDecoder,

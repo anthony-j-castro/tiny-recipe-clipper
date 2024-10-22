@@ -23,7 +23,7 @@ chrome.runtime.onMessage.addListener(async (rawMessage) => {
     const message = receivableServiceWorkerMessageDecoder.verify(rawMessage);
 
     switch (message.type) {
-      case "INFO": {
+      case "LOG_INFO": {
         exceptionLogger.info(
           message.payload.message,
           message.payload.properties,

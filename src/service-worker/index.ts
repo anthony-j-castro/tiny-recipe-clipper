@@ -195,7 +195,9 @@ chrome.tabs.onUpdated.addListener((_tabId, _changeInfo, tab) => {
 chrome.windows.onFocusChanged.addListener(async (windowId) => {
   if (windowId !== chrome.windows.WINDOW_ID_NONE) {
     const tab = await getCurrentTab({ focused: true });
-    updateExtensionIcon(tab);
+    if (tab) {
+      updateExtensionIcon(tab);
+    }
   }
 });
 

@@ -47,11 +47,7 @@ export default class TimesScraper extends BaseScraper implements Scraper {
         "script[type='application/ld+json']",
       );
 
-      if (scriptBlocks.length !== 1) {
-        throw new Error("Could not load recipe JSON.");
-      }
-
-      const rawScriptContent = scriptBlocks[0].textContent;
+      const rawScriptContent = scriptBlocks[0]?.textContent;
 
       if (!rawScriptContent) {
         throw new Error("Could not load recipe JSON.");

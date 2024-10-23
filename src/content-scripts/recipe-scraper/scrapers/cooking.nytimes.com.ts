@@ -35,6 +35,42 @@ export default class TimesScraper extends BaseScraper implements Scraper {
     return `By ${author.name}`;
   }
 
+  async _getImage() {
+    const {
+      primaryImageOfPage: { url: src },
+    } = object({
+      primaryImageOfPage: object({
+        url: string,
+      }),
+    }).verify(this.recipeJson.mainEntityOfPage);
+
+    return this._executeInPageScope(
+      async (args = {}) => {
+        const { src } = args;
+
+        if (typeof src !== "string") {
+          return null;
+        }
+        const response = await fetch(src);
+
+        const blob = await response.blob();
+        const reader = new FileReader();
+        await new Promise((resolve, reject) => {
+          reader.onload = resolve;
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        });
+
+        if (typeof reader.result !== "string") {
+          return null;
+        }
+
+        return reader.result;
+      },
+      { src },
+    );
+  }
+
   async _getIngredientGroups(): Promise<IngredientsGroup[]> {
     const ingredients = array(string).verify(this.recipeJson.recipeIngredient);
 
@@ -88,20 +124,29 @@ export default class TimesScraper extends BaseScraper implements Scraper {
   async load(): Promise<LoadReturn> {
     await this._getRecipeJson();
 
-    const [attribution, ingredientGroups, time, title, url, recipeYield] =
-      await Promise.all([
-        this._getAttribution(),
-        this._getIngredientGroups(),
-        this._getTime(),
-        this._getTitle(),
-        this._getUrl(),
-        this._getYield(),
-      ]);
+    const [
+      attribution,
+      image,
+      ingredientGroups,
+      time,
+      title,
+      url,
+      recipeYield,
+    ] = await Promise.all([
+      this._getAttribution(),
+      this._getImage(),
+      this._getIngredientGroups(),
+      this._getTime(),
+      this._getTitle(),
+      this._getUrl(),
+      this._getYield(),
+    ]);
 
     return {
       alerts: this.alerts,
       recipe: {
         attribution,
+        image,
         ingredientGroups,
         time,
         title,

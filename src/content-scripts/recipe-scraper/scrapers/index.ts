@@ -15,15 +15,22 @@ export interface Scraper {
   _getUrl: () => Promise<string>;
   _getYield: () => Promise<string | null>;
   load: () => Promise<LoadReturn>;
+  _getImage?: () => Promise<string | null>;
 }
 
-export type Executor = <T>(instructions: () => T) => Promise<T>;
+export type Executor = <T>(
+  instructions: (args?: Record<string, unknown>) => T,
+  args?: Record<string, unknown>,
+) => Promise<T>;
 
 export class BaseScraper {
   _executeInPageScope: Executor;
 
   constructor({
-    executeInPageScope = async <T>(instructions: () => T) => instructions(),
+    executeInPageScope = async <T>(
+      instructions: (args?: Record<string, unknown>) => T,
+      args?: Record<string, unknown>,
+    ) => instructions(args),
   }: {
     executeInPageScope?: Executor;
   }) {

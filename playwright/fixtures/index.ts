@@ -14,7 +14,10 @@ const EXTENSION_ID = "llnmekdhiiidlehocjhlnajijopclbmo";
 
 export const test = base.extend<{
   context: BrowserContext;
-  customExecuteInPageScope: <T>(instructions: () => T) => Promise<T>;
+  customExecuteInPageScope: <T>(
+    instructions: (args?: Record<string, unknown>) => T,
+    args?: Record<string, unknown>,
+  ) => Promise<T>;
   extensionId: string;
   gotoWithTabIdHelper: (url: string) => Promise<number>;
 }>({
@@ -87,7 +90,10 @@ export const test = base.extend<{
     await use(EXTENSION_ID);
   },
   customExecuteInPageScope: async ({ page }, use) => {
-    const fn = <T>(instructions: () => T) => page.evaluate(instructions);
+    const fn = <T>(
+      instructions: (args?: Record<string, unknown>) => T,
+      args?: Record<string, unknown>,
+    ) => page.evaluate(instructions, args);
     await use(fn);
   },
 });

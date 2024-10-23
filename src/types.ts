@@ -1,5 +1,6 @@
 export interface Recipe {
   attribution: string | null;
+  image: string | null;
   ingredientGroups: Array<{
     ingredients: string[];
     name?: string;

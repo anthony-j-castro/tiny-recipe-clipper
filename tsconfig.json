@@ -8,9 +8,10 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "ES6",
+    "module": "ESNext",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "paths": {
       "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"],
@@ -22,8 +23,5 @@
     "target": "ES6"
   },
   "include": ["src"],
-  "exclude": ["./node_modules", "./dist"],
-  "ts-node": {
-    "require": ["tsconfig-paths/register"]
-  }
+  "exclude": ["./node_modules", "./dist"]
 }

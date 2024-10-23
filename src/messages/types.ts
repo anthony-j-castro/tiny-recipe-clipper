@@ -1,3 +1,5 @@
+import { Recipe } from "~/types";
+
 export type MessageSender =
   | "e2e-test"
   | "options"
@@ -69,7 +71,7 @@ export type RecipeImporterReadyMessage = BaseMessage & {
 
 export type SendRecipeDataMessage = BaseMessage & {
   payload: {
-    recipe: { title: string; url: string };
+    recipe: Recipe;
   };
   sender: "recipe-scraper";
   type: "SEND_RECIPE_DATA";
@@ -85,10 +87,18 @@ export type ExtractRecipeMessage = BaseMessage & {
 
 export type RecipeDataMessage = BaseMessage & {
   payload: {
-    recipe: { title: string; url: string };
+    recipe: Recipe;
   };
   sender: "recipe-scraper" | "service-worker";
   type: "RECIPE_DATA";
+};
+
+export type LogInfoMessage = BaseMessage & {
+  payload: {
+    message: string;
+    properties?: Record<string, unknown>;
+  };
+  type: "LOG_INFO";
 };
 
 export type ErrorMessage = BaseMessage & {
@@ -101,6 +111,7 @@ export type ErrorMessage = BaseMessage & {
 export type Message =
   | ErrorMessage
   | ExtractRecipeMessage
+  | LogInfoMessage
   | OpenUrlForE2ETestFailureMessage
   | OpenUrlForE2ETestMessage
   | OpenUrlForE2ETestSuccessMessage
@@ -117,6 +128,7 @@ export type ReceivablePopupMessage = RecipeDataMessage;
 export type ReceivableRecipeScraperMessage = ExtractRecipeMessage;
 
 export type ReceivableServiceWorkerMessage =
+  | LogInfoMessage
   | OpenUrlForE2ETestMessage
   | PingMessage
   | RecipeDataMessage

@@ -1,4 +1,23 @@
 {
+  "attribution": "By Mark Bittman",
+  "imageUrl": "https://static01.nyt.com/images/2014/04/18/dining/salmonburger2/salmonburger-superJumbo.jpg",
+  "ingredientGroups": [
+    {
+      "ingredients": [
+        "1 1/2 pounds skinless, boneless salmon",
+        "2 teaspoons Dijon mustard",
+        "2 shallots, peeled and cut into chunks",
+        "1/2 cup coarse bread crumbs",
+        "1 tablespoon capers, drained",
+        "Salt and black pepper",
+        "2 tablespoons butter or olive oil",
+        "Lemon wedges",
+        "Tabasco sauce"
+      ]
+    }
+  ],
+  "time": "20 minutes",
   "title": "Salmon Burgers",
-  "url": "https://cooking.nytimes.com/recipes/7131-salmon-burgers"
+  "url": "https://cooking.nytimes.com/recipes/7131-salmon-burgers",
+  "yield": "4 servings"
 }

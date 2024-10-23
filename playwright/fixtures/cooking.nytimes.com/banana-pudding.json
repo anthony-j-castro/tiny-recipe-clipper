@@ -1,4 +1,20 @@
 {
+  "attribution": "By Priya Krishna",
+  "imageUrl": "https://static01.nyt.com/images/2023/01/18/multimedia/13PUDDING-REX2-banana-pudding-jlmg/18PUDDING-REX2-banana-pudding-jlmg-superJumbo.jpg",
+  "ingredientGroups": [
+    {
+      "ingredients": [
+        "1 (14-ounce) can sweetened condensed milk",
+        "1 1/2 cups ice-cold water",
+        "1 (3.4-ounce) package instant vanilla pudding mix",
+        "3 cups cold heavy cream",
+        "1 (11-ounce) box vanilla wafer cookies (such as Nilla)",
+        "4 to 5 ripe bananas, sliced"
+      ]
+    }
+  ],
+  "time": "5 hours 30 minutes",
   "title": "Magnolia Bakery’s Banana Pudding",
-  "url": "https://cooking.nytimes.com/recipes/1023785-magnolia-bakerys-banana-pudding"
+  "url": "https://cooking.nytimes.com/recipes/1023785-magnolia-bakerys-banana-pudding",
+  "yield": "12 to 16 servings"
 }

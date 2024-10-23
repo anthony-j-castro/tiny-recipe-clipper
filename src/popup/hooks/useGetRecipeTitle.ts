@@ -14,7 +14,7 @@ const useGetRecipeTitle = ({ enabled }: { enabled?: boolean } = {}) =>
       try {
         const currentTab = await getCurrentTab();
 
-        if (currentTab.id) {
+        if (currentTab?.id) {
           const response = await sendMessageToTab(currentTab.id, {
             type: "EXTRACT_RECIPE",
             sender: "popup",

@@ -71,7 +71,7 @@ const config = {
   VERSION: packageJson.version,
   WEB_APP: {
     BROWSER_EXTENSION_PATH: "/browser-extension",
-    EXTENSION_TEST_INITIALIZER_PATH: "/public/extension-test-initializer.html",
+    EXTENSION_TEST_INITIALIZER_PATH: "/public/extension-test-initializer",
     IMPORT_RECIPE_PATH: "/import-recipe",
     ORIGIN: USE_PRODUCTION_VALUES
       ? "https://tinyrecipebox.com"

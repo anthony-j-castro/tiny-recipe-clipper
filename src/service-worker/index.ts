@@ -23,6 +23,15 @@ chrome.runtime.onMessage.addListener(async (rawMessage) => {
     const message = receivableServiceWorkerMessageDecoder.verify(rawMessage);
 
     switch (message.type) {
+      case "LOG_INFO": {
+        exceptionLogger.info(
+          message.payload.message,
+          message.payload.properties,
+        );
+
+        break;
+      }
+
       case "SEND_RECIPE_DATA": {
         const tab = await createEmptyTab();
 
@@ -186,7 +195,9 @@ chrome.tabs.onUpdated.addListener((_tabId, _changeInfo, tab) => {
 chrome.windows.onFocusChanged.addListener(async (windowId) => {
   if (windowId !== chrome.windows.WINDOW_ID_NONE) {
     const tab = await getCurrentTab({ focused: true });
-    updateExtensionIcon(tab);
+    if (tab) {
+      updateExtensionIcon(tab);
+    }
   }
 });
 

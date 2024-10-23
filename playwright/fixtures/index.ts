@@ -1,25 +1,34 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import path from "path";
-import { test as base, chromium, type BrowserContext } from "@playwright/test";
+import { test as base, type BrowserContext } from "@playwright/test";
 import { integer } from "decoders";
+import { chromium } from "playwright-extra";
+import stealth from "puppeteer-extra-plugin-stealth";
 import config from "~/src/config";
+
+// This should be retrieved dynamically, but it seems the stealth
+// plugin interferes with the example extension ID logic.
+// For now, we know what this value should be so it's defined here.
+// This needs to be updated if the key file in the manifest ever changes.
+const EXTENSION_ID = "llnmekdhiiidlehocjhlnajijopclbmo";
 
 export const test = base.extend<{
   context: BrowserContext;
-  customExecuteInPageScope: <T>(instructions: () => T) => Promise<T>;
+  customExecuteInPageScope: <T>(
+    instructions: (args?: Record<string, unknown>) => T,
+    args?: Record<string, unknown>,
+  ) => Promise<T>;
   extensionId: string;
   gotoWithTabIdHelper: (url: string) => Promise<number>;
 }>({
   // eslint-disable-next-line no-empty-pattern
   context: async ({}, use) => {
+    chromium.use(stealth());
+
     const pathToExtension = path.join(__dirname, "../../dist");
     const context = await chromium.launchPersistentContext("", {
       headless: false,
-      args: [
-        "--headless=new",
-        `--disable-extensions-except=${pathToExtension}`,
-        `--load-extension=${pathToExtension}`,
-      ],
+      args: ["--headless=new", `--load-extension=${pathToExtension}`],
     });
 
     await use(context);
@@ -76,17 +85,15 @@ export const test = base.extend<{
     };
     await use(fn);
   },
-  extensionId: async ({ context }, use) => {
-    let [background] = context.serviceWorkers();
-    if (!background) {
-      background = await context.waitForEvent("serviceworker");
-    }
-
-    const extensionId = background.url().split("/")[2];
-    await use(extensionId);
+  // eslint-disable-next-line no-empty-pattern
+  extensionId: async ({}, use) => {
+    await use(EXTENSION_ID);
   },
   customExecuteInPageScope: async ({ page }, use) => {
-    const fn = <T>(instructions: () => T) => page.evaluate(instructions);
+    const fn = <T>(
+      instructions: (args?: Record<string, unknown>) => T,
+      args?: Record<string, unknown>,
+    ) => page.evaluate(instructions, args);
     await use(fn);
   },
 });

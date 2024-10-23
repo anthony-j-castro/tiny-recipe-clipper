@@ -32,7 +32,22 @@ chrome.runtime.onMessage.addListener(
             }
 
             try {
-              const recipe = await scraper.load();
+              const { alerts, recipe } = await scraper.load();
+
+              if (alerts.length > 0) {
+                alerts.forEach((alert) => {
+                  sendMessageToServiceWorker({
+                    type: "LOG_INFO",
+                    sender: "recipe-scraper",
+                    payload: {
+                      message: alert,
+                      properties: {
+                        url: recipe.url,
+                      },
+                    },
+                  });
+                });
+              }
 
               switch (message.payload.destination) {
                 case "popup": {

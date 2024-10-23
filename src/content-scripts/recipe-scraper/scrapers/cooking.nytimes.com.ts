@@ -1,5 +1,12 @@
 import { formatDuration } from "date-fns";
-import { array, nonEmptyString, object, string } from "decoders";
+import {
+  array,
+  httpsUrl,
+  nonEmptyString,
+  number,
+  object,
+  string,
+} from "decoders";
 import { parse } from "iso8601-duration";
 import { BaseScraper, type Executor, type LoadReturn, type Scraper } from ".";
 
@@ -35,40 +42,31 @@ export default class TimesScraper extends BaseScraper implements Scraper {
     return `By ${author.name}`;
   }
 
-  async _getImage() {
-    const {
-      primaryImageOfPage: { url: src },
-    } = object({
-      primaryImageOfPage: object({
-        url: string,
-      }),
-    }).verify(this.recipeJson.mainEntityOfPage);
+  _getImageUrl() {
+    const metadata = object({
+      image: array(
+        object({
+          url: httpsUrl,
+          width: number,
+        }),
+      ),
+    }).verify(this.recipeJson);
 
-    return this._executeInPageScope(
-      async (args = {}) => {
-        const { src } = args;
+    let largestImage: { url: URL; width: number } | undefined = undefined;
 
-        if (typeof src !== "string") {
-          return null;
-        }
-        const response = await fetch(src);
+    for (const [, image] of metadata.image.entries()) {
+      if (largestImage === undefined) {
+        largestImage = image;
 
-        const blob = await response.blob();
-        const reader = new FileReader();
-        await new Promise((resolve, reject) => {
-          reader.onload = resolve;
-          reader.onerror = reject;
-          reader.readAsDataURL(blob);
-        });
+        continue;
+      }
 
-        if (typeof reader.result !== "string") {
-          return null;
-        }
+      if (image.width > largestImage.width) {
+        largestImage = image;
+      }
+    }
 
-        return reader.result;
-      },
-      { src },
-    );
+    return largestImage === undefined ? null : largestImage.url.toString();
   }
 
   async _getIngredientGroups(): Promise<IngredientsGroup[]> {
@@ -124,29 +122,23 @@ export default class TimesScraper extends BaseScraper implements Scraper {
   async load(): Promise<LoadReturn> {
     await this._getRecipeJson();
 
-    const [
-      attribution,
-      image,
-      ingredientGroups,
-      time,
-      title,
-      url,
-      recipeYield,
-    ] = await Promise.all([
-      this._getAttribution(),
-      this._getImage(),
-      this._getIngredientGroups(),
-      this._getTime(),
-      this._getTitle(),
-      this._getUrl(),
-      this._getYield(),
-    ]);
+    const imageUrl = this._getImageUrl();
+
+    const [attribution, ingredientGroups, time, title, url, recipeYield] =
+      await Promise.all([
+        this._getAttribution(),
+        this._getIngredientGroups(),
+        this._getTime(),
+        this._getTitle(),
+        this._getUrl(),
+        this._getYield(),
+      ]);
 
     return {
       alerts: this.alerts,
       recipe: {
         attribution,
-        image,
+        imageUrl,
         ingredientGroups,
         time,
         title,

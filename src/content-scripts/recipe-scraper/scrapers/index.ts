@@ -15,7 +15,7 @@ export interface Scraper {
   _getUrl: () => Promise<string>;
   _getYield: () => Promise<string | null>;
   load: () => Promise<LoadReturn>;
-  _getImage?: () => Promise<string | null>;
+  _getImageUrl?: () => string | null;
 }
 
 export type Executor = <T>(

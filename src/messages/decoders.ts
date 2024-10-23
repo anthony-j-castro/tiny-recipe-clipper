@@ -40,7 +40,7 @@ const senderDecoder: Decoder<MessageSender> = oneOf([
 
 const recipeDecoder: Decoder<Recipe> = exact({
   attribution: nullable(string),
-  image: nullable(string),
+  imageUrl: nullable(string),
   ingredientGroups: array(
     exact({
       name: optional(string),

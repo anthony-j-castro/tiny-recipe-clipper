@@ -47,7 +47,7 @@
     "eslint-import-resolver-alias": "1.1.2",
     "eslint-plugin-jsonc": "2.16.0",
     "globals": "15.11.0",
-    "html-webpack-plugin": "5.6.2",
+    "html-webpack-plugin": "5.6.3",
     "playwright-extra": "4.3.6",
     "prettier": "3.3.3",
     "puppeteer-extra-plugin-stealth": "2.11.2",

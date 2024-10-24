@@ -14,7 +14,6 @@
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "paths": {
-      "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"],
       "~/*": ["*"]
     },
     "resolveJsonModule": true,

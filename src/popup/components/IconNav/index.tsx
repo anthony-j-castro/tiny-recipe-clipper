@@ -1,8 +1,3 @@
-import {
-  Application as ApplicationIcon,
-  Bug as BugIcon,
-  Cog as CogIcon,
-} from "mdi-material-ui";
 import { TooltipTrigger } from "react-aria-components";
 import { getExtensionUrl } from "~/chrome-helpers";
 import config from "~/config";
@@ -10,9 +5,12 @@ import useGetCurrentTab from "~/hooks/useGetCurrentTab";
 import IconButton from "~/popup/components/IconButton";
 import Tooltip from "~/ui-shared/components/Tooltip";
 import getReportProblemFormUrl from "~/utils/getReportProblemFormUrl";
-import { Container } from "./styled";
-
-const ICON_OPTIONS = { display: "block", fontSize: 16 };
+import {
+  Container,
+  OpenWebsiteIcon,
+  ReportBugIcon,
+  SettingsIcon,
+} from "./styled";
 
 const IconNav = () => {
   const { data: currentTab } = useGetCurrentTab();
@@ -23,19 +21,19 @@ const IconNav = () => {
     <Container>
       <TooltipTrigger>
         <IconButton href={config.WEB_APP.ORIGIN}>
-          <ApplicationIcon sx={ICON_OPTIONS} />
+          <OpenWebsiteIcon />
         </IconButton>
         <Tooltip>Open website</Tooltip>
       </TooltipTrigger>
       <TooltipTrigger>
         <IconButton href={getExtensionUrl("options.html")}>
-          <CogIcon sx={ICON_OPTIONS} />
+          <SettingsIcon />
         </IconButton>
         <Tooltip>Open extension options</Tooltip>
       </TooltipTrigger>
       <TooltipTrigger>
         <IconButton href={reportProblemFormUrl}>
-          <BugIcon sx={ICON_OPTIONS} />
+          <ReportBugIcon />
         </IconButton>
         <Tooltip>Report a problem</Tooltip>
       </TooltipTrigger>

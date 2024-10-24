@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import HorizontalSeparator from "~/options/components/HorizontalSeparator";
+import BaseInfoIcon from "~/ui-shared/components/icons/InfoIcon";
 import LinkPrimaryButton from "~/ui-shared/components/LinkPrimaryButton";
 
 export const Container = styled.div`
@@ -80,6 +81,12 @@ export const InfoBanner = styled.div(
 export const InnerBannerContainer = styled.div`
   display: flex;
   align-items: flex-start;
+`;
+
+export const InfoIcon = styled(BaseInfoIcon)`
+  display: block;
+  width: 20px;
+  height: 20px;
 `;
 
 export const BannerCopy = styled.div`

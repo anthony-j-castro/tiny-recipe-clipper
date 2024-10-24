@@ -26,7 +26,7 @@ const testValues: Array<{
   },
 ];
 
-testValues.forEach((testValue) => {
+for (const testValue of testValues) {
   test(testValue.testTitle, async ({ customExecuteInPageScope, page }) => {
     await page.goto(testValue.url);
 
@@ -38,4 +38,4 @@ testValues.forEach((testValue) => {
 
     expect(recipe).toEqual(testValue.fixture);
   });
-});
+}

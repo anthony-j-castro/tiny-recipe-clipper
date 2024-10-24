@@ -12,6 +12,7 @@ export const getCurrentTab = async ({
 }: { focused?: boolean } = {}) => {
   // Return a specific tab if a tab ID is passed to the page.
   // See: https://developer.chrome.com/docs/extensions/how-to/test/end-to-end-testing#extension-popup
+  // eslint-disable-next-line unicorn/no-typeof-undefined
   if (config.ENVIRONMENT === "test" && typeof window !== "undefined") {
     const queryParams = new URLSearchParams(window.location.search);
 
@@ -19,7 +20,7 @@ export const getCurrentTab = async ({
       const tabId = queryParams.get(ACTIVE_TAB_QUERY_PARAM_KEY);
 
       if (tabId !== null) {
-        const activeTabId = parseInt(tabId, 10);
+        const activeTabId = Number.parseInt(tabId, 10);
 
         if (activeTabId !== undefined) {
           return getTab(activeTabId);
@@ -66,14 +67,12 @@ export const setExtensionIcon = (
       if (error !== undefined) {
         // It's possible that a tab no longer exists when we try
         // to set the icon, so we expect that error to exist here.
-        if (error.message !== undefined) {
-          if (!NO_TAB_ERROR_REGEX.test(error.message)) {
-            // eslint-disable-next-line no-console
-            console.error(error.message);
-          }
-        } else {
+        if (error.message === undefined) {
           // eslint-disable-next-line no-console
           console.error("Unknown chrome.runtime.lastError occurred.");
+        } else if (!NO_TAB_ERROR_REGEX.test(error.message)) {
+          // eslint-disable-next-line no-console
+          console.error(error.message);
         }
       }
     },

@@ -35,7 +35,7 @@ chrome.runtime.onMessage.addListener(
               const { alerts, recipe } = await scraper.load();
 
               if (alerts.length > 0) {
-                alerts.forEach((alert) => {
+                for (const alert of alerts) {
                   sendMessageToServiceWorker({
                     type: "LOG_INFO",
                     sender: "recipe-scraper",
@@ -46,7 +46,7 @@ chrome.runtime.onMessage.addListener(
                       },
                     },
                   });
-                });
+                }
               }
 
               switch (message.payload.destination) {
@@ -74,7 +74,7 @@ chrome.runtime.onMessage.addListener(
                   break;
                 }
               }
-            } catch (error) {
+            } catch {
               sendResponse({
                 type: "ERROR",
                 sender: "recipe-scraper",

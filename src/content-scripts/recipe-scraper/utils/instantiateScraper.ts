@@ -14,7 +14,7 @@ const instantiateScraper = (url: string): Scraper | undefined => {
         return undefined;
       }
     }
-  } catch (error) {
+  } catch {
     return undefined;
   }
 };

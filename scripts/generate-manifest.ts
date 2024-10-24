@@ -1,21 +1,20 @@
 /* eslint-disable no-restricted-imports */
 import fs from "node:fs";
 import path from "node:path";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
+import { fileURLToPath } from "node:url";
 import "dotenv/config";
 import { format, resolveConfig } from "prettier";
 import packageJson from "../package.json";
 import baseManifest from "../src/base-manifest";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const main = async () => {
   const manifest = { ...baseManifest };
   manifest.version = packageJson.version;
 
   if (process.env.GITHUB_SHA && process.env.PUBLISH !== "true") {
-    const shortSha = process.env.GITHUB_SHA.substring(0, 7);
+    const shortSha = process.env.GITHUB_SHA.slice(0, 7);
     manifest.version_name = `${manifest.version}-${shortSha}`;
   } else {
     delete manifest.version_name;

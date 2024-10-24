@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import path from "path";
+import path from "node:path";
 import { test as base, type BrowserContext } from "@playwright/test";
 import { integer } from "decoders";
 import { chromium } from "playwright-extra";
@@ -70,11 +70,14 @@ export const test = base.extend<{
               false,
             );
 
-            window.postMessage({
-              type: "OPEN_URL_FOR_E2E_TEST",
-              payload: { url },
-              sender: "e2e-test",
-            });
+            window.postMessage(
+              {
+                type: "OPEN_URL_FOR_E2E_TEST",
+                payload: { url },
+                sender: "e2e-test",
+              },
+              window.location.origin,
+            );
           }),
         url,
       );

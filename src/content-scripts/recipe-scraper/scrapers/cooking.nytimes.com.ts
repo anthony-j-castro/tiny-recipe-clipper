@@ -52,7 +52,7 @@ export default class TimesScraper extends BaseScraper implements Scraper {
       ),
     }).verify(this.recipeJson);
 
-    let largestImage: { url: URL; width: number } | undefined = undefined;
+    let largestImage: { url: URL; width: number } | undefined;
 
     for (const [, image] of metadata.image.entries()) {
       if (largestImage === undefined) {
@@ -72,7 +72,7 @@ export default class TimesScraper extends BaseScraper implements Scraper {
   async _getIngredientGroups(): Promise<IngredientsGroup[]> {
     const ingredients = array(string).verify(this.recipeJson.recipeIngredient);
 
-    return [{ ingredients: ingredients }];
+    return [{ ingredients }];
   }
 
   async _getRecipeJson() {

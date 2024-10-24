@@ -1,8 +1,10 @@
-import ErrorIcon from "@mui/icons-material/Error";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import InfoIcon from "@mui/icons-material/Info";
 import { useQuery } from "@tanstack/react-query";
+import {
+  AlertCircle as AlertIcon,
+  ChevronDown as ChevronDownIcon,
+  ChevronUp as ChevronUpIcon,
+  Information as InformationIcon,
+} from "mdi-material-ui";
 import { useState } from "react";
 import { ERROR_LOG_MAX_LENGTH, getErrorLog } from "~/utils/error-log";
 import getReportProblemFormUrl from "~/utils/getReportProblemFormUrl";
@@ -42,9 +44,9 @@ const ErrorHistory = () => {
         }}
       >
         {open ? (
-          <ExpandLessIcon sx={ICON_OPTIONS} />
+          <ChevronUpIcon sx={ICON_OPTIONS} />
         ) : (
-          <ExpandMoreIcon sx={ICON_OPTIONS} />
+          <ChevronDownIcon sx={ICON_OPTIONS} />
         )}
         <span>Error History</span>
       </Disclosure>
@@ -54,7 +56,7 @@ const ErrorHistory = () => {
           <IconWithMessageWrapper>Loading…</IconWithMessageWrapper>
         ) : isError ? (
           <IconWithMessageWrapper>
-            <ErrorIcon sx={ICON_OPTIONS} />
+            <AlertIcon sx={ICON_OPTIONS} />
             <span>
               Something went wrong while loading your error history. Please{" "}
               <a
@@ -69,7 +71,7 @@ const ErrorHistory = () => {
           </IconWithMessageWrapper>
         ) : errorLog.length === 0 ? (
           <IconWithMessageWrapper>
-            <InfoIcon sx={ICON_OPTIONS} />
+            <InformationIcon sx={ICON_OPTIONS} />
             <span>There are no recent errors to display.</span>
           </IconWithMessageWrapper>
         ) : (
@@ -101,7 +103,7 @@ const ErrorHistory = () => {
               </tbody>
             </Table>
             <IconWithMessageWrapper>
-              <InfoIcon sx={ICON_OPTIONS} />
+              <InformationIcon sx={ICON_OPTIONS} />
               <span>
                 Error history is limited to the last {ERROR_LOG_MAX_LENGTH}{" "}
                 items.

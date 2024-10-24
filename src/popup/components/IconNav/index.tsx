@@ -1,6 +1,8 @@
-import BugReportIcon from "@mui/icons-material/BugReport";
-import SettingsIcon from "@mui/icons-material/Settings";
-import WebIcon from "@mui/icons-material/Web";
+import {
+  Application as ApplicationIcon,
+  Bug as BugIcon,
+  Cog as CogIcon,
+} from "mdi-material-ui";
 import { TooltipTrigger } from "react-aria-components";
 import { getExtensionUrl } from "~/chrome-helpers";
 import config from "~/config";
@@ -21,19 +23,19 @@ const IconNav = () => {
     <Container>
       <TooltipTrigger>
         <IconButton href={config.WEB_APP.ORIGIN}>
-          <WebIcon sx={ICON_OPTIONS} />
+          <ApplicationIcon sx={ICON_OPTIONS} />
         </IconButton>
         <Tooltip>Open website</Tooltip>
       </TooltipTrigger>
       <TooltipTrigger>
         <IconButton href={getExtensionUrl("options.html")}>
-          <SettingsIcon sx={ICON_OPTIONS} />
+          <CogIcon sx={ICON_OPTIONS} />
         </IconButton>
         <Tooltip>Open extension options</Tooltip>
       </TooltipTrigger>
       <TooltipTrigger>
         <IconButton href={reportProblemFormUrl}>
-          <BugReportIcon sx={ICON_OPTIONS} />
+          <BugIcon sx={ICON_OPTIONS} />
         </IconButton>
         <Tooltip>Report a problem</Tooltip>
       </TooltipTrigger>

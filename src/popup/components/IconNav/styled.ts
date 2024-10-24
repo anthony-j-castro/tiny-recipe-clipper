@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import WebIcon from "~/ui-shared/components/icons/WebIcon";
 
 export const Container = styled.div`
@@ -9,8 +9,10 @@ export const Container = styled.div`
   }
 `;
 
-export const OpenWebsiteIcon = styled(WebIcon)`
+const iconStyles = css`
   display: block;
   width: 16px;
   height: 16px;
 `;
+
+export const OpenWebsiteIcon = styled(WebIcon)(() => iconStyles);

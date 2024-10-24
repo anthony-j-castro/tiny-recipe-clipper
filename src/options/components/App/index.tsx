@@ -1,4 +1,4 @@
-import InfoIcon from "@mui/icons-material/Info";
+import { Information as InformationIcon } from "mdi-material-ui";
 import config from "~/config";
 import useGetUserId from "~/hooks/useGetUserId";
 import ErrorHistory from "~/options/components/ErrorHistory";
@@ -41,7 +41,7 @@ export default function App() {
         {!isPending && userId === undefined ? (
           <InfoBanner>
             <InnerBannerContainer>
-              <InfoIcon sx={{ display: "block", fontSize: 20 }} />
+              <InformationIcon sx={{ display: "block", fontSize: 20 }} />
               <BannerCopy>
                 <div>
                   Finish setting up this extension by syncing with the web app.

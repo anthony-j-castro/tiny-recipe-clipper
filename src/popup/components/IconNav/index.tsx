@@ -1,8 +1,4 @@
-import {
-  Application as ApplicationIcon,
-  Bug as BugIcon,
-  Cog as CogIcon,
-} from "mdi-material-ui";
+import { Bug as BugIcon, Cog as CogIcon } from "mdi-material-ui";
 import { TooltipTrigger } from "react-aria-components";
 import { getExtensionUrl } from "~/chrome-helpers";
 import config from "~/config";
@@ -10,7 +6,7 @@ import useGetCurrentTab from "~/hooks/useGetCurrentTab";
 import IconButton from "~/popup/components/IconButton";
 import Tooltip from "~/ui-shared/components/Tooltip";
 import getReportProblemFormUrl from "~/utils/getReportProblemFormUrl";
-import { Container } from "./styled";
+import { Container, OpenWebsiteIcon } from "./styled";
 
 const ICON_OPTIONS = { display: "block", fontSize: 16 };
 
@@ -23,7 +19,7 @@ const IconNav = () => {
     <Container>
       <TooltipTrigger>
         <IconButton href={config.WEB_APP.ORIGIN}>
-          <ApplicationIcon sx={ICON_OPTIONS} />
+          <OpenWebsiteIcon />
         </IconButton>
         <Tooltip>Open website</Tooltip>
       </TooltipTrigger>

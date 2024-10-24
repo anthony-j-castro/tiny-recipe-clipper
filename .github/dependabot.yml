@@ -6,10 +6,6 @@ updates:
       interval: "daily"
       time: "18:00"
       timezone: "America/New_York"
-    groups:
-      material-ui:
-        patterns:
-          - "@mui/*"
     open-pull-requests-limit: 10
   - package-ecosystem: "github-actions"
     directory: "/"

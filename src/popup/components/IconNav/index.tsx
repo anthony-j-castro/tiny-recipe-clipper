@@ -1,4 +1,4 @@
-import { Bug as BugIcon, Cog as CogIcon } from "mdi-material-ui";
+import { Bug as BugIcon } from "mdi-material-ui";
 import { TooltipTrigger } from "react-aria-components";
 import { getExtensionUrl } from "~/chrome-helpers";
 import config from "~/config";
@@ -6,7 +6,7 @@ import useGetCurrentTab from "~/hooks/useGetCurrentTab";
 import IconButton from "~/popup/components/IconButton";
 import Tooltip from "~/ui-shared/components/Tooltip";
 import getReportProblemFormUrl from "~/utils/getReportProblemFormUrl";
-import { Container, OpenWebsiteIcon } from "./styled";
+import { Container, OpenWebsiteIcon, SettingsIcon } from "./styled";
 
 const ICON_OPTIONS = { display: "block", fontSize: 16 };
 
@@ -25,7 +25,7 @@ const IconNav = () => {
       </TooltipTrigger>
       <TooltipTrigger>
         <IconButton href={getExtensionUrl("options.html")}>
-          <CogIcon sx={ICON_OPTIONS} />
+          <SettingsIcon />
         </IconButton>
         <Tooltip>Open extension options</Tooltip>
       </TooltipTrigger>

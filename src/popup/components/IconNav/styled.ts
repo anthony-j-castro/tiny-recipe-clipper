@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import BaseSettingsIcon from "~/ui-shared/components/icons/SettingsIcon";
 import WebIcon from "~/ui-shared/components/icons/WebIcon";
 
 export const Container = styled.div`
@@ -16,3 +17,5 @@ const iconStyles = css`
 `;
 
 export const OpenWebsiteIcon = styled(WebIcon)(() => iconStyles);
+
+export const SettingsIcon = styled(BaseSettingsIcon)(() => iconStyles);

@@ -1,24 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
-import {
-  AlertCircle as AlertIcon,
-  ChevronDown as ChevronDownIcon,
-  ChevronUp as ChevronUpIcon,
-  Information as InformationIcon,
-} from "mdi-material-ui";
 import { useState } from "react";
 import { ERROR_LOG_MAX_LENGTH, getErrorLog } from "~/utils/error-log";
 import getReportProblemFormUrl from "~/utils/getReportProblemFormUrl";
 import {
   Cell,
+  ChevronDownIcon,
+  ChevronUpIcon,
   Disclosure,
   DisclosureContentSeparator,
   DisclosureWrapper,
+  ErrorIcon,
   HeaderCell,
   IconWithMessageWrapper,
+  InfoIcon,
   Table,
 } from "./styled";
-
-const ICON_OPTIONS = { fontSize: 16, marginRight: "4px", flexGrow: 0 };
 
 const ErrorHistory = () => {
   const [open, setOpen] = useState(false);
@@ -43,11 +39,7 @@ const ErrorHistory = () => {
           setOpen((open) => !open);
         }}
       >
-        {open ? (
-          <ChevronUpIcon sx={ICON_OPTIONS} />
-        ) : (
-          <ChevronDownIcon sx={ICON_OPTIONS} />
-        )}
+        {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
         <span>Error History</span>
       </Disclosure>
       <div>
@@ -56,7 +48,7 @@ const ErrorHistory = () => {
           <IconWithMessageWrapper>Loading…</IconWithMessageWrapper>
         ) : isError ? (
           <IconWithMessageWrapper>
-            <AlertIcon sx={ICON_OPTIONS} />
+            <ErrorIcon />
             <span>
               Something went wrong while loading your error history. Please{" "}
               <a
@@ -71,7 +63,7 @@ const ErrorHistory = () => {
           </IconWithMessageWrapper>
         ) : errorLog.length === 0 ? (
           <IconWithMessageWrapper>
-            <InformationIcon sx={ICON_OPTIONS} />
+            <InfoIcon />
             <span>There are no recent errors to display.</span>
           </IconWithMessageWrapper>
         ) : (
@@ -103,7 +95,7 @@ const ErrorHistory = () => {
               </tbody>
             </Table>
             <IconWithMessageWrapper>
-              <InformationIcon sx={ICON_OPTIONS} />
+              <InfoIcon />
               <span>
                 Error history is limited to the last {ERROR_LOG_MAX_LENGTH}{" "}
                 items.

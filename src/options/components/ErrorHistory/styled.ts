@@ -1,5 +1,9 @@
 import styled, { css } from "styled-components";
 import HorizontalSeparator from "~/options/components/HorizontalSeparator";
+import BaseChevronDownIcon from "~/ui-shared/components/icons/ChevronDownIcon";
+import BaseChevronUpIcon from "~/ui-shared/components/icons/ChevronUpIcon";
+import BaseErrorIcon from "~/ui-shared/components/icons/ErrorIcon";
+import BaseInfoIcon from "~/ui-shared/components/icons/InfoIcon";
 
 export const DisclosureWrapper = styled.details(
   ({ theme }) => css`
@@ -64,4 +68,27 @@ export const IconWithMessageWrapper = styled.div`
   display: flex;
   align-items: center;
   margin: 16px 0 8px;
+`;
+
+const iconStyles = css`
+  flex-grow: 0;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+`;
+
+export const ChevronUpIcon = styled(BaseChevronUpIcon)`
+  ${iconStyles}
+`;
+
+export const ChevronDownIcon = styled(BaseChevronDownIcon)`
+  ${iconStyles}
+`;
+
+export const ErrorIcon = styled(BaseErrorIcon)`
+  ${iconStyles}
+`;
+
+export const InfoIcon = styled(BaseInfoIcon)`
+  ${iconStyles}
 `;

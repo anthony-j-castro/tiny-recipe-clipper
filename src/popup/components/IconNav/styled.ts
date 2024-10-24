@@ -17,8 +17,14 @@ const iconStyles = css`
   height: 16px;
 `;
 
-export const OpenWebsiteIcon = styled(WebIcon)(() => iconStyles);
+export const OpenWebsiteIcon = styled(WebIcon)`
+  ${iconStyles}
+`;
 
-export const SettingsIcon = styled(BaseSettingsIcon)(() => iconStyles);
+export const SettingsIcon = styled(BaseSettingsIcon)`
+  ${iconStyles}
+`;
 
-export const ReportBugIcon = styled(BugIcon)(() => iconStyles);
+export const ReportBugIcon = styled(BugIcon)`
+  ${iconStyles}
+`;

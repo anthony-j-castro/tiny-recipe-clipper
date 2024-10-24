@@ -206,9 +206,9 @@ const setIconsOnStartup = async () => {
     active: true,
   });
 
-  tabs.forEach((tab) => {
+  for (const tab of tabs) {
     updateExtensionIcon(tab);
-  });
+  }
 };
 
 chrome.runtime.onInstalled.addListener(setIconsOnStartup);

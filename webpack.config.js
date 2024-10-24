@@ -44,7 +44,7 @@ const config = {
         exclude: /(node_modules|bower_components)/,
       },
       {
-        test: /\.(woff|woff2|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        test: /\.(woff|woff2|ttf|eot)(\?v=\d\.\d\.\d)?$/,
         exclude: [/node_modules/],
         type: "asset/resource",
         generator: {

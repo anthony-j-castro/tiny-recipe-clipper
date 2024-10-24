@@ -34,7 +34,7 @@ const useGetRecipeTitle = ({ enabled }: { enabled?: boolean } = {}) =>
 
           return decodedResponse.payload.recipe.title;
         }
-      } catch (error) {
+      } catch {
         throw new Error(
           "An unexpected error occurred while extracting the recipe title.",
         );

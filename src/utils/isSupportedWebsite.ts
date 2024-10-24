@@ -8,7 +8,7 @@ const isSupportedWebsite = (url: string) => {
       SUPPORTED_HOSTNAMES_DATA,
       hostname,
     );
-  } catch (error) {
+  } catch {
     return false;
   }
 };

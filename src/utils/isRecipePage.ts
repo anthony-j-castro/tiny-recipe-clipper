@@ -13,7 +13,7 @@ const isRecipePage = (url: string) => {
     const { RECIPE_PAGE_PATHNAME_REGEX } = data;
 
     return RECIPE_PAGE_PATHNAME_REGEX.test(pathname);
-  } catch (error) {
+  } catch {
     return false;
   }
 };

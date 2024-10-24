@@ -93,6 +93,7 @@ const config = {
   ],
   resolve: {
     alias: {
+      "@mui/styled-engine": "@mui/styled-engine-sc",
       "~": path.resolve(__dirname, "src"),
     },
     extensions: [".ts", ".tsx", ".js", ".jsx"],

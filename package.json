@@ -28,7 +28,7 @@
     "uuid": "11.0.3"
   },
   "devDependencies": {
-    "@anthony-j-castro/eslint-config": "github:anthony-j-castro/eslint-config#semver:2.1.0",
+    "@anthony-j-castro/eslint-config": "github:anthony-j-castro/eslint-config#semver:2.1.1",
     "@anthony-j-castro/prettier-config": "github:anthony-j-castro/prettier-config#semver:1.0.0",
     "@playwright/test": "1.49.0",
     "@tanstack/eslint-plugin-query": "5.61.6",

@@ -28,7 +28,7 @@
     "uuid": "11.0.3"
   },
   "devDependencies": {
-    "@anthony-j-castro/eslint-config": "github:anthony-j-castro/eslint-config#semver:2.1.0",
+    "@anthony-j-castro/eslint-config": "github:anthony-j-castro/eslint-config#semver:2.1.1",
     "@anthony-j-castro/prettier-config": "github:anthony-j-castro/prettier-config#semver:1.0.0",
     "@playwright/test": "1.49.0",
     "@tanstack/eslint-plugin-query": "5.61.6",
@@ -40,7 +40,7 @@
     "copy-webpack-plugin": "12.0.2",
     "css-loader": "7.1.2",
     "dotenv": "16.4.5",
-    "eslint": "9.14.0",
+    "eslint": "9.16.0",
     "eslint-import-resolver-alias": "1.1.2",
     "eslint-plugin-jsonc": "2.18.2",
     "globals": "15.12.0",

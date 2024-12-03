@@ -1,5 +1,10 @@
 import { Recipe } from "~/types";
 
+export type Executor = <T>(
+  instructions: (args?: Record<string, unknown>) => T,
+  args?: Record<string, unknown>,
+) => Promise<T>;
+
 export interface LoadReturn {
   alerts: string[];
   recipe: Recipe;
@@ -17,11 +22,6 @@ export interface Scraper {
   load: () => Promise<LoadReturn>;
   _getImageUrl?: () => string | null;
 }
-
-export type Executor = <T>(
-  instructions: (args?: Record<string, unknown>) => T,
-  args?: Record<string, unknown>,
-) => Promise<T>;
 
 export class BaseScraper {
   _executeInPageScope: Executor;

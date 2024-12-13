@@ -49,7 +49,7 @@
     "prettier": "3.4.2",
     "puppeteer-extra-plugin-stealth": "2.11.2",
     "style-loader": "4.0.0",
-    "terser-webpack-plugin": "5.3.10",
+    "terser-webpack-plugin": "5.3.11",
     "ts-loader": "9.5.1",
     "tsconfig-paths": "4.2.0",
     "tsx": "4.19.2",

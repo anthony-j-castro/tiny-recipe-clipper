@@ -3,8 +3,9 @@ import {
   array,
   httpsUrl,
   nonEmptyString,
-  number,
   object,
+  positiveInteger,
+  prep,
   string,
 } from "decoders";
 import { parse } from "iso8601-duration";
@@ -47,7 +48,7 @@ export default class TimesScraper extends BaseScraper implements Scraper {
       image: array(
         object({
           url: httpsUrl,
-          width: number,
+          width: prep((n) => Number.parseInt(`${n}`, 10), positiveInteger),
         }),
       ),
     }).verify(this.recipeJson);

@@ -35,7 +35,7 @@
     "@types/chrome": "0.0.293",
     "@types/node": "22.10.6",
     "@types/react": "19.0.6",
-    "@types/react-dom": "19.0.2",
+    "@types/react-dom": "19.0.3",
     "@types/uuid": "10.0.0",
     "copy-webpack-plugin": "12.0.2",
     "css-loader": "7.1.2",

@@ -42,7 +42,7 @@
     "dotenv": "16.4.7",
     "eslint": "9.18.0",
     "eslint-import-resolver-alias": "1.1.2",
-    "eslint-plugin-jsonc": "2.18.2",
+    "eslint-plugin-jsonc": "2.19.1",
     "globals": "15.14.0",
     "html-webpack-plugin": "5.6.3",
     "playwright-extra": "4.3.6",

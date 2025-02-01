@@ -50,6 +50,7 @@ export default class TimesScraper extends BaseScraper implements Scraper {
         object({
           url: httpsUrl,
           width: prep((n) => Number.parseInt(`${n}`, 10), positiveInteger),
+          height: prep((n) => Number.parseInt(`${n}`, 10), positiveInteger),
         }),
       ),
     }).verify(this.recipeJson);
@@ -57,6 +58,11 @@ export default class TimesScraper extends BaseScraper implements Scraper {
     let largestImage: { url: URL; width: number } | undefined;
 
     for (const [, image] of metadata.image.entries()) {
+      // Square images are usually bad crops, so discard.
+      if (image.width === image.height) {
+        continue;
+      }
+
       if (largestImage === undefined) {
         largestImage = image;
 

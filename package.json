@@ -9,6 +9,7 @@
     "clean": "rm -rf dist/*",
     "lint": "npx eslint",
     "lint:ci": "npx eslint --quiet",
+    "playwright": "npx playwright test --ui",
     "prettier": "prettier . --write",
     "prettier:ci": "prettier . --check",
     "typecheck": "tsc --noEmit"

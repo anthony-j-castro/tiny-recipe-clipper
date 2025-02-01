@@ -101,11 +101,14 @@ export default class TimesScraper extends BaseScraper implements Scraper {
         try {
           const json = JSON.parse(rawScriptContent);
 
-          object({ "@type": constant("Recipe") }).verify(json);
+          if (
+            Object.prototype.hasOwnProperty.call(json, "@type") &&
+            json["@type"] === "Recipe"
+          ) {
+            recipeJson = json;
 
-          recipeJson = json;
-
-          break;
+            break;
+          }
         } catch {
           continue;
         }

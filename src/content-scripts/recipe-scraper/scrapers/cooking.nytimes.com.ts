@@ -1,6 +1,7 @@
 import { formatDuration } from "date-fns";
 import {
   array,
+  constant,
   httpsUrl,
   nonEmptyString,
   object,
@@ -82,13 +83,33 @@ export default class TimesScraper extends BaseScraper implements Scraper {
         "script[type='application/ld+json']",
       );
 
-      const rawScriptContent = scriptBlocks[0]?.textContent;
+      let recipeJson: Record<string, unknown> | undefined;
 
-      if (!rawScriptContent) {
+      for (const scriptBlock of scriptBlocks) {
+        const rawScriptContent = scriptBlock.textContent;
+
+        if (!rawScriptContent) {
+          continue;
+        }
+
+        try {
+          const json = JSON.parse(rawScriptContent);
+
+          object({ "@type": constant("Recipe") }).verify(json);
+
+          recipeJson = json;
+
+          break;
+        } catch {
+          continue;
+        }
+      }
+
+      if (!recipeJson) {
         throw new Error("Could not load recipe JSON.");
       }
 
-      return JSON.parse(rawScriptContent);
+      return recipeJson;
     });
 
     this.recipeJson = recipeJson;

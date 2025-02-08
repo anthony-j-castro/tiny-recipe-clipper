@@ -33,7 +33,7 @@
     "@anthony-j-castro/prettier-config": "github:anthony-j-castro/prettier-config#semver:1.0.0",
     "@playwright/test": "1.50.1",
     "@tanstack/eslint-plugin-query": "5.66.0",
-    "@types/chrome": "0.0.301",
+    "@types/chrome": "0.0.302",
     "@types/node": "22.13.1",
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",

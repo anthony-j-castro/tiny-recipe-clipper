@@ -1,15 +1,18 @@
-const path = require("node:path");
-const config = require("@anthony-j-castro/eslint-config");
-const queryPlugin = require("@tanstack/eslint-plugin-query");
-const jsonc = require("eslint-plugin-jsonc");
-const globals = require("globals");
-const jsoncParser = require("jsonc-eslint-parser");
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import config from "@anthony-j-castro/eslint-config";
+import queryPlugin from "@tanstack/eslint-plugin-query";
+import jsonc from "eslint-plugin-jsonc";
+import globals from "globals";
+import jsoncParser from "jsonc-eslint-parser";
 
-module.exports = [
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export default [
   ...config,
   ...queryPlugin.configs["flat/recommended"],
   {
-    ignores: ["dist/*", "playwright/report/**", "playwright/test-results/**"],
+    ignores: ["dist/*", "playwright/report/*", "playwright/test-results/*"],
   },
   {
     settings: {
@@ -23,7 +26,7 @@ module.exports = [
     },
   },
   {
-    files: ["eslint.config.js", "webpack.config.js"],
+    files: ["webpack.config.js"],
     languageOptions: {
       globals: {
         ...globals.node,

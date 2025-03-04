@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@fontsource-variable/inter-tight": "5.2.5",
-    "@tanstack/react-query": "5.66.11",
+    "@tanstack/react-query": "5.67.1",
     "date-fns": "4.1.0",
     "decoders": "2.6.1",
     "iso8601-duration": "2.1.2",

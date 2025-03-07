@@ -7,6 +7,11 @@ updates:
       time: "18:00"
       timezone: "America/New_York"
     open-pull-requests-limit: 10
+    groups:
+      react-aria:
+        patterns:
+          - "react-aria"
+          - "react-aria-components"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:

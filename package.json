@@ -22,8 +22,8 @@
     "iso8601-duration": "2.1.2",
     "modern-normalize": "3.0.1",
     "react": "19.0.0",
-    "react-aria": "3.38.0",
-    "react-aria-components": "1.7.0",
+    "react-aria": "3.38.1",
+    "react-aria-components": "1.7.1",
     "react-dom": "19.0.0",
     "styled-components": "6.1.15",
     "uuid": "11.1.0"

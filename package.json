@@ -29,7 +29,7 @@
     "uuid": "11.1.0"
   },
   "devDependencies": {
-    "@anthony-j-castro/eslint-config": "github:anthony-j-castro/eslint-config#v4.0.5",
+    "@anthony-j-castro/eslint-config": "github:anthony-j-castro/eslint-config#v4.0.6",
     "@anthony-j-castro/prettier-config": "github:anthony-j-castro/prettier-config#v1.1.1",
     "@playwright/test": "1.51.1",
     "@tanstack/eslint-plugin-query": "5.68.0",

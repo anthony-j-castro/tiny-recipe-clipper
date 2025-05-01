@@ -31,7 +31,7 @@
   "devDependencies": {
     "@anthony-j-castro/eslint-config": "github:anthony-j-castro/eslint-config#v4.0.8",
     "@anthony-j-castro/prettier-config": "github:anthony-j-castro/prettier-config#v1.1.1",
-    "@playwright/test": "1.51.1",
+    "@playwright/test": "1.52.0",
     "@tanstack/eslint-plugin-query": "5.72.2",
     "@types/chrome": "0.0.317",
     "@types/node": "22.15.3",

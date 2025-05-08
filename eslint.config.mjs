@@ -1,12 +1,11 @@
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import config from "@anthony-j-castro/eslint-config";
 import queryPlugin from "@tanstack/eslint-plugin-query";
 import jsonc from "eslint-plugin-jsonc";
 import globals from "globals";
 import jsoncParser from "jsonc-eslint-parser";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = import.meta.dirname;
 
 export default [
   ...config,

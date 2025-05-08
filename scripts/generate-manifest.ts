@@ -1,13 +1,12 @@
 /* eslint-disable no-restricted-imports */
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import "dotenv/config";
 import { format, resolveConfig } from "prettier";
 import packageJson from "../package.json";
 import baseManifest from "../src/base-manifest";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = import.meta.dirname;
 
 const main = async () => {
   const manifest = { ...baseManifest };

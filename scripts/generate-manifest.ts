@@ -1,13 +1,17 @@
 /* eslint-disable no-restricted-imports */
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import "dotenv/config";
 import { format, resolveConfig } from "prettier";
 import packageJson from "../package.json";
 import baseManifest from "../src/base-manifest";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const PLACEHOLDER_PATH = path.resolve(import.meta.dirname, "placeholder.json");
+const PRETTIER_CONFIG_PATH = path.resolve(
+  import.meta.dirname,
+  "../.prettierrc.json",
+);
+const MANIFEST_PATH = path.resolve(import.meta.dirname, "../src/manifest.json");
 
 const main = async () => {
   const manifest = { ...baseManifest };
@@ -20,22 +24,16 @@ const main = async () => {
     delete manifest.version_name;
   }
 
-  const prettierOptions = await resolveConfig(
-    path.resolve(__dirname, "placeholder.json"),
-    {
-      config: path.resolve(__dirname, "../.prettierrc.json"),
-    },
-  );
+  const prettierOptions = await resolveConfig(PLACEHOLDER_PATH, {
+    config: PRETTIER_CONFIG_PATH,
+  });
 
   const formattedManifestContent = await format(
     JSON.stringify(manifest, null, 2),
     { ...(prettierOptions ?? undefined), parser: "json" },
   );
 
-  fs.writeFileSync(
-    path.resolve(__dirname, "../src/manifest.json"),
-    formattedManifestContent,
-  );
+  fs.writeFileSync(MANIFEST_PATH, formattedManifestContent);
 };
 
 main();

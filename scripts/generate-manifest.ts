@@ -6,8 +6,6 @@ import { format, resolveConfig } from "prettier";
 import packageJson from "../package.json";
 import baseManifest from "../src/base-manifest";
 
-const __dirname = import.meta.dirname;
-
 const main = async () => {
   const manifest = { ...baseManifest };
   manifest.version = packageJson.version;
@@ -20,9 +18,9 @@ const main = async () => {
   }
 
   const prettierOptions = await resolveConfig(
-    path.resolve(__dirname, "placeholder.json"),
+    path.resolve(import.meta.dirname, "placeholder.json"),
     {
-      config: path.resolve(__dirname, "../.prettierrc.json"),
+      config: path.resolve(import.meta.dirname, "../.prettierrc.json"),
     },
   );
 
@@ -32,7 +30,7 @@ const main = async () => {
   );
 
   fs.writeFileSync(
-    path.resolve(__dirname, "../src/manifest.json"),
+    path.resolve(import.meta.dirname, "../src/manifest.json"),
     formattedManifestContent,
   );
 };

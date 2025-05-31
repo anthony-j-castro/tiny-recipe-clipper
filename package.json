@@ -34,7 +34,7 @@
     "@playwright/test": "1.52.0",
     "@tanstack/eslint-plugin-query": "5.78.0",
     "@types/chrome": "0.0.323",
-    "@types/node": "22.15.18",
+    "@types/node": "22.15.29",
     "@types/react": "19.1.4",
     "@types/react-dom": "19.1.5",
     "@types/uuid": "10.0.0",

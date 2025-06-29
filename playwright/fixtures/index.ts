@@ -27,6 +27,7 @@ export const test = base.extend<{
 
     const pathToExtension = path.join(__dirname, "../../dist");
     const context = await chromium.launchPersistentContext("", {
+      channel: "chromium",
       headless: false,
       args: ["--headless=new", `--load-extension=${pathToExtension}`],
     });

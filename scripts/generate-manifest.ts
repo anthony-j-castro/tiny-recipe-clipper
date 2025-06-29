@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prefer-import-meta-properties */
 /* eslint-disable no-restricted-imports */
 import fs from "node:fs";
 import path from "node:path";

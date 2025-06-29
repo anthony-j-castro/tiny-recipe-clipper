@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@fontsource-variable/inter-tight": "5.2.5",
-    "@tanstack/react-query": "5.79.0",
+    "@tanstack/react-query": "5.81.5",
     "date-fns": "4.1.0",
     "decoders": "2.7.0",
     "iso8601-duration": "2.1.2",
@@ -32,7 +32,7 @@
     "@anthony-j-castro/eslint-config": "github:anthony-j-castro/eslint-config#v4.0.10",
     "@anthony-j-castro/prettier-config": "github:anthony-j-castro/prettier-config#v1.1.1",
     "@playwright/test": "1.53.1",
-    "@tanstack/eslint-plugin-query": "5.78.0",
+    "@tanstack/eslint-plugin-query": "5.81.2",
     "@types/chrome": "0.0.326",
     "@types/node": "22.15.29",
     "@types/react": "19.1.6",

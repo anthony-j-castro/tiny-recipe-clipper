@@ -1,12 +1,9 @@
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import config from "@anthony-j-castro/eslint-config";
 import queryPlugin from "@tanstack/eslint-plugin-query";
 import jsonc from "eslint-plugin-jsonc";
 import globals from "globals";
 import jsoncParser from "jsonc-eslint-parser";
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default [
   ...config,
@@ -18,7 +15,7 @@ export default [
     settings: {
       "import/resolver": {
         alias: {
-          map: [["~", path.resolve(__dirname, "src")]],
+          map: [["~", path.resolve(import.meta.dirname, "src")]],
           extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
         },
         typescript: { project: "tsconfig.json" },
@@ -49,8 +46,8 @@ export default [
       "import/resolver": {
         alias: {
           map: [
-            ["~/playwright", path.resolve(__dirname, "playwright")],
-            ["~/src", path.resolve(__dirname, "src")],
+            ["~/playwright", path.resolve(import.meta.dirname, "playwright")],
+            ["~/src", path.resolve(import.meta.dirname, "src")],
           ],
           extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
         },

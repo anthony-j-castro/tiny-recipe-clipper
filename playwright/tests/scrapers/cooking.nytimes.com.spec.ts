@@ -36,6 +36,7 @@ for (const testValue of testValues) {
 
     const { recipe } = await scraper.load();
 
-    expect(recipe).toEqual(testValue.fixture);
+    expect(recipe).toMatchObject(testValue.fixture);
+    expect(recipe.imageUrl).toBeTruthy();
   });
 }

@@ -15,7 +15,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@fontsource-variable/inter-tight": "5.2.5",
+    "@fontsource-variable/inter-tight": "5.2.6",
     "@tanstack/react-query": "5.81.5",
     "date-fns": "4.1.0",
     "decoders": "2.7.0",

@@ -47,7 +47,7 @@
     "globals": "16.2.0",
     "html-webpack-plugin": "5.6.3",
     "playwright-extra": "4.3.6",
-    "prettier": "3.5.3",
+    "prettier": "3.6.2",
     "puppeteer-extra-plugin-stealth": "2.11.2",
     "style-loader": "4.0.0",
     "terser-webpack-plugin": "5.3.14",

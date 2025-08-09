@@ -25,7 +25,7 @@
     "react-aria": "3.42.0",
     "react-aria-components": "1.11.0",
     "react-dom": "19.1.1",
-    "styled-components": "6.1.16",
+    "styled-components": "6.1.19",
     "uuid": "11.1.0"
   },
   "devDependencies": {

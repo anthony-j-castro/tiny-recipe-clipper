@@ -51,7 +51,7 @@
     "puppeteer-extra-plugin-stealth": "2.11.2",
     "style-loader": "4.0.0",
     "terser-webpack-plugin": "5.3.14",
-    "ts-loader": "9.5.2",
+    "ts-loader": "9.5.4",
     "tsconfig-paths": "4.2.0",
     "tsx": "4.20.5",
     "typescript": "5.9.2",

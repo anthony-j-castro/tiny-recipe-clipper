@@ -18,7 +18,7 @@
     "@fontsource-variable/inter-tight": "5.2.6",
     "@tanstack/react-query": "5.85.5",
     "date-fns": "4.1.0",
-    "decoders": "2.7.1",
+    "decoders": "2.7.5",
     "iso8601-duration": "2.1.2",
     "modern-normalize": "3.0.1",
     "react": "19.1.1",

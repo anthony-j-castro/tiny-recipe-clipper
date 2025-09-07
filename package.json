@@ -41,7 +41,7 @@
     "copy-webpack-plugin": "13.0.1",
     "css-loader": "7.1.2",
     "dotenv": "17.2.1",
-    "eslint": "9.34.0",
+    "eslint": "9.35.0",
     "eslint-import-resolver-alias": "1.1.2",
     "eslint-plugin-jsonc": "2.20.1",
     "globals": "16.3.0",

@@ -1,0 +1,9 @@
+@value colors: "~/ui-shared/themes/colors.css";
+@value darkPurple, lightPurple, purple, white from colors;
+
+.primary {
+  --button-background-color: purple;
+  --button-text-color: white;
+  --button-hover-background-color: darkPurple;
+  --button-disabled-background-color: lightPurple;
+}

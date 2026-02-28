@@ -1,10 +1,15 @@
-const path = require("node:path");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
-const webpack = require("webpack");
+import path from "node:path";
+import CopyWebpackPlugin from "copy-webpack-plugin";
+import * as dotenv from "dotenv";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import values from "postcss-modules-values";
+import TerserPlugin from "terser-webpack-plugin";
+import webpack from "webpack";
 
-require("dotenv").config({ path: path.resolve(__dirname, ".env") });
+const __dirname = import.meta.dirname;
+
+dotenv.config({ path: path.resolve(__dirname, ".env") });
 
 const config = {
   entry: {
@@ -35,8 +40,34 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        test: /\.module\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader, // or 'style-loader' for dev
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                localIdentName: "[name]__[local]--[hash:base64:5]",
+                namedExport: false,
+              },
+              importLoaders: 1, // run postcss-loader before css-loader
+            },
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [
+                  values, // enables @value directive
+                ],
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /(?<!\.module)\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
         test: /\.tsx?$/,
@@ -90,12 +121,15 @@ const config = {
         },
       ],
     }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+    }),
   ],
   resolve: {
     alias: {
       "~": path.resolve(__dirname, "src"),
     },
-    extensions: [".ts", ".tsx", ".js", ".jsx"],
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".css"],
   },
   optimization: {
     minimize: true,
@@ -118,4 +152,4 @@ const config = {
   },
 };
 
-module.exports = config;
+export default config;

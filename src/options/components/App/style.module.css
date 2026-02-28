@@ -1,0 +1,96 @@
+@value colors: "~/ui-shared/themes/colors.css";
+@value darkGray, lightGray from colors;
+
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+}
+
+.title {
+  font-weight: 700;
+  margin: 0 0 0 16px;
+}
+
+.main {
+  margin-top: 32px;
+}
+
+.label {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.description {
+  font-size: 12px;
+  line-height: 1.25em;
+  color: darkGray;
+  margin: 4px 0 0;
+}
+
+.userId {
+  font-family: monospace;
+  user-select: text;
+}
+
+.separator {
+  margin: 32px 0;
+}
+
+.sectionHeading {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 16px;
+}
+
+.version {
+  user-select: text;
+}
+
+.versionNumber {
+  font-family: monospace;
+}
+
+.infoBanner {
+  font-size: 16px;
+  font-weight: 500;
+  background: lightGray;
+  padding: 8px;
+  border-radius: 4px;
+  margin: 0 -8px 32px -8px;
+}
+
+.infoBannerContainer {
+  display: flex;
+  align-items: flex-start;
+}
+
+.infoIcon {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.bannerCopy {
+  flex-grow: 1;
+  margin-top: 2px;
+  margin-left: 16px;
+}
+
+.bannerButton {
+  display: inline-block;
+  width: auto;
+  margin-top: 16px;
+}

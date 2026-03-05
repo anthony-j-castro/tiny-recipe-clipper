@@ -3,14 +3,12 @@ import { getExtensionUrl } from "~/chrome-helpers";
 import config from "~/config";
 import useGetCurrentTab from "~/hooks/useGetCurrentTab";
 import IconButton from "~/popup/components/IconButton";
+import BugIcon from "~/ui-shared/components/icons/BugIcon";
+import SettingsIcon from "~/ui-shared/components/icons/SettingsIcon";
+import WebIcon from "~/ui-shared/components/icons/WebIcon";
 import Tooltip from "~/ui-shared/components/Tooltip";
 import getReportProblemFormUrl from "~/utils/getReportProblemFormUrl";
-import {
-  Container,
-  OpenWebsiteIcon,
-  ReportBugIcon,
-  SettingsIcon,
-} from "./styled";
+import styles from "./style.module.css";
 
 const IconNav = () => {
   const { data: currentTab } = useGetCurrentTab();
@@ -18,26 +16,26 @@ const IconNav = () => {
   const reportProblemFormUrl = getReportProblemFormUrl(currentTab?.url);
 
   return (
-    <Container>
+    <div className={styles.container}>
       <TooltipTrigger>
         <IconButton href={config.WEB_APP.ORIGIN}>
-          <OpenWebsiteIcon />
+          <WebIcon className={styles.icon} />
         </IconButton>
         <Tooltip>Open website</Tooltip>
       </TooltipTrigger>
       <TooltipTrigger>
         <IconButton href={getExtensionUrl("options.html")}>
-          <SettingsIcon />
+          <SettingsIcon className={styles.icon} />
         </IconButton>
         <Tooltip>Open extension options</Tooltip>
       </TooltipTrigger>
       <TooltipTrigger>
         <IconButton href={reportProblemFormUrl}>
-          <ReportBugIcon />
+          <BugIcon className={styles.icon} />
         </IconButton>
         <Tooltip>Report a problem</Tooltip>
       </TooltipTrigger>
-    </Container>
+    </div>
   );
 };
 

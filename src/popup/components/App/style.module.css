@@ -1,0 +1,50 @@
+@value colors: "~/ui-shared/theme/colors.css";
+@value darkGray, gray, purple from colors;
+
+.container {
+  padding: 8px;
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.clipRecipeButton {
+  margin-left: 32px;
+}
+
+.card {
+  min-width: 200px;
+  padding: 8px;
+  border: 1px solid gray;
+  border-radius: 4px;
+
+  &.emphasize {
+    border: 2px solid purple;
+  }
+}
+
+.recipeTitle {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.flavorText {
+  font-size: 10px;
+  color: darkGray;
+  font-style: italic;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.text {
+  line-height: 1.25em;
+}
+
+.actionButton {
+  margin-top: 12px;
+}

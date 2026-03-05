@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
-import { OverlayArrow } from "react-aria-components";
-import { StyledTooltip } from "./styled";
+import { Tooltip as BaseTooltip, OverlayArrow } from "react-aria-components";
+import styles from "./style.module.css";
 
 interface Props {
   children: ReactNode;
 }
 
 const Tooltip = ({ children }: Props) => (
-  <StyledTooltip>
+  <BaseTooltip className={styles.tooltip}>
     <OverlayArrow>
       <svg
         height={8}
@@ -18,7 +18,7 @@ const Tooltip = ({ children }: Props) => (
       </svg>
     </OverlayArrow>
     {children}
-  </StyledTooltip>
+  </BaseTooltip>
 );
 
 export default Tooltip;

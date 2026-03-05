@@ -3,15 +3,17 @@ import CopyWebpackPlugin from "copy-webpack-plugin";
 import * as dotenv from "dotenv";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import values from "postcss-modules-values";
+import PostCssValues from "postcss-modules-values";
+import PostCssNested from "postcss-nested";
 import TerserPlugin from "terser-webpack-plugin";
 import webpack from "webpack";
+import type { Configuration } from "webpack";
 
 const __dirname = import.meta.dirname;
 
 dotenv.config({ path: path.resolve(__dirname, ".env") });
 
-const config = {
+const config: Configuration = {
   entry: {
     "service-worker": {
       import: path.resolve(__dirname, "src/service-worker/index.ts"),
@@ -57,9 +59,7 @@ const config = {
             loader: "postcss-loader",
             options: {
               postcssOptions: {
-                plugins: [
-                  values, // enables @value directive
-                ],
+                plugins: [PostCssNested, PostCssValues],
               },
             },
           },

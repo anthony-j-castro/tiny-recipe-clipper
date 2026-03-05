@@ -17,7 +17,7 @@
   &[data-placement="bottom"] {
     margin-top: 8px;
 
-    & .react-aria-OverlayArrow svg {
+    & :global(.react-aria-OverlayArrow) svg {
       transform: rotate(180deg);
     }
   }
@@ -25,7 +25,7 @@
   &[data-placement="right"] {
     margin-left: 8px;
 
-    & .react-aria-OverlayArrow svg {
+    & :global(.react-aria-OverlayArrow) svg {
       transform: rotate(90deg);
     }
   }
@@ -33,12 +33,12 @@
   &[data-placement="left"] {
     margin-right: 8px;
 
-    & .react-aria-OverlayArrow svg {
+    & :global(.react-aria-OverlayArrow) svg {
       transform: rotate(-90deg);
     }
   }
 
-  & .react-aria-OverlayArrow svg {
+  & :global(.react-aria-OverlayArrow) svg {
     display: block;
     fill: nearBlack;
   }

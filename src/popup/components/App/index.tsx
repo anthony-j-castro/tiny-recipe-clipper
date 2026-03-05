@@ -1,24 +1,18 @@
+import clsx from "clsx";
 import { sendMessageToTab } from "~/chrome-helpers";
 import config from "~/config";
 import useGetCurrentTab from "~/hooks/useGetCurrentTab";
 import useGetMe from "~/hooks/useGetUserId";
 import IconNav from "~/popup/components/IconNav";
+import LinkButton from "~/popup/components/LinkButton";
 import useFlavorText from "~/popup/hooks/useFlavorText";
 import useGetRecipeTitle from "~/popup/hooks/useGetRecipeTitle";
+import LinkPrimaryButton from "~/ui-shared/components/LinkPrimaryButton";
+import PrimaryButton from "~/ui-shared/components/PrimaryButton";
 import getReportProblemFormUrl from "~/utils/getReportProblemFormUrl";
 import isRecipePage from "~/utils/isRecipePage";
 import isSupportedWebsite from "~/utils/isSupportedWebsite";
-import {
-  ActionButton,
-  AppContainer,
-  Card,
-  ClipRecipeButton,
-  FlavorText,
-  PrimaryActionButton,
-  RecipeTitle,
-  Text,
-  TopRow,
-} from "./styled";
+import styles from "./style.module.css";
 
 const App = () => {
   const { data: userId, isPending: isPendingMe } = useGetMe();
@@ -52,11 +46,12 @@ const App = () => {
   const flavorText = useFlavorText();
 
   return (
-    <AppContainer>
-      <TopRow>
+    <div className={styles.container}>
+      <div className={styles.topRow}>
         <IconNav />
         {!isRequiresSync && isSupported ? (
-          <ClipRecipeButton
+          <PrimaryButton
+            className={styles.clipRecipeButton}
             isDisabled={!isRecipeOnPage || isErrorRecipeTitle}
             onPress={() => {
               if (currentTab?.id) {
@@ -71,55 +66,73 @@ const App = () => {
             }}
           >
             Clip recipe
-          </ClipRecipeButton>
+          </PrimaryButton>
         ) : null}
-      </TopRow>
+      </div>
       {isPendingMe ? null : isRequiresSync ? (
-        <Card>
-          <Text>
+        <div className={styles.card}>
+          <div className={styles.text}>
             Finish setting up this extension by syncing with the web app.
-          </Text>
-          <PrimaryActionButton
+          </div>
+          <LinkPrimaryButton
+            className={styles.actionButton}
             href={`${config.WEB_APP.ORIGIN}${config.WEB_APP.BROWSER_EXTENSION_PATH}`}
           >
             Launch Tiny Recipe Box in a new tab
-          </PrimaryActionButton>
-        </Card>
+          </LinkPrimaryButton>
+        </div>
       ) : isRecipeOnPage ? (
         isPendingRecipeTitle ? null : isErrorRecipeTitle ? (
-          <Card>
-            <Text>
+          <div className={styles.card}>
+            <div className={styles.text}>
               Sorry! You’re on a valid recipe page but the recipe couldn’t be
               read properly.
-            </Text>
-            <ActionButton href={reportProblemFormUrl}>
+            </div>
+            <LinkButton
+              className={styles.actionButton}
+              href={reportProblemFormUrl}
+            >
               Report a problem
-            </ActionButton>
-          </Card>
+            </LinkButton>
+          </div>
         ) : (
-          <Card $emphasize>
-            <RecipeTitle data-testid="recipe-title">{recipeTitle}</RecipeTitle>
-            <FlavorText>{flavorText}</FlavorText>
-          </Card>
+          <div className={clsx(styles.card, styles.emphasize)}>
+            <div
+              className={styles.recipeTitle}
+              data-testid="recipe-title"
+            >
+              {recipeTitle}
+            </div>
+            <div className={styles.flavorText}>{flavorText}</div>
+          </div>
         )
       ) : isSupported ? (
-        <Card>
-          <Text data-testid="non-recipe-page-message">
+        <div className={styles.card}>
+          <div
+            className={styles.text}
+            data-testid="non-recipe-page-message"
+          >
             To clip a recipe, make sure you’re on a recipe page.
-          </Text>
-        </Card>
+          </div>
+        </div>
       ) : (
-        <Card>
-          <Text data-testid="unsupported-site-message">
+        <div className={styles.card}>
+          <div
+            className={styles.text}
+            data-testid="unsupported-site-message"
+          >
             Sorry! It looks like we don’t support clipping recipes from this
             site.
-          </Text>
-          <ActionButton href={requestFormUrl.toString()}>
+          </div>
+          <LinkButton
+            className={styles.actionButton}
+            href={requestFormUrl.toString()}
+          >
             Request support for this site
-          </ActionButton>
-        </Card>
+          </LinkButton>
+        </div>
       )}
-    </AppContainer>
+    </div>
   );
 };
 export default App;

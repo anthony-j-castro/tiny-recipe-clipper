@@ -1,4 +1,4 @@
-@value colors: "~/ui-shared/themes/colors.css";
+@value colors: "~/ui-shared/theme/colors.css";
 @value gray, lightGray, nearBlack from colors;
 
 .disclosureWrapper {

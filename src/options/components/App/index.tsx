@@ -86,7 +86,6 @@ export default function App() {
           <div className={styles.version}>
             Extension version:{" "}
             <span className={styles.versionNumber}>{config.VERSION}</span>
-            rollbar: {config.ROLLBAR_ACCESS_TOKEN}
           </div>
         </section>
       </main>

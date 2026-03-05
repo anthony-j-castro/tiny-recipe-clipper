@@ -1,4 +1,4 @@
-@value colors: "~/ui-shared/themes/colors.css";
+@value colors: "~/ui-shared/theme/colors.css";
 @value nearBlack, white from colors;
 
 .tooltip {

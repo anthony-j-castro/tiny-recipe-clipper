@@ -1,0 +1,10 @@
+@value colors: "~/ui-shared/theme/colors.css";
+@value darkGray, lightGray from colors;
+
+.button {
+  --button-background-color: transparent;
+  --button-text-color: darkGray;
+  --button-hover-background-color: lightGray;
+  width: auto;
+  padding: 4px;
+}

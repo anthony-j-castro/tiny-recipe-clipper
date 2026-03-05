@@ -1,25 +1,20 @@
+import clsx from "clsx";
 import type { ComponentPropsWithoutRef } from "react";
 import { useSeparator } from "react-aria";
-import styled, { css } from "styled-components";
-
-const Separator = styled.hr(
-  ({ theme }) => css`
-    width: 100%;
-    height: 1px;
-    border: 0;
-    background: ${theme.colors.gray};
-  `,
-);
+import styles from "./style.module.css";
 
 const HorizontalSeparator = (props: ComponentPropsWithoutRef<"hr">) => {
+  const { className, ...rest } = props;
+
   const { separatorProps } = useSeparator({
-    ...props,
+    ...rest,
     orientation: "horizontal",
   });
 
   return (
-    <Separator
-      {...props}
+    <hr
+      {...rest}
+      className={clsx(styles.separator, className)}
       {...separatorProps}
     />
   );

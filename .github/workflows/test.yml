@@ -54,7 +54,7 @@ jobs:
           BUILD_ENV: test
           ROLLBAR_ACCESS_TOKEN: ${{ vars.ROLLBAR_ACCESS_TOKEN }}
       - name: Upload playwright report
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: playwright-report
@@ -81,7 +81,7 @@ jobs:
           BUILD_ENV: production
           ROLLBAR_ACCESS_TOKEN: ${{ vars.ROLLBAR_ACCESS_TOKEN }}
       - name: Upload artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: tiny-recipe-clipper
           path: dist

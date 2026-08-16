@@ -7,7 +7,7 @@ import {
   string,
   type Decoder,
 } from "decoders";
-import packageJson from "../package.json";
+import packageJson from "../package.json" with { type: "json" };
 
 interface Config {
   ENVIRONMENT: "development" | "production" | "test";

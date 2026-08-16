@@ -62,6 +62,7 @@ jobs:
           retention-days: 7
 
   upload-artifact:
+    if: github.ref == 'refs/heads/main'
     needs: test-with-playwright
     runs-on: ubuntu-latest
     steps:

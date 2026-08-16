@@ -1,16 +1,8 @@
 /// <reference types="node" />
-/* eslint-disable unicorn/no-typeof-undefined */
 
 const ENV = {
-  BUILD_ENV:
-    typeof process === "undefined"
-      ? import.meta.env?.VITE_BUILD_ENV
-      : (process.env.BUILD_ENV ?? process.env.VITE_BUILD_ENV),
-  ROLLBAR_ACCESS_TOKEN:
-    typeof process === "undefined"
-      ? import.meta.env?.VITE_ROLLBAR_ACCESS_TOKEN
-      : (process?.env?.ROLLBAR_ACCESS_TOKEN ??
-        process?.env?.VITE_ROLLBAR_ACCESS_TOKEN),
+  BUILD_ENV: import.meta.env.VITE_BUILD_ENV,
+  ROLLBAR_ACCESS_TOKEN: import.meta.env.VITE_ROLLBAR_ACCESS_TOKEN,
 };
 
 export default ENV;

@@ -7,7 +7,7 @@ const WEB_APP_ORIGIN = "https://tinyrecipebox.com";
 
 const VERSION_NAME =
   process.env.GITHUB_SHA && process.env.PUBLISH !== "true"
-    ? process.env.GITHUB_SHA.slice(0, 7)
+    ? `${pkg.version}-${process.env.GITHUB_SHA.slice(0, 7)}`
     : undefined;
 
 const recipeWebsitesMatchesArray = Object.entries(SUPPORTED_HOSTNAMES_DATA).map(
@@ -16,8 +16,8 @@ const recipeWebsitesMatchesArray = Object.entries(SUPPORTED_HOSTNAMES_DATA).map(
 
 export default defineManifest({
   manifest_version: 3,
-  name: pkg.name,
-  description: "",
+  name: "Tiny Recipe Clipper",
+  description: "Clip recipes from your favorite websites.",
   // TODO: Update production key with real value after initial publish.
   key: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAg7YR6fSyLKY2/5U9OyK0djEKQpViaNRV7+Gcc2kgoSAgUHqi50lVe4PdB87UMVKS4s3r78UjfySP0UPl8vZjKrCfnWdrTOt8Bhvi3EXcYfmjUYhzBDI8kMjWv506g31ZPvbTneH4VUfl2sg6DwpJHtih0OYcQcm+ehbBApBPT2pthwqqvWNTscnokWn315XDGakQd050+MRbipELibJwNY3B2sMEwZtmM44ZWwroPK8kfgfAEMa7AbMIfzqeFucKPZAtpKxj/ATgkb6j+vecw7WbzMxv4YvMkO5zFITPRve3827+LGxpR/j8dUmGlcJaPz1VFYmMp53M3L+BJdfWhQIDAQAB",
   version: pkg.version,

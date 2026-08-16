@@ -9,7 +9,7 @@ const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false, retry: false } },
 });
 
-const root = createRoot(document.getElementById("root")!);
+const root = createRoot(document.querySelector("#root")!);
 
 root.render(
   <StrictMode>

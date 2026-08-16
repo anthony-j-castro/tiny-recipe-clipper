@@ -8,6 +8,7 @@ import {
   type Decoder,
 } from "decoders";
 import packageJson from "../package.json" with { type: "json" };
+import ENV from "./environment";
 
 interface Config {
   ENVIRONMENT: "development" | "production" | "test";
@@ -54,11 +55,10 @@ const configDecoder: Decoder<Config> = exact({
 });
 
 const USE_PRODUCTION_VALUES =
-  import.meta.env.VITE_BUILD_ENV === "production" ||
-  import.meta.env.VITE_BUILD_ENV === "test";
+  ENV.BUILD_ENV === "production" || ENV.BUILD_ENV === "test";
 
 const config = {
-  ENVIRONMENT: import.meta.env.VITE_BUILD_ENV || "development",
+  ENVIRONMENT: ENV.BUILD_ENV || "development",
   REPORT_PROBLEM_FORM: {
     URL: "https://docs.google.com/forms/d/e/1FAIpQLSeV1bF-mkxoBibHnxKk4AjeVLI8fUjLLRj08Z9nW7vch1qnPg/viewform",
     VERSION_LINK_PARAM: "entry.307864289",
@@ -68,7 +68,7 @@ const config = {
     URL: "https://docs.google.com/forms/d/e/1FAIpQLSfxOzZQMDKmz8uCvlUskaiZdH6JO9nhc3eWNo59YSgtOqlTHw/viewform",
     WEBSITE_LINK_PARAM: "entry.895703910",
   },
-  ROLLBAR_ACCESS_TOKEN: import.meta.env.VITE_ROLLBAR_ACCESS_TOKEN || null,
+  ROLLBAR_ACCESS_TOKEN: ENV.ROLLBAR_ACCESS_TOKEN || null,
   VERSION: packageJson.version,
   WEB_APP: {
     BROWSER_EXTENSION_PATH: "/browser-extension",

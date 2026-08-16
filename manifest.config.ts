@@ -32,12 +32,12 @@ export default defineManifest({
   },
   permissions: ["activeTab", "storage", "tabs"],
   background: {
-    service_worker: "src/service-worker/index.ts",
+    service_worker: "src/service-worker/service-worker.ts",
   },
   content_scripts: [
     {
       matches: recipeWebsitesMatchesArray,
-      js: ["src/content-scripts/recipe-scraper/index.ts"],
+      js: ["src/content-scripts/recipe-scraper/recipe-scraper.ts"],
     },
   ],
   options_ui: {

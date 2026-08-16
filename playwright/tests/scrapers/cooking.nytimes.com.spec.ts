@@ -1,7 +1,7 @@
 import { expect, test } from "~/playwright/fixtures";
-import bananaPudding from "~/playwright/fixtures/cooking.nytimes.com/banana-pudding.json";
-import banoffeePie from "~/playwright/fixtures/cooking.nytimes.com/banoffee-pie.json";
-import salmonBurgers from "~/playwright/fixtures/cooking.nytimes.com/salmon-burgers.json";
+import bananaPudding from "~/playwright/fixtures/cooking.nytimes.com/banana-pudding.json" with { type: "json" };
+import banoffeePie from "~/playwright/fixtures/cooking.nytimes.com/banoffee-pie.json" with { type: "json" };
+import salmonBurgers from "~/playwright/fixtures/cooking.nytimes.com/salmon-burgers.json" with { type: "json" };
 import TimesScraper from "~/src/content-scripts/recipe-scraper/scrapers/cooking.nytimes.com";
 
 const testValues: Array<{

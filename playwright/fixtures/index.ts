@@ -25,7 +25,7 @@ export const test = base.extend<{
   context: async ({}, use) => {
     chromium.use(stealth());
 
-    const pathToExtension = path.join(__dirname, "../../dist");
+    const pathToExtension = path.join(import.meta.dirname, "../../dist");
     const context = await chromium.launchPersistentContext("", {
       channel: "chromium",
       headless: false,

@@ -17,7 +17,7 @@ test("displays a navigate to recipe page message", async ({
 
   const extensionPopupPage = await context.newPage();
   await extensionPopupPage.goto(
-    `chrome-extension://${extensionId}/popup.html?active-tab-id=${tabId}`,
+    `chrome-extension://${extensionId}/src/popup/index.html?active-tab-id=${tabId}`,
   );
 
   await expect(
@@ -42,7 +42,7 @@ test("detects a recipe", async ({
 
   const extensionPopupPage = await context.newPage();
   await extensionPopupPage.goto(
-    `chrome-extension://${extensionId}/popup.html?active-tab-id=${tabId}`,
+    `chrome-extension://${extensionId}/src/popup/index.html?active-tab-id=${tabId}`,
   );
 
   await expect(extensionPopupPage.getByTestId("recipe-title")).toHaveText(

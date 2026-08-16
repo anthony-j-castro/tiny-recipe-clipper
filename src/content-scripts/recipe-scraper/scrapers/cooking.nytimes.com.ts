@@ -79,7 +79,13 @@ export default class TimesScraper extends BaseScraper implements Scraper {
   async _getIngredientGroups(): Promise<IngredientsGroup[]> {
     const ingredients = array(string).verify(this.recipeJson.recipeIngredient);
 
-    return [{ ingredients }];
+    return [
+      {
+        ingredients: ingredients.map((ingredient) =>
+          ingredient.normalize("NFKD").replace("⁄", "/"),
+        ),
+      },
+    ];
   }
 
   async _getRecipeJson() {
@@ -140,7 +146,7 @@ export default class TimesScraper extends BaseScraper implements Scraper {
   async _getUrl() {
     const url = string.verify(this.recipeJson.url);
 
-    return url;
+    return url.startsWith("//") ? `https:${url}` : url;
   }
 
   async _getYield() {

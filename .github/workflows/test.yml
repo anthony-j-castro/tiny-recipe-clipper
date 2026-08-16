@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Setup node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: lts/*
           cache: npm
@@ -33,9 +33,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Setup node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: lts/*
           cache: npm
@@ -44,15 +44,15 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          BUILD_ENV: test
-          ROLLBAR_ACCESS_TOKEN: ${{ vars.ROLLBAR_ACCESS_TOKEN }}
+          VITE_BUILD_ENV: test
+          VITE_ROLLBAR_ACCESS_TOKEN: ${{ vars.ROLLBAR_ACCESS_TOKEN }}
       - name: Install playwright browsers
         run: npx playwright install --with-deps
       - name: Run playwright tests
         run: npx playwright test
         env:
-          BUILD_ENV: test
-          ROLLBAR_ACCESS_TOKEN: ${{ vars.ROLLBAR_ACCESS_TOKEN }}
+          VITE_BUILD_ENV: test
+          VITE_ROLLBAR_ACCESS_TOKEN: ${{ vars.ROLLBAR_ACCESS_TOKEN }}
       - name: Upload playwright report
         uses: actions/upload-artifact@v7
         if: failure()
@@ -78,8 +78,8 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          BUILD_ENV: production
-          ROLLBAR_ACCESS_TOKEN: ${{ vars.ROLLBAR_ACCESS_TOKEN }}
+          VITE_BUILD_ENV: production
+          VITE_ROLLBAR_ACCESS_TOKEN: ${{ vars.ROLLBAR_ACCESS_TOKEN }}
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:

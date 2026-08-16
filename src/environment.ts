@@ -9,8 +9,8 @@ const ENV = {
   ROLLBAR_ACCESS_TOKEN:
     typeof process === "undefined"
       ? import.meta.env?.VITE_ROLLBAR_ACCESS_TOKEN
-      : (process?.env?.ROLLBAR_ACCESS_TOKEN ??
-        process?.env?.VITE_ROLLBAR_ACCESS_TOKEN),
+      : (process.env.ROLLBAR_ACCESS_TOKEN ??
+        process.env.VITE_ROLLBAR_ACCESS_TOKEN),
 };
 
 export default ENV;

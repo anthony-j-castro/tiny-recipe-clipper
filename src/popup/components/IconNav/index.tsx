@@ -24,7 +24,7 @@ const IconNav = () => {
         <Tooltip>Open website</Tooltip>
       </TooltipTrigger>
       <TooltipTrigger>
-        <IconButton href={getExtensionUrl("options.html")}>
+        <IconButton href={getExtensionUrl("src/options/index.html")}>
           <SettingsIcon className={styles.icon} />
         </IconButton>
         <Tooltip>Open extension options</Tooltip>

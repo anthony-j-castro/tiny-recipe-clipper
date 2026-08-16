@@ -2,8 +2,6 @@ import path from "node:path";
 import config from "@anthony-j-castro/eslint-config";
 import queryPlugin from "@tanstack/eslint-plugin-query";
 import jsonc from "eslint-plugin-jsonc";
-import globals from "globals";
-import jsoncParser from "jsonc-eslint-parser";
 
 export default [
   ...config,
@@ -23,18 +21,8 @@ export default [
     },
   },
   {
-    files: ["webpack.config.js"],
-    languageOptions: {
-      globals: {
-        ...globals.node,
-      },
-    },
-  },
-  {
     files: ["playwright/**/*.json"],
-    languageOptions: {
-      parser: jsoncParser,
-    },
+    language: "jsonc/x",
     plugins: { jsonc },
     rules: {
       "jsonc/sort-keys": "error",

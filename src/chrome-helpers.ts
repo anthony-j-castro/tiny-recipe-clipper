@@ -58,7 +58,7 @@ export const setExtensionIcon = (
 ) =>
   chrome.action.setIcon(
     {
-      path: `/images/${icon}.png`,
+      path: `/icons/${icon}.png`,
       tabId,
     },
     () => {

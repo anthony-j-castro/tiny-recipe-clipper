@@ -27,7 +27,7 @@
     "react-aria": "3.51.0",
     "react-aria-components": "1.20.0",
     "react-dom": "19.2.8",
-    "uuid": "14.0.1"
+    "uuid": "14.0.2"
   },
   "devDependencies": {
     "@anthony-j-castro/eslint-config": "github:anthony-j-castro/eslint-config#v4.2.2",

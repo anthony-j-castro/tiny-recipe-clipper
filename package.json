@@ -23,10 +23,10 @@
     "decoders": "2.9.3",
     "iso8601-duration": "2.1.4",
     "modern-normalize": "3.0.1",
-    "react": "19.2.8",
+    "react": "19.3.0",
     "react-aria": "3.52.1",
     "react-aria-components": "1.21.1",
-    "react-dom": "19.2.8",
+    "react-dom": "19.3.0",
     "uuid": "14.0.2"
   },
   "devDependencies": {
@@ -39,8 +39,8 @@
     "@tanstack/react-query": "5.102.6",
     "@types/chrome": "0.2.7",
     "@types/node": "26.2.0",
-    "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.4",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.1.1",
     "dotenv": "17.4.2",
     "eslint": "9.39.5",

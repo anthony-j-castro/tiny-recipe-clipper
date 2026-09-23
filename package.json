@@ -47,7 +47,7 @@
     "eslint-import-resolver-alias": "1.1.2",
     "eslint-plugin-jsonc": "3.4.2",
     "playwright-extra": "4.3.6",
-    "prettier": "3.9.6",
+    "prettier": "3.9.9",
     "puppeteer-extra-plugin-stealth": "2.11.2",
     "typescript": "5.9.3",
     "vite": "8.3.0",
